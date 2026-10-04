@@ -5,8 +5,6 @@ cache/
 artifacts/
 deployments-*.json
 web/dist/
-web/src/abis/
-web/src/deployments.json
 ganache-db/
 .DS_Store
 *.log
