@@ -1,0 +1,24 @@
+{
+  "name": "spv-token-system",
+  "version": "1.0.0",
+  "private": true,
+  "description": "SPV token monorepo — contracts and web",
+  "license": "MIT",
+  "scripts": {
+    "postinstall": "npm run install:all",
+    "install:all": "npm run install:contracts && npm run install:web",
+    "install:contracts": "npm --prefix contracts install",
+    "install:web": "npm --prefix web install",
+    "compile": "npm --prefix contracts run compile",
+    "test": "npm --prefix contracts run test",
+    "deploy:amoy": "npm --prefix contracts run deploy:amoy",
+    "deploy:polygon": "npm --prefix contracts run deploy:polygon",
+    "interact:amoy": "npm --prefix contracts run interact:amoy",
+    "interact:polygon": "npm --prefix contracts run interact:polygon",
+    "export:amoy": "npm --prefix contracts run export:amoy",
+    "export:polygon": "npm --prefix contracts run export:polygon",
+    "dev": "npm --prefix web run dev",
+    "build": "npm --prefix web run build",
+    "preview": "npm --prefix web run preview"
+  }
+}

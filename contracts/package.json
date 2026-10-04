@@ -1,0 +1,24 @@
+{
+  "name": "spv-contracts",
+  "version": "1.0.0",
+  "description": "SPV token contracts with dynamic bonding curve and DEX migration on Polygon PoS",
+  "scripts": {
+    "compile": "hardhat compile",
+    "test": "hardhat test",
+    "deploy:amoy": "hardhat run scripts/deploy.js --network amoy",
+    "deploy:polygon": "hardhat run scripts/deploy.js --network polygon",
+    "interact:amoy": "hardhat run scripts/interact.js --network amoy",
+    "interact:polygon": "hardhat run scripts/interact.js --network polygon",
+    "export:amoy": "cross-env NETWORK=amoy node scripts/export-to-frontend.js",
+    "export:polygon": "cross-env NETWORK=polygon node scripts/export-to-frontend.js"
+  },
+  "devDependencies": {
+    "@nomicfoundation/hardhat-toolbox": "^5.0.0",
+    "cross-env": "^7.0.3",
+    "hardhat": "^2.22.0"
+  },
+  "dependencies": {
+    "@openzeppelin/contracts": "^5.0.0",
+    "dotenv": "^16.4.0"
+  }
+}
