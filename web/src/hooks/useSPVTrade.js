@@ -1,12 +1,14 @@
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect } from "react";
 import { useAccount, useReadContract, useWriteContract, useWaitForTransactionReceipt } from "wagmi";
-import { maxUint256, parseUnits } from "viem";
+import { maxUint256, parseUnits, formatUnits } from "viem";
 import { CONFIG, ABIS } from "../config";
 
 export function useSPVTrade() {
   const { address } = useAccount();
   const [mode, setMode] = useState("buy");
-  const [amount, setAmount] = useState("");
+  const [usdtInput, setUsdtInput] = useState("");
+  const [spvInput, setSpvInput] = useState("");
+  const [lastEdited, setLastEdited] = useState("usdt");
 
   const { data: usdtBalance } = useReadContract({
     address: CONFIG.usdt, abi: ABIS.usdt, functionName: "balanceOf",
@@ -32,24 +34,59 @@ export function useSPVTrade() {
     query: { enabled: !!address, refetchInterval: 10_000 },
   });
 
-  const parsedAmount = (() => {
-    if (!amount || isNaN(Number(amount)) || Number(amount) <= 0) return 0n;
-    try {
-      return mode === "buy" ? parseUnits(amount, 6) : parseUnits(amount, 18);
-    } catch { return 0n; }
+  const parsedUsdt = (() => {
+    if (!usdtInput || isNaN(Number(usdtInput)) || Number(usdtInput) <= 0) return 0n;
+    try { return parseUnits(usdtInput, 6); } catch { return 0n; }
   })();
 
-  const { data: previewBuy } = useReadContract({
+  const parsedSpv = (() => {
+    if (!spvInput || isNaN(Number(spvInput)) || Number(spvInput) <= 0) return 0n;
+    try { return parseUnits(spvInput, 18); } catch { return 0n; }
+  })();
+
+  const { data: previewBuyOut } = useReadContract({
     address: CONFIG.router, abi: ABIS.router, functionName: "previewBuy",
-    args: parsedAmount > 0n ? [parsedAmount] : undefined,
-    query: { enabled: parsedAmount > 0n && mode === "buy" },
+    args: parsedUsdt > 0n ? [parsedUsdt] : undefined,
+    query: { enabled: parsedUsdt > 0n },
   });
 
-  const { data: previewSell } = useReadContract({
+  const { data: previewSellOut } = useReadContract({
     address: CONFIG.router, abi: ABIS.router, functionName: "previewSell",
-    args: parsedAmount > 0n ? [parsedAmount] : undefined,
-    query: { enabled: parsedAmount > 0n && mode === "sell" },
+    args: parsedSpv > 0n && address ? [address, parsedSpv] : undefined,
+    query: { enabled: parsedSpv > 0n && !!address },
   });
+
+  useEffect(() => {
+    if (lastEdited !== "usdt") return;
+    if (parsedUsdt === 0n || previewBuyOut === undefined) return;
+    const out = Number(formatUnits(previewBuyOut, 18));
+    if (!isFinite(out) || out <= 0) return;
+    setSpvInput(out.toFixed(6));
+  }, [lastEdited, parsedUsdt, previewBuyOut]);
+
+  useEffect(() => {
+    if (lastEdited !== "spv") return;
+    if (parsedSpv === 0n || previewSellOut === undefined) return;
+    const out = Number(formatUnits(previewSellOut, 6));
+    if (!isFinite(out) || out <= 0) return;
+    setUsdtInput(out.toFixed(6));
+  }, [lastEdited, parsedSpv, previewSellOut]);
+
+  const onUsdtChange = useCallback((v) => {
+    setLastEdited("usdt");
+    setUsdtInput(v);
+  }, []);
+
+  const onSpvChange = useCallback((v) => {
+    setLastEdited("spv");
+    setSpvInput(v);
+  }, []);
+
+  const reset = useCallback(() => {
+    setUsdtInput("");
+    setSpvInput("");
+    setLastEdited("usdt");
+  }, []);
 
   const approveTx = useWriteContract();
   const approveReceipt = useWaitForTransactionReceipt({ hash: approveTx.data });
@@ -72,37 +109,50 @@ export function useSPVTrade() {
   const tradeReceipt = useWaitForTransactionReceipt({ hash: tradeTx.data });
 
   const execute = useCallback(() => {
-    if (parsedAmount <= 0n) return;
     if (mode === "buy") {
-      const minOut = previewBuy ? (previewBuy * 99n) / 100n : 0n;
+      if (parsedUsdt <= 0n) return;
+      const minOut = previewBuyOut ? (previewBuyOut * 99n) / 100n : 0n;
       tradeTx.writeContract({
         address: CONFIG.router, abi: ABIS.router, functionName: "buy",
-        args: [parsedAmount, minOut],
+        args: [parsedUsdt, minOut],
       });
     } else {
-      const minOut = previewSell ? (previewSell * 99n) / 100n : 0n;
+      if (parsedSpv <= 0n) return;
+      const minOut = previewSellOut ? (previewSellOut * 99n) / 100n : 0n;
       tradeTx.writeContract({
         address: CONFIG.router, abi: ABIS.router, functionName: "sell",
-        args: [parsedAmount, minOut],
+        args: [parsedSpv, minOut],
       });
     }
-  }, [mode, parsedAmount, previewBuy, previewSell, tradeTx]);
+  }, [mode, parsedUsdt, parsedSpv, previewBuyOut, previewSellOut, tradeTx]);
 
   const needsApproval = mode === "buy"
-    ? (usdtAllowance ?? 0n) < parsedAmount
-    : (spvAllowance ?? 0n) < parsedAmount;
+    ? (usdtAllowance ?? 0n) < parsedUsdt
+    : (spvAllowance ?? 0n) < parsedSpv;
 
   const hasBalance = mode === "buy"
-    ? (usdtBalance ?? 0n) >= parsedAmount
-    : (spvBalance ?? 0n) >= parsedAmount;
+    ? (usdtBalance ?? 0n) >= parsedUsdt
+    : (spvBalance ?? 0n) >= parsedSpv;
 
-  const canTrade = parsedAmount > 0n && hasBalance && !needsApproval;
+  const canTrade = mode === "buy"
+    ? parsedUsdt > 0n && hasBalance && !needsApproval
+    : parsedSpv > 0n && hasBalance && !needsApproval;
+
   const isPending = approveTx.isPending || tradeTx.isPending || approveReceipt.isLoading || tradeReceipt.isLoading;
 
+  const parsedAmount = mode === "buy" ? parsedUsdt : parsedSpv;
+
   return {
-    mode, setMode, amount, setAmount, parsedAmount,
-    usdtBalance: usdtBalance ?? 0n, spvBalance: spvBalance ?? 0n,
-    previewBuy: previewBuy ?? 0n, previewSell: previewSell ?? 0n,
+    mode, setMode,
+    usdtInput, spvInput,
+    setUsdtInput: onUsdtChange,
+    setSpvInput: onSpvChange,
+    reset,
+    parsedAmount, parsedUsdt, parsedSpv,
+    usdtBalance: usdtBalance ?? 0n,
+    spvBalance: spvBalance ?? 0n,
+    previewBuy: previewBuyOut ?? 0n,
+    previewSell: previewSellOut ?? 0n,
     needsApproval, hasBalance, canTrade, isPending,
     approve, execute,
     txHash: tradeTx.data,

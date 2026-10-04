@@ -11,8 +11,25 @@ export default function TradePanel() {
   const { open } = useAppKit();
   const t = useSPVTrade();
 
-  const out = t.mode === "buy" ? formatSpv(t.previewBuy) : formatUsdt(t.previewSell);
-  const outLabel = t.mode === "buy" ? "SPV" : "USDT";
+  const isBuy = t.mode === "buy";
+  const topLabel = isBuy ? "You pay (USDT)" : "You sell (SPV)";
+  const topValue = isBuy ? t.usdtInput : t.spvInput;
+  const topSymbol = isBuy ? "USDT" : "SPV";
+  const topBalance = isBuy ? formatUsdt(t.usdtBalance) : formatSpv(t.spvBalance);
+
+  const bottomLabel = isBuy ? "You receive (SPV)" : "You receive (USDT)";
+  const bottomValue = isBuy ? t.spvInput : t.usdtInput;
+  const bottomSymbol = isBuy ? "SPV" : "USDT";
+
+  const handleTopChange = (v) => {
+    if (isBuy) t.setUsdtInput(v);
+    else t.setSpvInput(v);
+  };
+
+  const handleBottomChange = (v) => {
+    if (isBuy) t.setSpvInput(v);
+    else t.setUsdtInput(v);
+  };
 
   return (
     <div className="max-w-7xl mx-auto px-6 py-24">
@@ -21,7 +38,7 @@ export default function TradePanel() {
           Trade <span className="gradient-text">SPV</span>
         </h2>
         <p className="text-white/60 max-w-2xl mx-auto">
-          Buy or sell directly on the bonding curve with 1% slippage protection.
+          Buy or sell on the bonding curve. Prices update as you type.
         </p>
       </div>
 
@@ -33,40 +50,34 @@ export default function TradePanel() {
       >
         <div className="grid grid-cols-2 gap-2 p-1 rounded-full glass mb-6">
           <button
-            onClick={() => t.setMode("buy")}
-            className={`py-2.5 rounded-full text-sm font-bold transition-all ${t.mode === "buy" ? "glow-btn text-white" : "text-white/60"}`}
+            onClick={() => { t.setMode("buy"); t.reset(); }}
+            className={`py-2.5 rounded-full text-sm font-bold transition-all ${isBuy ? "glow-btn text-white" : "text-white/60"}`}
           >
             Buy
           </button>
           <button
-            onClick={() => t.setMode("sell")}
-            className={`py-2.5 rounded-full text-sm font-bold transition-all ${t.mode === "sell" ? "glow-btn text-white" : "text-white/60"}`}
+            onClick={() => { t.setMode("sell"); t.reset(); }}
+            className={`py-2.5 rounded-full text-sm font-bold transition-all ${!isBuy ? "glow-btn text-white" : "text-white/60"}`}
           >
             Sell
           </button>
         </div>
 
         <div className="space-y-3 mb-4">
-          <label className="text-xs text-white/60">
-            {t.mode === "buy" ? "You pay (USDT)" : "You sell (SPV)"}
-          </label>
+          <label className="text-xs text-white/60">{topLabel}</label>
           <div className="glass rounded-2xl p-4">
             <div className="flex items-center gap-3">
               <input
                 type="number"
                 inputMode="decimal"
                 placeholder="0.0"
-                value={t.amount}
-                onChange={(e) => t.setAmount(e.target.value)}
+                value={topValue}
+                onChange={(e) => handleTopChange(e.target.value)}
                 className="flex-1 bg-transparent text-2xl font-mono outline-none placeholder:text-white/20"
               />
-              <span className="text-sm font-bold text-white/60">
-                {t.mode === "buy" ? "USDT" : "SPV"}
-              </span>
+              <span className="text-sm font-bold text-white/60">{topSymbol}</span>
             </div>
-            <div className="text-xs text-white/40 mt-2">
-              Balance: {t.mode === "buy" ? formatUsdt(t.usdtBalance) : formatSpv(t.spvBalance)}
-            </div>
+            <div className="text-xs text-white/40 mt-2">Balance: {topBalance}</div>
           </div>
         </div>
 
@@ -77,9 +88,19 @@ export default function TradePanel() {
         </div>
 
         <div className="space-y-3 mt-4 mb-6">
-          <label className="text-xs text-white/60">You receive ({outLabel})</label>
+          <label className="text-xs text-white/60">{bottomLabel}</label>
           <div className="glass rounded-2xl p-4">
-            <div className="text-2xl font-mono">{t.amount ? out : "0.00"}</div>
+            <div className="flex items-center gap-3">
+              <input
+                type="number"
+                inputMode="decimal"
+                placeholder="0.0"
+                value={bottomValue}
+                onChange={(e) => handleBottomChange(e.target.value)}
+                className="flex-1 bg-transparent text-2xl font-mono outline-none placeholder:text-white/20"
+              />
+              <span className="text-sm font-bold text-white/60">{bottomSymbol}</span>
+            </div>
             <div className="text-xs text-white/40 mt-2">Estimated · 1% slippage</div>
           </div>
         </div>
@@ -94,7 +115,7 @@ export default function TradePanel() {
             disabled={t.isPending || t.parsedAmount === 0n}
             className="w-full glow-btn text-white font-bold rounded-2xl py-4"
           >
-            {t.isPending ? "Approving..." : `Approve ${t.mode === "buy" ? "USDT" : "SPV"}`}
+            {t.isPending ? "Approving..." : `Approve ${isBuy ? "USDT" : "SPV"}`}
           </button>
         ) : (
           <button
@@ -102,7 +123,7 @@ export default function TradePanel() {
             disabled={!t.canTrade || t.isPending}
             className="w-full glow-btn text-white font-bold rounded-2xl py-4 disabled:opacity-40"
           >
-            {t.isPending ? "Confirming..." : t.mode === "buy" ? "Buy SPV" : "Sell SPV"}
+            {t.isPending ? "Confirming..." : isBuy ? "Buy SPV" : "Sell SPV"}
           </button>
         )}
 
