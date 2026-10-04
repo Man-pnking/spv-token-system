@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { ArrowDownUp, ExternalLink, Wallet, Fuel, Info } from "lucide-react";
+import { ArrowDownUp, ExternalLink, Wallet, Fuel, Info, AlertCircle } from "lucide-react";
 import { useAccount, useBalance } from "wagmi";
 import { useAppKit } from "@reown/appkit/react";
 import { useSPVTrade } from "../hooks/useSPVTrade";
@@ -8,13 +8,15 @@ import { useGasEstimate } from "../hooks/useGasEstimate";
 import { CONFIG } from "../config";
 import { formatUsdt, formatSpv } from "../utils/format";
 
+const MIN_USDT = 0.01;
+const MIN_SPV = 1;
+
 export default function TradePanel() {
   const { isConnected, address } = useAccount();
   const { open } = useAppKit();
   const t = useSPVTrade();
   const fees = useSPVFees();
 
-  // Native POL balance for gas
   const { data: polBalance } = useBalance({
     address,
     query: { enabled: !!address, refetchInterval: 15_000 },
@@ -30,7 +32,6 @@ export default function TradePanel() {
   const bottomValue = isBuy ? t.spvInput : t.usdtInput;
   const bottomSymbol = isBuy ? "SPV" : "USDT";
 
-  // Preview for gas estimate
   const previewOut = isBuy ? t.previewBuy : t.previewSell;
   const minOut = previewOut > 0n ? (previewOut * 99n) / 100n : 0n;
   const { gasCostPol, loading: gasLoading } = useGasEstimate(
@@ -55,6 +56,28 @@ export default function TradePanel() {
     ? Number(polBalance.formatted).toFixed(4)
     : "0.0000";
 
+  // --- Validation logic ---
+  const inputTop = parseFloat(topValue || "0");
+  const balanceTop = isBuy
+    ? Number(t.usdtBalance) / 1e6
+    : Number(t.spvBalance) / 1e18;
+  const minRequired = isBuy ? MIN_USDT : MIN_SPV;
+
+  let validationError = "";
+  if (topValue && inputTop > 0) {
+    if (inputTop < minRequired) {
+      validationError = isBuy
+        ? `Minimum buy is ${MIN_USDT} USDT`
+        : `Minimum sell is ${MIN_SPV} SPV`;
+    } else if (inputTop > balanceTop) {
+      validationError = isBuy
+        ? `Insufficient USDT. You have ${balanceTop.toFixed(6)} USDT.`
+        : `Insufficient SPV. You have ${balanceTop.toFixed(4)} SPV.`;
+    }
+  }
+
+  const inputError = validationError !== "";
+
   return (
     <div className="max-w-7xl mx-auto px-6 py-24">
       <div className="text-center mb-14">
@@ -67,7 +90,6 @@ export default function TradePanel() {
       </div>
 
       <div className="grid lg:grid-cols-3 gap-4 max-w-5xl mx-auto">
-        {/* Trade panel */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -91,7 +113,7 @@ export default function TradePanel() {
 
           <div className="space-y-3 mb-4">
             <label className="text-xs text-white/60">{topLabel}</label>
-            <div className="glass rounded-2xl p-4">
+            <div className={`glass rounded-2xl p-4 transition-colors ${inputError ? "border border-red-500/40" : ""}`}>
               <div className="flex items-center gap-3">
                 <input
                   type="number"
@@ -105,6 +127,12 @@ export default function TradePanel() {
               </div>
               <div className="text-xs text-white/40 mt-2">Balance: {topBalance}</div>
             </div>
+            {inputError && (
+              <div className="flex items-center gap-1.5 text-xs text-red-400 mt-1">
+                <AlertCircle className="w-3 h-3 flex-shrink-0" />
+                <span>{validationError}</span>
+              </div>
+            )}
           </div>
 
           <div className="flex justify-center -my-3 relative z-10">
@@ -138,23 +166,19 @@ export default function TradePanel() {
           ) : t.needsApproval ? (
             <button
               onClick={t.approve}
-              disabled={t.isPending || t.parsedAmount === 0n}
-              className="w-full glow-btn text-white font-bold rounded-2xl py-4"
+              disabled={t.isPending || t.parsedAmount === 0n || inputError}
+              className="w-full glow-btn text-white font-bold rounded-2xl py-4 disabled:opacity-40"
             >
               {t.isPending ? "Approving..." : `Approve ${isBuy ? "USDT" : "SPV"}`}
             </button>
           ) : (
             <button
               onClick={t.execute}
-              disabled={!t.canTrade || t.isPending}
+              disabled={!t.canTrade || t.isPending || inputError}
               className="w-full glow-btn text-white font-bold rounded-2xl py-4 disabled:opacity-40"
             >
               {t.isPending ? "Confirming..." : isBuy ? "Buy SPV" : "Sell SPV"}
             </button>
-          )}
-
-          {!t.hasBalance && t.parsedAmount > 0n && (
-            <div className="text-xs text-red-400 text-center mt-3">Insufficient balance</div>
           )}
 
           {t.error && (
@@ -175,7 +199,6 @@ export default function TradePanel() {
           )}
         </motion.div>
 
-        {/* Side panel */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -186,7 +209,6 @@ export default function TradePanel() {
             Wallet
           </h3>
 
-          {/* POL balance */}
           <div className="flex items-start gap-3">
             <div className="w-8 h-8 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center">
               <Wallet className="w-4 h-4 text-white/70" />
@@ -198,7 +220,6 @@ export default function TradePanel() {
             </div>
           </div>
 
-          {/* USDT balance */}
           <div className="flex items-start gap-3">
             <div className="w-8 h-8 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center">
               <span className="text-xs font-bold text-teal-400">$</span>
@@ -209,7 +230,6 @@ export default function TradePanel() {
             </div>
           </div>
 
-          {/* SPV balance */}
           <div className="flex items-start gap-3">
             <div className="w-8 h-8 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center">
               <span className="text-xs font-bold text-violet-400">S</span>
@@ -226,7 +246,6 @@ export default function TradePanel() {
             Fees
           </h3>
 
-          {/* Creator fee */}
           <div className="flex items-start gap-3">
             <div className="w-8 h-8 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center">
               <Info className="w-4 h-4 text-white/70" />
@@ -238,7 +257,6 @@ export default function TradePanel() {
             </div>
           </div>
 
-          {/* Burn rate */}
           <div className="flex items-start gap-3">
             <div className="w-8 h-8 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center">
               <Info className="w-4 h-4 text-white/70" />
@@ -250,7 +268,6 @@ export default function TradePanel() {
             </div>
           </div>
 
-          {/* Estimated gas */}
           <div className="flex items-start gap-3">
             <div className="w-8 h-8 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center">
               <Fuel className="w-4 h-4 text-white/70" />
@@ -258,7 +275,7 @@ export default function TradePanel() {
             <div className="flex-1">
               <div className="text-[10px] uppercase tracking-wider text-white/50">Estimated Gas</div>
               <div className="font-mono text-sm">
-                {t.parsedAmount === 0n
+                {t.parsedAmount === 0n || inputError
                   ? "—"
                   : gasLoading
                   ? "Loading..."
