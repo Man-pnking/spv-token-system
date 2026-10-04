@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import {
-  Coins, Shield, Zap, TrendingUp, AlertTriangle, CheckCircle2,
-  Rocket, Target, Lock, ArrowRight,
+  Coins, Shield, Zap, AlertTriangle, CheckCircle2,
+  Rocket, ArrowRight,
 } from "lucide-react";
 
 export default function Intro() {
@@ -43,7 +43,7 @@ export default function Intro() {
       >
         {[
           { icon: Coins, title: "No Pre-mine", desc: "Supply starts at zero. Every token in circulation was bought by a user." },
-          { icon: Shield, title: "Permanent Liquidity", desc: "On migration, LP tokens are burned to 0x…dEaD. No rug possible." },
+          { icon: Shield, title: "Permanent Liquidity", desc: "On migration, LP tokens are burned to 0x...dEaD. No rug possible." },
           { icon: Zap, title: "Dynamic Fees", desc: "Creator fee scales with price and volume. Sell fee drops with hold time." },
         ].map((item, i) => (
           <div key={i} className="glass-strong rounded-3xl p-6">
@@ -65,7 +65,7 @@ export default function Intro() {
           className="text-2xl sm:text-3xl font-black mb-10 text-warm"
         >
           How to <span className="gradient-text">buy SPV</span>
-        </motion.h2>
+        </motion.h3>
 
         <div className="space-y-4">
           {[
@@ -138,7 +138,7 @@ export default function Intro() {
           0x3d838A7aa293F4371F4C23dD0906FEaCa1b83FB3
         </div>
         <div className="mt-4 text-xs text-warm-mute">
-          MetaMask → Import Tokens → Custom Token → paste address → confirm
+          MetaMask: Import Tokens, Custom Token, paste address, confirm
         </div>
       </motion.div>
 
@@ -172,7 +172,7 @@ export default function Intro() {
               status: "current",
               items: [
                 "Logo submitted to Polygonscan",
-                "Community building — X, Telegram",
+                "Community building on X and Telegram",
                 "Marketing push to drive unique buyers",
                 "Migration triggers fire naturally",
               ],
@@ -182,7 +182,7 @@ export default function Intro() {
               status: "pending",
               items: [
                 "Auto-migration to QuickSwap when 2 of 3 triggers met",
-                "LP tokens burned to 0x…dEaD for permanent liquidity",
+                "LP tokens burned to 0x...dEaD for permanent liquidity",
                 "DEX Screener and GeckoTerminal auto-index the pool",
                 "Token becomes discoverable to public traders",
               ],
@@ -284,7 +284,7 @@ export default function Intro() {
         <div className="glass-strong rounded-3xl p-7">
           <div className="flex items-center gap-3 mb-6">
             <AlertTriangle className="w-6 h-6 text-amber-400" />
-            <h3 className="text-xl font-black text-warm">Cons & Risks</h3>
+            <h3 className="text-xl font-black text-warm">Cons and Risks</h3>
           </div>
           <ul className="space-y-3">
             {[
