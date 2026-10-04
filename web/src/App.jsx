@@ -11,11 +11,11 @@ import Footer from "./components/Footer";
 
 export default function App() {
   return (
-    <div className="relative min-h-screen">
+    <div className="relative min-h-screen w-full overflow-x-hidden">
       <AnimatedBackground />
-      <div className="frost-layer relative z-10 min-h-screen">
+      <div className="frost-layer relative z-10 min-h-screen w-full">
         <Navbar />
-        <main>
+        <main className="w-full">
           <section id="home"><Hero /></section>
           <section id="intro"><Intro /></section>
           <section id="stats"><CurveStats /></section>

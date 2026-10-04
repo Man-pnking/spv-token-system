@@ -10,28 +10,28 @@ export default function AnimatedBackground() {
       <div className="absolute inset-0 bg-gradient-to-br from-[#0a0705] via-[#120d08] to-[#0a0705]" />
 
       <div
-        className="absolute -top-1/3 -left-1/4 w-[70vw] h-[70vw] rounded-full blur-[120px] opacity-40 animate-aurora"
+        className="absolute -top-1/3 -left-1/4 w-[70vw] h-[70vw] max-w-[600px] max-h-[600px] rounded-full blur-[120px] opacity-40 animate-aurora"
         style={{
           background: "radial-gradient(circle, #d4af37 0%, transparent 70%)",
-          transform: `translate(${mouse.x * 30}px, ${mouse.y * 30 + scrollY * 0.15}px)`,
+          transform: `translate(${mouse.x * 20}px, ${mouse.y * 20 + scrollY * 0.15}px)`,
         }}
       />
 
       <div
-        className="absolute -bottom-1/3 -right-1/4 w-[80vw] h-[80vw] rounded-full blur-[140px] opacity-30 animate-aurora"
+        className="absolute -bottom-1/3 -right-1/4 w-[80vw] h-[80vw] max-w-[700px] max-h-[700px] rounded-full blur-[140px] opacity-30 animate-aurora"
         style={{
           background: "radial-gradient(circle, #f4c430 0%, transparent 70%)",
           animationDelay: "-7s",
-          transform: `translate(${mouse.x * -40}px, ${mouse.y * -40 - scrollY * 0.1}px)`,
+          transform: `translate(${mouse.x * -20}px, ${mouse.y * -20 - scrollY * 0.1}px)`,
         }}
       />
 
       <div
-        className="absolute top-1/3 right-1/4 w-[50vw] h-[50vw] rounded-full blur-[160px] opacity-20 animate-aurora"
+        className="absolute top-1/3 right-1/4 w-[50vw] h-[50vw] max-w-[500px] max-h-[500px] rounded-full blur-[160px] opacity-20 animate-aurora"
         style={{
           background: "radial-gradient(circle, #7c5cff 0%, transparent 70%)",
           animationDelay: "-14s",
-          transform: `translate(${mouse.x * 20}px, ${mouse.y * 20 + scrollY * 0.08}px)`,
+          transform: `translate(${mouse.x * 15}px, ${mouse.y * 15 + scrollY * 0.08}px)`,
         }}
       />
 
