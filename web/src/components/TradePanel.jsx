@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { ArrowDownUp, ExternalLink, Loader2 } from "lucide-react";
+import { ArrowDownUp, ExternalLink } from "lucide-react";
 import { useAccount, useBalance } from "wagmi";
 import { useAppKit } from "@reown/appkit/react";
 import { useSPVTrade } from "../hooks/useSPVTrade";
@@ -44,6 +44,18 @@ export default function TradePanel() {
   const handleBottomChange = (v) => {
     if (isBuy) t.setSpvInput(v);
     else t.setUsdtInput(v);
+  };
+
+  const applyPercent = (pct) => {
+    if (isBuy) {
+      const balance = Number(t.usdtBalance) / 1e6;
+      const value = (balance * pct) / 100;
+      if (value > 0) t.setUsdtInput(value.toFixed(6));
+    } else {
+      const balance = Number(t.spvBalance) / 1e18;
+      const value = (balance * pct) / 100;
+      if (value > 0) t.setSpvInput(value.toFixed(6));
+    }
   };
 
   const creatorFeePct = fees.loading ? "—" : `${fees.creatorFeePct.toFixed(2)}%`;
@@ -104,7 +116,7 @@ export default function TradePanel() {
         </div>
       )}
 
-      <div className="flex items-center gap-10 mb-16">
+      <div className="flex items-center gap-10 mb-12">
         {["buy", "sell"].map((m) => (
           <button
             key={m}
@@ -124,7 +136,26 @@ export default function TradePanel() {
         ))}
       </div>
 
-      {/* Top input */}
+      {/* Quick fill buttons */}
+      {isConnected && (
+        <div className="flex gap-2 mb-6">
+          {[
+            { label: "25%", pct: 25 },
+            { label: "50%", pct: 50 },
+            { label: "75%", pct: 75 },
+            { label: "Max", pct: 100 },
+          ].map((btn) => (
+            <button
+              key={btn.label}
+              onClick={() => applyPercent(btn.pct)}
+              className="flex-1 py-2 rounded-full border border-[#d4af37]/15 text-xs font-bold text-warm-dim hover:border-[#d4af37]/40 hover:text-[#d4af37] transition-colors"
+            >
+              {btn.label}
+            </button>
+          ))}
+        </div>
+      )}
+
       <div className="mb-8">
         <div className="flex items-baseline justify-between mb-4">
           <label className="text-xs uppercase tracking-[0.25em] text-warm-mute">
@@ -152,19 +183,10 @@ export default function TradePanel() {
         <ArrowDownUp className="w-5 h-5 text-[#d4af37]/60" />
       </div>
 
-      {/* Bottom input */}
       <div className="mb-12">
-        <div className="flex items-baseline justify-between mb-4">
-          <label className="text-xs uppercase tracking-[0.25em] text-warm-mute">
-            {bottomLabel}
-          </label>
-          {t.isPreviewLoading && t.parsedAmount > 0n && (
-            <span className="text-[10px] uppercase tracking-[0.25em] text-warm-mute flex items-center gap-1.5">
-              <Loader2 className="w-3 h-3 animate-spin" />
-              Updating
-            </span>
-          )}
-        </div>
+        <label className="text-xs uppercase tracking-[0.25em] text-warm-mute block mb-4">
+          {bottomLabel}
+        </label>
         <div className="flex items-baseline gap-4 pb-4 border-b border-[#d4af37]/15">
           <input
             type="number"
@@ -201,7 +223,7 @@ export default function TradePanel() {
           <div className="text-[10px] uppercase tracking-[0.25em] text-warm-mute mb-2">
             Slippage
           </div>
-          <div className="font-mono text-sm text-warm-dim">1%</div>
+          <div className="font-mono text-sm text-warm-dim">2%</div>
         </div>
       </div>
 
