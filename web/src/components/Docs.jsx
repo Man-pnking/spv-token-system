@@ -1,13 +1,13 @@
-import { motion } from "framer-motion";
+import Animated from "./Animated";
 import { Copy, ExternalLink } from "lucide-react";
 import { CONFIG } from "../config";
 
-const FEES = [
-  ["< 1 hour", "15%"],
-  ["1-24 hours", "10%"],
-  ["1-7 days", "5%"],
-  ["7-30 days", "2%"],
-  ["> 30 days", "0.5%"],
+const SELL_TIERS = [
+  ["Under 1 hour", "15%"],
+  ["1 to 24 hours", "10%"],
+  ["1 to 7 days", "5%"],
+  ["7 to 30 days", "2%"],
+  ["Over 30 days", "0.5%"],
 ];
 
 const CREATOR_FEES = [
@@ -22,22 +22,24 @@ const CREATOR_FEES = [
 function CopyAddr({ label, addr }) {
   const copy = () => navigator.clipboard.writeText(addr);
   return (
-    <div className="glass rounded-xl p-3 flex items-center justify-between gap-3">
+    <div className="flex items-center justify-between py-4 border-b border-[#d4af37]/10">
       <div className="min-w-0">
-        <div className="text-[10px] uppercase tracking-wider text-white/50">{label}</div>
-        <div className="font-mono text-xs truncate">{addr}</div>
+        <div className="text-[10px] uppercase tracking-[0.25em] text-warm-mute mb-1">
+          {label}
+        </div>
+        <div className="font-mono text-xs sm:text-sm truncate text-warm-dim">{addr}</div>
       </div>
-      <div className="flex items-center gap-1 shrink-0">
-        <button onClick={copy} className="p-2 rounded-lg hover:bg-white/10 transition-colors">
-          <Copy className="w-3.5 h-3.5" />
+      <div className="flex items-center gap-1 shrink-0 ml-4">
+        <button onClick={copy} className="p-2 rounded-lg hover:bg-white/5 transition-colors">
+          <Copy className="w-3.5 h-3.5 text-warm-dim" />
         </button>
         <a
           href={`${CONFIG.explorer}/address/${addr}`}
           target="_blank"
           rel="noopener noreferrer"
-          className="p-2 rounded-lg hover:bg-white/10 transition-colors"
+          className="p-2 rounded-lg hover:bg-white/5 transition-colors"
         >
-          <ExternalLink className="w-3.5 h-3.5" />
+          <ExternalLink className="w-3.5 h-3.5 text-warm-dim" />
         </a>
       </div>
     </div>
@@ -46,120 +48,107 @@ function CopyAddr({ label, addr }) {
 
 export default function Docs() {
   return (
-    <div className="max-w-5xl mx-auto px-6 py-24">
-      <div className="text-center mb-14">
-        <h2 className="text-3xl sm:text-5xl font-black mb-4">Documentation</h2>
-        <p className="text-white/60 max-w-2xl mx-auto">
-          Everything you need to understand the SPV economics and contracts.
+    <div className="max-w-4xl mx-auto px-6 py-16">
+      <div className="mb-20">
+        <div className="text-xs uppercase tracking-[0.3em] text-warm-mute mb-4">
+          Documentation
+        </div>
+        <h2 className="text-4xl sm:text-6xl font-black leading-tight">
+          Everything about <span className="gradient-text">SPV</span>
+        </h2>
+      </div>
+
+      <Animated variant="up" className="mb-20">
+        <h3 className="text-2xl font-black text-warm mb-4">Dynamic Creator Fee</h3>
+        <p className="text-sm text-warm-dim leading-relaxed mb-8 max-w-3xl">
+          The creator fee adjusts automatically from 0.5% to 5% based on price and
+          volume. It decreases as price rises to reward holders and increases with
+          daily volume to capture upside during active trading.
         </p>
-      </div>
-
-      <div className="space-y-6">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="glass-strong rounded-2xl p-6"
-        >
-          <h3 className="text-xl font-bold mb-4">Dynamic Creator Fee</h3>
-          <p className="text-sm text-white/60 mb-4">
-            The creator fee adjusts automatically from 0.5% to 5% based on price and volume.
-            It decreases as price rises (rewarding holders) and increases with daily volume (capturing upside).
-          </p>
-          <div className="overflow-x-auto">
-            <table className="w-full text-sm">
-              <thead>
-                <tr className="text-white/40 text-left">
-                  <th className="py-2 pr-4">Scenario</th>
-                  <th className="py-2 pr-4">Price</th>
-                  <th className="py-2 pr-4">Volume</th>
-                  <th className="py-2">Fee</th>
+        <div className="overflow-x-auto">
+          <table className="w-full text-sm">
+            <thead>
+              <tr className="text-warm-mute text-left">
+                <th className="py-3 pr-6 font-normal text-[10px] uppercase tracking-[0.25em]">Scenario</th>
+                <th className="py-3 pr-6 font-normal text-[10px] uppercase tracking-[0.25em]">Price</th>
+                <th className="py-3 pr-6 font-normal text-[10px] uppercase tracking-[0.25em]">Volume</th>
+                <th className="py-3 font-normal text-[10px] uppercase tracking-[0.25em]">Fee</th>
+              </tr>
+            </thead>
+            <tbody>
+              {CREATOR_FEES.map(([s, p, v, f]) => (
+                <tr key={s} className="border-t border-[#d4af37]/10">
+                  <td className="py-3 pr-6 text-warm-dim">{s}</td>
+                  <td className="py-3 pr-6 font-mono text-warm-dim">{p}</td>
+                  <td className="py-3 pr-6 font-mono text-warm-dim">{v}</td>
+                  <td className="py-3 font-mono text-[#d4af37]">{f}</td>
                 </tr>
-              </thead>
-              <tbody>
-                {CREATOR_FEES.map(([s, p, v, f]) => (
-                  <tr key={s} className="border-t border-white/5">
-                    <td className="py-2 pr-4">{s}</td>
-                    <td className="py-2 pr-4 font-mono">{p}</td>
-                    <td className="py-2 pr-4 font-mono">{v}</td>
-                    <td className="py-2 font-mono text-spv-accent">{f}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        </motion.div>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </Animated>
 
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="glass-strong rounded-2xl p-6"
-        >
-          <h3 className="text-xl font-bold mb-4">Sell Fee Tiers</h3>
-          <p className="text-sm text-white/60 mb-4">
-            Sell fees decrease with hold time. Long-term holders pay almost nothing.
-          </p>
-          <div className="grid grid-cols-2 sm:grid-cols-5 gap-3">
-            {FEES.map(([t, f]) => (
-              <div key={t} className="glass rounded-xl p-4 text-center">
-                <div className="text-[10px] uppercase tracking-wider text-white/50 mb-1">{t}</div>
-                <div className="text-xl font-bold font-mono text-spv-accent">{f}</div>
+      <div className="divider mb-20" />
+
+      <Animated variant="up" className="mb-20">
+        <h3 className="text-2xl font-black text-warm mb-4">Sell Fee Tiers</h3>
+        <p className="text-sm text-warm-dim leading-relaxed mb-8 max-w-3xl">
+          Sell fees decrease with hold time. Long-term holders pay almost nothing.
+        </p>
+        <div className="grid grid-cols-2 sm:grid-cols-5 gap-8">
+          {SELL_TIERS.map(([t, f]) => (
+            <div key={t}>
+              <div className="text-[10px] uppercase tracking-[0.25em] text-warm-mute mb-2">
+                {t}
               </div>
-            ))}
-          </div>
-        </motion.div>
+              <div className="text-3xl font-black font-mono gradient-text">{f}</div>
+            </div>
+          ))}
+        </div>
+      </Animated>
 
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="glass-strong rounded-2xl p-6"
-        >
-          <h3 className="text-xl font-bold mb-4">Burn Mechanism</h3>
-          <p className="text-sm text-white/60 leading-relaxed">
-            Every sell burns 0.5% to 12% of the token amount, scaled by daily volume.
-            Burn stops when total supply reaches the supply floor (10% of peak supply).
-            This prevents total supply collapse while keeping deflationary pressure during active trading.
-          </p>
-        </motion.div>
+      <div className="divider mb-20" />
 
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="glass-strong rounded-2xl p-6"
-        >
-          <h3 className="text-xl font-bold mb-4">Migration Triggers</h3>
-          <p className="text-sm text-white/60 mb-4">
-            The curve migrates to QuickSwap when 2 of 3 conditions are met:
-          </p>
-          <ul className="space-y-2 text-sm text-white/70 mb-4">
-            <li className="flex gap-3"><span className="text-spv-accent">1.</span> Price reaches 5x the initial price (0.05 USDT)</li>
-            <li className="flex gap-3"><span className="text-spv-accent">2.</span> Total minted reaches 5,000,000 SPV</li>
-            <li className="flex gap-3"><span className="text-spv-accent">3.</span> Unique buyers reach 500</li>
-          </ul>
-          <p className="text-sm text-white/60">
-            Fallback: migration is forced after 90 days if no triggers fire. LP tokens are
-            burned to the dead address, making liquidity permanent.
-          </p>
-        </motion.div>
+      <Animated variant="up" className="mb-20">
+        <h3 className="text-2xl font-black text-warm mb-4">Burn Mechanism</h3>
+        <p className="text-sm text-warm-dim leading-relaxed max-w-3xl">
+          Every sell burns 0.5% to 12% of the token amount, scaled by daily volume.
+          Burn stops when total supply reaches the supply floor at 10% of peak supply.
+          This prevents total supply collapse while keeping deflationary pressure
+          during active trading.
+        </p>
+      </Animated>
 
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="glass-strong rounded-2xl p-6"
-        >
-          <h3 className="text-xl font-bold mb-4">Contract Addresses</h3>
-          <div className="space-y-3">
-            <CopyAddr label="SPV Token" addr={CONFIG.spvToken} />
-            <CopyAddr label="Bonding Curve" addr={CONFIG.curve} />
-            <CopyAddr label="Router" addr={CONFIG.router} />
-            <CopyAddr label="USDT" addr={CONFIG.usdt} />
-          </div>
-        </motion.div>
-      </div>
+      <div className="divider mb-20" />
+
+      <Animated variant="up" className="mb-20">
+        <h3 className="text-2xl font-black text-warm mb-4">Migration Triggers</h3>
+        <p className="text-sm text-warm-dim leading-relaxed mb-6 max-w-3xl">
+          The curve migrates to QuickSwap when 2 of 3 conditions are met:
+        </p>
+        <ul className="space-y-3 text-sm text-warm-dim mb-6">
+          <li className="flex gap-3"><span className="text-[#d4af37]">01</span> Price reaches 5x the initial price (0.05 USDT)</li>
+          <li className="flex gap-3"><span className="text-[#d4af37]">02</span> Total minted reaches 5,000,000 SPV</li>
+          <li className="flex gap-3"><span className="text-[#d4af37]">03</span> Unique buyers reach 500</li>
+        </ul>
+        <p className="text-sm text-warm-dim leading-relaxed max-w-3xl">
+          Fallback: migration is forced after 90 days if no triggers fire. LP tokens
+          are burned to the dead address, making liquidity permanent.
+        </p>
+      </Animated>
+
+      <div className="divider mb-20" />
+
+      <Animated variant="up">
+        <h3 className="text-2xl font-black text-warm mb-6">Contract Addresses</h3>
+        <div>
+          <CopyAddr label="SPV Token" addr={CONFIG.spvToken} />
+          <CopyAddr label="Bonding Curve" addr={CONFIG.curve} />
+          <CopyAddr label="Router" addr={CONFIG.router} />
+          <CopyAddr label="USDT" addr={CONFIG.usdt} />
+        </div>
+      </Animated>
     </div>
   );
 }

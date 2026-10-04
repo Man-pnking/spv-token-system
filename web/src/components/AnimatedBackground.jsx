@@ -1,54 +1,51 @@
 import { useMousePosition } from "../hooks/useMousePosition";
+import { useParallax } from "../hooks/useParallax";
 
 export default function AnimatedBackground() {
   const mouse = useMousePosition();
+  const scrollY = useParallax();
 
   return (
     <div className="fixed inset-0 -z-10 overflow-hidden pointer-events-none">
-      {/* Base gradient */}
       <div className="absolute inset-0 bg-gradient-to-br from-[#0a0705] via-[#120d08] to-[#0a0705]" />
 
-      {/* Gold aurora 1 */}
       <div
         className="absolute -top-1/3 -left-1/4 w-[70vw] h-[70vw] rounded-full blur-[120px] opacity-40 animate-aurora"
         style={{
           background: "radial-gradient(circle, #d4af37 0%, transparent 70%)",
-          transform: `translate(${mouse.x * 30}px, ${mouse.y * 30}px)`,
+          transform: `translate(${mouse.x * 30}px, ${mouse.y * 30 + scrollY * 0.15}px)`,
         }}
       />
 
-      {/* Warm amber aurora 2 */}
       <div
         className="absolute -bottom-1/3 -right-1/4 w-[80vw] h-[80vw] rounded-full blur-[140px] opacity-30 animate-aurora"
         style={{
           background: "radial-gradient(circle, #f4c430 0%, transparent 70%)",
           animationDelay: "-7s",
-          transform: `translate(${mouse.x * -40}px, ${mouse.y * -40}px)`,
+          transform: `translate(${mouse.x * -40}px, ${mouse.y * -40 - scrollY * 0.1}px)`,
         }}
       />
 
-      {/* Violet accent for contrast */}
       <div
         className="absolute top-1/3 right-1/4 w-[50vw] h-[50vw] rounded-full blur-[160px] opacity-20 animate-aurora"
         style={{
           background: "radial-gradient(circle, #7c5cff 0%, transparent 70%)",
           animationDelay: "-14s",
-          transform: `translate(${mouse.x * 20}px, ${mouse.y * 20}px)`,
+          transform: `translate(${mouse.x * 20}px, ${mouse.y * 20 + scrollY * 0.08}px)`,
         }}
       />
 
-      {/* Subtle grid */}
       <div
         className="absolute inset-0 opacity-[0.015]"
         style={{
           backgroundImage:
             "linear-gradient(rgba(212,175,55,0.6) 1px, transparent 1px), linear-gradient(90deg, rgba(212,175,55,0.6) 1px, transparent 1px)",
           backgroundSize: "100px 100px",
+          backgroundPosition: `0 ${-scrollY * 0.05}px`,
           maskImage: "radial-gradient(ellipse at center, black 30%, transparent 75%)",
         }}
       />
 
-      {/* Noise */}
       <div
         className="absolute inset-0 opacity-[0.02] mix-blend-overlay"
         style={{
@@ -57,7 +54,6 @@ export default function AnimatedBackground() {
         }}
       />
 
-      {/* Vignette */}
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_30%,rgba(0,0,0,0.7)_100%)]" />
     </div>
   );

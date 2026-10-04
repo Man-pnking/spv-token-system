@@ -2,7 +2,8 @@ import { useEffect } from "react";
 
 export function useScrollReveal() {
   useEffect(() => {
-    const els = document.querySelectorAll(".reveal");
+    const selectors = ".reveal, .reveal-up, .reveal-fade, .reveal-scale";
+    const els = document.querySelectorAll(selectors);
     if (els.length === 0) return;
 
     const observer = new IntersectionObserver(
@@ -14,7 +15,7 @@ export function useScrollReveal() {
           }
         });
       },
-      { threshold: 0.15, rootMargin: "0px 0px -80px 0px" }
+      { threshold: 0.12, rootMargin: "0px 0px -60px 0px" }
     );
 
     els.forEach((el) => observer.observe(el));

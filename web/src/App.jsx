@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import AnimatedBackground from "./components/AnimatedBackground";
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
@@ -9,15 +8,12 @@ import TradePanel from "./components/TradePanel";
 import Docs from "./components/Docs";
 import FAQ from "./components/FAQ";
 import Footer from "./components/Footer";
-import { useScrollReveal } from "./hooks/useScrollReveal";
 
 export default function App() {
-  useScrollReveal();
-
   return (
     <div className="relative min-h-screen">
       <AnimatedBackground />
-      <div className="relative z-10">
+      <div className="frost-layer relative z-10 min-h-screen">
         <Navbar />
         <main>
           <section id="home"><Hero /></section>

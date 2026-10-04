@@ -29,51 +29,32 @@
     background: linear-gradient(180deg, #d4af37 0%, #8a6f22 100%);
     border-radius: 3px;
   }
-  ::-webkit-scrollbar-thumb:hover {
-    background: linear-gradient(180deg, #f4c430 0%, #d4af37 100%);
-  }
 }
 
 @layer components {
-  .glass {
+  .frost-layer {
     background: linear-gradient(
       135deg,
-      rgba(212, 175, 55, 0.05) 0%,
-      rgba(255, 255, 255, 0.02) 100%
+      rgba(212, 175, 55, 0.04) 0%,
+      rgba(255, 255, 255, 0.01) 100%
     );
-    backdrop-filter: blur(40px) saturate(140%);
-    -webkit-backdrop-filter: blur(40px) saturate(140%);
-    border: 1px solid rgba(212, 175, 55, 0.08);
-    box-shadow:
-      0 8px 40px rgba(0, 0, 0, 0.5),
-      inset 0 1px 0 rgba(212, 175, 55, 0.1);
+    backdrop-filter: blur(60px) saturate(140%);
+    -webkit-backdrop-filter: blur(60px) saturate(140%);
   }
 
-  .glass-strong {
+  .divider {
+    height: 1px;
     background: linear-gradient(
-      135deg,
-      rgba(212, 175, 55, 0.08) 0%,
-      rgba(212, 175, 55, 0.02) 100%
+      90deg,
+      transparent 0%,
+      rgba(212, 175, 55, 0.25) 50%,
+      transparent 100%
     );
-    backdrop-filter: blur(50px) saturate(150%);
-    -webkit-backdrop-filter: blur(50px) saturate(150%);
-    border: 1px solid rgba(212, 175, 55, 0.12);
-    box-shadow:
-      0 16px 60px rgba(0, 0, 0, 0.6),
-      inset 0 1px 0 rgba(212, 175, 55, 0.15);
   }
 
-  .glass-button {
-    @apply rounded-full px-6 py-3 transition-all duration-500;
-    background: rgba(212, 175, 55, 0.05);
-    backdrop-filter: blur(20px);
-    border: 1px solid rgba(212, 175, 55, 0.15);
-    color: #f5efe0;
-  }
-  .glass-button:hover {
+  .divider-full {
+    height: 1px;
     background: rgba(212, 175, 55, 0.12);
-    border-color: rgba(212, 175, 55, 0.35);
-    transform: translateY(-1px);
   }
 
   .gradient-text {
@@ -89,39 +70,34 @@
     animation: gradient-shift 10s ease infinite;
   }
 
-  .gold-glow {
-    box-shadow:
-      0 0 40px rgba(212, 175, 55, 0.4),
-      0 0 80px rgba(212, 175, 55, 0.15);
-  }
-
-  .glow-btn {
-    position: relative;
+  .btn-gold {
     background: linear-gradient(135deg, #d4af37 0%, #8a6f22 100%);
-    box-shadow:
-      0 8px 32px rgba(212, 175, 55, 0.3),
-      inset 0 1px 0 rgba(255, 255, 255, 0.2);
-    transition: all 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
     color: #0a0705;
     font-weight: 700;
+    border-radius: 9999px;
+    padding: 1rem 2rem;
+    transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+    box-shadow: 0 8px 32px rgba(212, 175, 55, 0.25);
   }
-  .glow-btn:hover {
-    box-shadow:
-      0 12px 48px rgba(212, 175, 55, 0.5),
-      inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  .btn-gold:hover {
+    box-shadow: 0 12px 48px rgba(212, 175, 55, 0.45);
     transform: translateY(-2px);
   }
-  .glow-btn:active { transform: translateY(0) scale(0.98); }
-  .glow-btn:disabled { @apply opacity-40 cursor-not-allowed; transform: none; }
+  .btn-gold:disabled {
+    opacity: 0.35;
+    cursor: not-allowed;
+    transform: none;
+  }
 
-  .divider-gold {
-    height: 1px;
-    background: linear-gradient(
-      90deg,
-      transparent 0%,
-      rgba(212, 175, 55, 0.4) 50%,
-      transparent 100%
-    );
+  .btn-ghost {
+    padding: 1rem 2rem;
+    border-radius: 9999px;
+    border: 1px solid rgba(212, 175, 55, 0.2);
+    transition: all 0.4s ease;
+  }
+  .btn-ghost:hover {
+    border-color: rgba(212, 175, 55, 0.5);
+    background: rgba(212, 175, 55, 0.05);
   }
 }
 
@@ -130,18 +106,49 @@
   .safe-top { padding-top: env(safe-area-inset-top, 0); }
 
   .text-warm { color: #f5efe0; }
-  .text-warm-dim { color: rgba(245, 239, 224, 0.6); }
+  .text-warm-dim { color: rgba(245, 239, 224, 0.65); }
   .text-warm-mute { color: rgba(245, 239, 224, 0.4); }
 
   .reveal {
     opacity: 0;
     transform: translateY(40px);
-    transition: opacity 1.2s cubic-bezier(0.2, 0.8, 0.2, 1),
-                transform 1.2s cubic-bezier(0.2, 0.8, 0.2, 1);
+    transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
     will-change: opacity, transform;
   }
   .reveal.visible {
     opacity: 1;
     transform: translateY(0);
+  }
+
+  .reveal-up {
+    opacity: 0;
+    transform: translateY(60px);
+    transition: opacity 1.4s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 1.4s cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: opacity, transform;
+  }
+  .reveal-up.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .reveal-fade {
+    opacity: 0;
+    transition: opacity 1.6s ease;
+  }
+  .reveal-fade.visible {
+    opacity: 1;
+  }
+
+  .reveal-scale {
+    opacity: 0;
+    transform: scale(0.96);
+    transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .reveal-scale.visible {
+    opacity: 1;
+    transform: scale(1);
   }
 }
