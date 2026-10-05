@@ -21,3 +21,4 @@ Thumbs.db
 coverage/
 coverage.json
 typechain-types/web/src.bak/
+web/src.bak/
