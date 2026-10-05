@@ -7,8 +7,6 @@ import { useSPVFees } from "../hooks/useSPVFees";
 import { useGasEstimate } from "../hooks/useGasEstimate";
 import { CONFIG } from "../config";
 import { formatUsdt, formatSpv } from "../utils/format";
-import PriceChart from "./PriceChart";
-import ActivityFeed from "./ActivityFeed";
 import AnimatedNumber from "./AnimatedNumber";
 
 const MIN_USDT = 0.01;
@@ -120,10 +118,6 @@ export default function TradePanel() {
         </h2>
       </div>
 
-      <PriceChart />
-
-      <ActivityFeed />
-
       {isConnected && (
         <div className="mb-12">
           <div className="grid grid-cols-3 gap-6 pb-8">
@@ -189,10 +183,7 @@ export default function TradePanel() {
       )}
 
       <div className="mb-8">
-        <label
-          htmlFor="trade-top"
-          className="text-label block mb-4"
-        >
+        <label htmlFor="trade-top" className="text-label block mb-4">
           {topLabel}
         </label>
         <div className="flex items-baseline gap-4 pb-4 border-b border-[#00ffff]/15">
@@ -226,10 +217,7 @@ export default function TradePanel() {
       </div>
 
       <div className="mb-12">
-        <label
-          htmlFor="trade-bottom"
-          className="text-label block mb-4"
-        >
+        <label htmlFor="trade-bottom" className="text-label block mb-4">
           {bottomLabel}
         </label>
         <div className="flex items-baseline gap-4 pb-4 border-b border-[#00ffff]/15">

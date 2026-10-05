@@ -3,6 +3,7 @@ import { Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import WalletButton from "./WalletButton";
 import SPVMark from "./SPVMark";
+import PriceTickerBanner from "./PriceTickerBanner";
 
 const LINKS = [
   { href: "#home", label: "Home" },
@@ -18,13 +19,19 @@ const LINKS = [
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
+  const [tickerVisible, setTickerVisible] = useState(false);
   const [open, setOpen] = useState(false);
   const menuRef = useRef(null);
   const toggleRef = useRef(null);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 30);
+    const onScroll = () => {
+      const y = window.scrollY;
+      setScrolled(y > 30);
+      setTickerVisible(y > 200);
+    };
     window.addEventListener("scroll", onScroll, { passive: true });
+    onScroll();
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
@@ -33,7 +40,6 @@ export default function Navbar() {
     return () => { document.body.style.overflow = ""; };
   }, [open]);
 
-  // Close on Escape and return focus to the toggle button
   useEffect(() => {
     if (!open) return;
     const onKey = (e) => {
@@ -111,6 +117,9 @@ export default function Navbar() {
             </button>
           </div>
         </div>
+
+        {/* Price ticker banner — slides in on scroll */}
+        <PriceTickerBanner visible={tickerVisible} />
       </div>
 
       <AnimatePresence>
