@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { ArrowDownUp, ExternalLink, Wallet } from "lucide-react";
+import { ArrowDownUp, ExternalLink } from "lucide-react";
 import { useAccount, useBalance } from "wagmi";
 import { useAppKit } from "@reown/appkit/react";
 import { useSPVTrade } from "../hooks/useSPVTrade";
@@ -86,7 +86,7 @@ export default function TradePanel() {
     t.parsedAmount === 0n ||
     (t.needsApproval ? false : !t.canTrade);
 
-  const actionReady = !actionDisabled;
+  const shouldPulse = !isConnected || (!actionDisabled && !t.isPending);
   const actionLabel = !isConnected
     ? "Connect Wallet"
     : t.isPending
@@ -117,40 +117,6 @@ export default function TradePanel() {
           Buy or sell <span className="gradient-text">SPV</span>
         </h2>
       </div>
-
-      {/* Connect prompt if no wallet */}
-      {!isConnected && (
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="glass-strong rounded-2xl p-6 mb-10 flex flex-col sm:flex-row items-center justify-between gap-4"
-          style={{ border: "1px solid rgba(0, 255, 255, 0.2)" }}
-        >
-          <div className="flex items-center gap-4">
-            <div
-              className="w-12 h-12 rounded-xl flex items-center justify-center shrink-0"
-              style={{
-                background: "rgba(0, 255, 255, 0.1)",
-                border: "1px solid rgba(0, 255, 255, 0.25)",
-              }}
-            >
-              <Wallet className="w-6 h-6 text-[#00ffff]" />
-            </div>
-            <div>
-              <div className="font-bold text-warm mb-1">Connect your wallet to trade</div>
-              <div className="text-xs text-warm-dim">
-                MetaMask, WalletConnect, Coinbase, Rabby, and more
-              </div>
-            </div>
-          </div>
-          <button
-            onClick={() => open()}
-            className="btn-feedback btn-feedback-strong btn-gold btn-idle-pulse shrink-0"
-          >
-            Connect Wallet
-          </button>
-        </motion.div>
-      )}
 
       {isConnected && (
         <div className="mb-12">
@@ -307,7 +273,7 @@ export default function TradePanel() {
         onClick={handleAction}
         disabled={actionDisabled && isConnected}
         aria-label={actionLabel}
-        className={`btn-feedback btn-feedback-strong btn-gold w-full ${actionReady ? "btn-idle-pulse" : ""}`}
+        className={`btn-feedback btn-feedback-strong btn-gold w-full ${shouldPulse ? "btn-idle-pulse" : ""}`}
       >
         {actionLabel}
       </button>

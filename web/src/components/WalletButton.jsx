@@ -10,7 +10,6 @@ export default function WalletButton({ compact = false }) {
   const { disconnect } = useDisconnect();
   const wasConnected = useRef(false);
 
-  // On first connect, scroll to the trade panel
   useEffect(() => {
     if (isConnected && !wasConnected.current) {
       wasConnected.current = true;
