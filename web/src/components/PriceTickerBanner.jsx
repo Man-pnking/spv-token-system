@@ -2,8 +2,6 @@ import { useSPVFees } from "../hooks/useSPVFees";
 import { useRecentActivity } from "../hooks/useRecentActivity";
 import { formatSpv } from "../utils/format";
 
-const MARQUEE_ITEMS = [];
-
 export default function PriceTickerBanner({ visible }) {
   const fees = useSPVFees();
   const { activities } = useRecentActivity();
@@ -14,8 +12,8 @@ export default function PriceTickerBanner({ visible }) {
     : ((fees.priceRatio - 1) * 100).toFixed(2);
   const changePositive = !fees.loading && fees.priceRatio >= 1;
 
-  // Build the ticker content
   const items = [];
+
   items.push({
     key: "price",
     node: (
@@ -37,9 +35,7 @@ export default function PriceTickerBanner({ visible }) {
         <span className="text-warm font-mono">
           {fees.loading ? "—" : `${fees.progress.toFixed(1)}%`}
         </span>
-        <span className="text-warm-mute">
-          ({fees.triggersMet}/2 triggers)
-        </span>
+        <span className="text-warm-mute">({fees.triggersMet}/2 triggers)</span>
       </>
     ),
   });
@@ -65,7 +61,6 @@ export default function PriceTickerBanner({ visible }) {
     ),
   });
 
-  // Recent trades
   if (activities && activities.length > 0) {
     activities.slice(0, 5).forEach((a, i) => {
       const isBuy = a.type === "buy";
@@ -79,9 +74,9 @@ export default function PriceTickerBanner({ visible }) {
             <span className="text-warm font-mono">
               {a.amountDisplay || a.amount}
             </span>
-            <span className="text-warm-mute truncate">
-              {a.addressShort || ""}
-            </span>
+            {a.addressShort && (
+              <span className="text-warm-mute truncate">{a.addressShort}</span>
+            )}
           </>
         ),
       });
@@ -104,13 +99,18 @@ export default function PriceTickerBanner({ visible }) {
 
   return (
     <div
-      className={`overflow-hidden transition-all duration-500 ${
-        visible ? "max-h-10 opacity-100 mt-2" : "max-h-0 opacity-0 mt-0"
-      }`}
+      className="overflow-hidden transition-all duration-500 ease-out"
+      style={{
+        maxHeight: visible ? "56px" : "0px",
+        opacity: visible ? 1 : 0,
+        marginTop: visible ? "8px" : "0px",
+        transform: visible ? "translateY(0)" : "translateY(-8px)",
+        pointerEvents: visible ? "auto" : "none",
+      }}
       aria-hidden={!visible}
     >
       <div
-        className="rounded-2xl py-2.5 flex items-center"
+        className="rounded-2xl py-2.5 flex items-center h-12"
         style={{
           background: "rgba(15, 11, 7, 0.5)",
           backdropFilter: "blur(40px) saturate(140%)",
