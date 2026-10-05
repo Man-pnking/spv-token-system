@@ -5,16 +5,16 @@ import SectionWatermark from "./SectionWatermark";
 import { Coins, TrendingUp, Flame, Shield, XCircle } from "lucide-react";
 
 const WHAT_IT_IS = [
-  { icon: Coins, title: "Exposure to a bonding curve", desc: "Each SPV token represents a share of a mathematical curve. The price is set by the curve, not by a market maker or a team." },
-  { icon: TrendingUp, title: "A position that mints on demand", desc: "Every new buy mints tokens. Every sell burns them. There is no fixed supply — the supply expands and contracts with demand." },
-  { icon: Flame, title: "A deflationary asset on sells", desc: "A portion of every sell is burned permanently. Over time, active trading reduces the total supply, which affects the price." },
+  { icon: Coins, title: "Exposure to a bonding curve", desc: "Each SPV token represents a share of a mathematical curve. The price is set by the curve, not by a market maker or a team. Every trade is priced deterministically on-chain." },
+  { icon: TrendingUp, title: "A position that mints on demand", desc: "Every new buy mints tokens. Every sell burns them. Supply expands and contracts with real demand — no pre-mine, no team allocation, no insider advantage." },
+  { icon: Flame, title: "A deflationary asset on sells", desc: "A portion of every sell is burned permanently. Over time, active trading reduces total supply. The benefit accrues to every holder, not to any insider." },
   { icon: Shield, title: "A non-custodial position", desc: "You hold the tokens in your own wallet. No intermediary can freeze, seize, or control them. The contract is the only counterparty." },
 ];
 
 const WHAT_IT_IS_NOT = [
   "Not equity in a company. SPV is not stock. There are no dividends, no profits, no ownership rights in any business.",
   "Not a security. It is not registered with any regulator. You buy it at your own risk and on your own judgment.",
-  "Not a guaranteed return. The price can fall as well as rise. Early buyers pay higher fees than late buyers.",
+  "Not a get-rich-quick scheme. The exit fee starts higher than most tokens and drops to one of the lowest in the market for holders who stay 30 days. SPV rewards conviction, not speculation.",
   "Not a governance token (yet). SPV holders do not currently vote on protocol decisions. Governance is a stated future goal.",
   "Not insurance. There is no fund protecting your position if the price collapses.",
 ];

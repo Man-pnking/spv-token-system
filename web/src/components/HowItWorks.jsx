@@ -3,10 +3,10 @@ import Stagger from "./Stagger";
 import SectionLabel from "./SectionLabel";
 
 const STEPS = [
-  { n: "01", title: "Buy with USDT", desc: "USDT enters the curve. SPV mints on demand. Price rises along a constant-product curve." },
-  { n: "02", title: "Hold or trade", desc: "Sell fees drop from 15% to 0.5% as your hold time grows. A volume-scaled burn removes supply on every sell." },
-  { n: "03", title: "Auto migration", desc: "When 2 of 3 triggers hit (price 5x, 5M minted, 500 holders), reserves move to QuickSwap automatically." },
-  { n: "04", title: "Trade on DEX", desc: "Liquidity locked forever. LP tokens burned. The same router routes all future trades to the DEX." },
+  { n: "01", title: "Buy with USDT", desc: "USDT enters the curve. SPV mints on demand. Price rises along a constant-product curve. No pre-mine, no team allocation, no insider advantage." },
+  { n: "02", title: "Hold for rewards", desc: "Every holder starts at the same exit fee. Stay 30 days and it drops from 15% to 0.5% — a 30x reduction for conviction. A volume-scaled burn also removes supply on every sell, benefiting everyone who stays." },
+  { n: "03", title: "Market-proven graduation", desc: "SPV migrates to QuickSwap when 2 of 3 signals confirm real demand: price 5x, 5M minted, or 500 unique holders. Not on a schedule — on proof." },
+  { n: "04", title: "Permanent liquidity", desc: "Liquidity locks forever on graduation. LP tokens are burned. No rug is possible. The same router routes all future trades to the DEX, seamlessly." },
 ];
 
 export default function HowItWorks() {

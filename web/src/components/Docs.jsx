@@ -4,11 +4,11 @@ import { Copy, ExternalLink } from "lucide-react";
 import { CONFIG } from "../config";
 
 const SELL_TIERS = [
-  ["Under 1 hour", "15%"],
-  ["1 to 24 hours", "10%"],
-  ["1 to 7 days", "5%"],
-  ["7 to 30 days", "2%"],
-  ["Over 30 days", "0.5%"],
+  ["First hour", "15%", "Same for everyone"],
+  ["1-24 hours", "10%", "1.5x cheaper"],
+  ["1-7 days", "5%", "3x cheaper"],
+  ["7-30 days", "2%", "7.5x cheaper"],
+  ["30+ days", "0.5%", "30x cheaper"],
 ];
 
 const CREATOR_FEES = [
@@ -55,14 +55,19 @@ export default function Docs() {
         <h2 className="display-lg">
           Everything about <span className="gradient-text">SPV</span>
         </h2>
+        <p className="text-body mt-6 max-w-3xl">
+          Every number on this page is enforced on-chain. Nothing here is a
+          promise — it is the current state of the contracts.
+        </p>
       </div>
 
       <Animated variant="up" className="mb-20">
-        <h3 className="display-md text-warm mb-4">Dynamic Creator Fee</h3>
+        <h3 className="display-md text-warm mb-4">Creator Fee</h3>
         <p className="text-body mb-8 max-w-3xl">
-          The creator fee adjusts automatically from 0.5% to 5% based on price and
-          volume. It decreases as price rises to reward holders and increases with
-          daily volume to capture upside during active trading.
+          The creator earns less as the token succeeds. As price rises, the fee
+          shrinks. As volume grows, it grows. This means the creator's incentive
+          is aligned with holders — success reduces the founder's cut, not
+          increases it.
         </p>
         <div className="overflow-x-auto">
           <table className="w-full text-sm">
@@ -91,15 +96,19 @@ export default function Docs() {
       <div className="divider mb-20" />
 
       <Animated variant="up" className="mb-20">
-        <h3 className="display-md text-warm mb-4">Sell Fee Tiers</h3>
+        <h3 className="display-md text-warm mb-4">Exit Rewards</h3>
         <p className="text-body mb-8 max-w-3xl">
-          Sell fees decrease with hold time. Long-term holders pay almost nothing.
+          Every holder starts at the same place. The longer you hold, the less
+          you pay to exit. Hold for 30 days and your exit fee drops from 15% to
+          0.5% — a 30x reduction available to anyone with conviction. This is
+          how SPV rewards patience over speculation.
         </p>
         <div className="grid grid-cols-2 sm:grid-cols-5 gap-8">
-          {SELL_TIERS.map(([t, f]) => (
+          {SELL_TIERS.map(([t, f, note]) => (
             <div key={t}>
               <div className="text-label mb-2">{t}</div>
-              <div className="text-3xl font-black text-mono gradient-text">{f}</div>
+              <div className="text-3xl font-black text-mono gradient-text mb-2">{f}</div>
+              <div className="text-xs text-warm-mute">{note}</div>
             </div>
           ))}
         </div>
@@ -108,21 +117,22 @@ export default function Docs() {
       <div className="divider mb-20" />
 
       <Animated variant="up" className="mb-20">
-        <h3 className="display-md text-warm mb-4">Burn Mechanism</h3>
+        <h3 className="display-md text-warm mb-4">Deflation</h3>
         <p className="text-body max-w-3xl">
-          Every sell burns 0.5% to 12% of the token amount, scaled by daily volume.
-          Burn stops when total supply reaches the supply floor at 10% of peak supply.
-          This prevents total supply collapse while keeping deflationary pressure
-          during active trading.
+          Every sell burns a portion of the token amount, scaled by daily
+          volume. Burn stops at 10% of peak supply so the token never collapses
+          to zero. Active trading makes SPV scarcer over time — a benefit that
+          accrues to every holder, not to any insider.
         </p>
       </Animated>
 
       <div className="divider mb-20" />
 
       <Animated variant="up" className="mb-20">
-        <h3 className="display-md text-warm mb-4">Migration Triggers</h3>
+        <h3 className="display-md text-warm mb-4">Graduation</h3>
         <p className="text-body mb-6 max-w-3xl">
-          The curve migrates to QuickSwap when 2 of 3 conditions are met:
+          SPV graduates from the curve to QuickSwap when the market proves real
+          demand. Two of three conditions must be met:
         </p>
         <ul className="space-y-3 text-sm text-warm-dim mb-6">
           <li className="flex gap-3"><span className="text-[#00ffff]">01</span> Price reaches 5x the initial price (0.05 USDT)</li>
@@ -130,8 +140,9 @@ export default function Docs() {
           <li className="flex gap-3"><span className="text-[#00ffff]">03</span> Unique buyers reach 500</li>
         </ul>
         <p className="text-body max-w-3xl">
-          Fallback: migration is forced after 90 days if no triggers fire. LP tokens
-          are burned to the dead address, making liquidity permanent.
+          If the market has not proven itself within 90 days, migration happens
+          anyway. Either way, LP tokens are burned on migration — permanent
+          liquidity, no exceptions, no rug.
         </p>
       </Animated>
 

@@ -4,18 +4,17 @@ import { Plus, Minus } from "lucide-react";
 import Animated from "./Animated";
 
 const QUESTIONS = [
-  // --- Tough questions first ---
   {
     q: "Can the creator rug pull?",
     a: "No. On migration, all liquidity goes to QuickSwap and the LP tokens are burned to 0x...dEaD. Once burned, no one — not the creator, not the deployer, not the contract — can remove that liquidity. Before migration, the curve holds all reserves in the contract itself, not in the creator's wallet. The creator can pause the curve in an emergency, but cannot withdraw reserves or mint tokens outside the curve logic.",
   },
   {
     q: "What happens if nobody buys?",
-    a: "The curve sits at its initial price of 0.01 USDT with zero supply. No tokens exist. No one has lost anything. If you buy and then nobody else does, you can always sell back through the curve. You will get slightly less than you paid due to the sell fee and the creator fee, but the curve always accepts sells. There is no scenario where the contract takes your USDT and gives you nothing.",
+    a: "The curve sits at its initial price of 0.01 USDT with zero supply. No tokens exist. No one has lost anything. If you buy and then nobody else does, you can always sell back through the curve. You will get slightly less than you paid due to the exit fee and the creator fee, but the curve always accepts sells. There is no scenario where the contract takes your USDT and gives you nothing.",
   },
   {
     q: "What if I want to sell but there's no liquidity?",
-    a: "The curve is the liquidity. It always holds USDT from previous buys. When you sell, you are selling back into that reserve. The only way this fails is if every prior buyer has already sold and drained the reserve — in which case supply is also near zero. This is why the sell fee tiers and burn mechanism exist: they discourage panic selling and preserve the curve's ability to buy back.",
+    a: "The curve is the liquidity. It always holds USDT from previous buys. When you sell, you are selling back into that reserve. The only way this fails is if every prior buyer has already sold and drained the reserve — in which case supply is also near zero. This is why the exit fee tiers and burn mechanism exist: they encourage holding, which preserves the curve's ability to buy back for everyone.",
   },
   {
     q: "Is SPV a security?",
@@ -27,10 +26,8 @@ const QUESTIONS = [
   },
   {
     q: "What is the worst-case scenario?",
-    a: "The worst case is: the token launches, a few people buy, interest fades, and the price drifts down toward the initial price. Early buyers who bought high and sold low lose money. Migration may trigger automatically after 90 days with thin liquidity, in which case the resulting QuickSwap pool is small and trading is slow. You can lose 100% of what you put in if the curve falls to zero demand. Only trade what you can afford to lose.",
+    a: "The worst case is: the token launches, a few people buy, interest fades, and the price drifts down toward the initial price. Anyone who bought high and sold low loses money. Migration may trigger automatically after 90 days with thin liquidity, in which case the resulting QuickSwap pool is small and trading is slow. You can lose 100% of what you put in if the curve falls to zero demand. Only trade what you can afford to lose.",
   },
-
-  // --- Original entries ---
   {
     q: "What is SPV?",
     a: "SPV (Special Purpose Vehicle) is a mint-on-demand ERC20 token on Polygon. Tokens are created only when users buy through the bonding curve and burned when they sell. There is no pre-mine and no team allocation.",
@@ -41,31 +38,35 @@ const QUESTIONS = [
   },
   {
     q: "What are the fees?",
-    a: "Buy has zero protocol fee, only a dynamic creator fee of 0.5% to 5%. Sell has a time-tiered fee of 15% down to 0.5% based on hold duration. A volume-scaled burn also applies on sells.",
+    a: "Buying has zero protocol fee — only a creator fee of 0.5% to 5% that gets cheaper as the token succeeds. Selling has an exit fee that starts at 15% and drops to 0.5% for holders who stay 30 days or more. Every holder starts at the same place. The exit fee is a reward for patience, not a penalty for early buyers.",
+  },
+  {
+    q: "Why is there a high sell fee?",
+    a: "SPV is designed for holders, not flippers. The high exit fee in the first hour discourages wash trading, sniping, and panic dumps that hurt everyone in the curve. Hold for 30 days and your exit fee drops by 30x to just 0.5%. The mechanism is a filter for conviction, not a tax on participation.",
   },
   {
     q: "Where does the creator fee go?",
-    a: "The creator fee is transferred immediately to the configured creator address on every buy and sell. The recipient can be updated by the owner but cannot be set to zero.",
+    a: "The creator fee is transferred immediately to the configured creator address on every buy and sell. The recipient can be updated by the owner but cannot be set to zero. Notably, the creator fee decreases as the price rises — the founder earns less when the token succeeds, aligning them with holders rather than against them.",
   },
   {
     q: "Is there a supply cap?",
-    a: "No hard cap. Supply is elastic and backed by USDT held in the curve. Deflationary burn reduces supply during active trading and stops at 10% of peak supply.",
+    a: "No hard cap. Supply is elastic and backed by USDT held in the curve. Deflationary burn reduces supply during active trading and stops at 10% of peak supply. There is no maximum, but there is a floor — the supply can never collapse to zero.",
   },
   {
     q: "What is migration?",
-    a: "Migration is the automatic graduation from bonding curve to DEX. It triggers when 2 of 3 conditions are met: price reaches 5x, 5M tokens minted, or 500 unique buyers. Fallback is 90 days.",
+    a: "Migration is the automatic graduation from bonding curve to DEX. It triggers when 2 of 3 conditions are met: price reaches 5x, 5M tokens minted, or 500 unique buyers. Fallback is 90 days. Migration is proof-based, not schedule-based — the market decides when SPV is ready.",
   },
   {
     q: "How is liquidity locked?",
-    a: "On migration, all curve reserves become QuickSwap liquidity. The LP tokens are sent to 0x...dEaD and cannot be recovered. This makes liquidity permanent and rug-proof.",
+    a: "On migration, all curve reserves become QuickSwap liquidity. The LP tokens are sent to 0x...dEaD and cannot be recovered. This makes liquidity permanent and rug-proof. Once SPV graduates, no one can pull the pool.",
   },
   {
     q: "What happens after migration?",
-    a: "Trading continues through the same router, which automatically routes orders to QuickSwap. All contract addresses remain the same, only the execution venue changes.",
+    a: "Trading continues through the same router, which automatically routes orders to QuickSwap. All contract addresses remain the same, only the execution venue changes. You do not need to do anything — the transition is seamless.",
   },
   {
     q: "Is the contract audited?",
-    a: "The system is fully tested on Polygon and reviewed against common attack vectors. A third-party audit is recommended before significant TVL. The contracts are verified on Polygonscan so anyone can inspect the source.",
+    a: "The system is fully tested on Polygon and reviewed against common attack vectors. A third-party audit is recommended before significant TVL. The contracts are verified on Polygonscan so anyone can inspect the source at any time.",
   },
   {
     q: "How do I verify the contract address?",
