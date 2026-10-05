@@ -22,3 +22,10 @@ coverage/
 coverage.json
 typechain-types/web/src.bak/
 web/src.bak/
+
+# Next.js build cache
+apps/chat/.next/
+.next/
+
+# Next.js build cache
+apps/chat/.next/
