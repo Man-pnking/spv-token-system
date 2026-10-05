@@ -1,0 +1,126 @@
+cd ~/Desktop/spv-token-system
+
+cat > web/public/ruby-diamond.svg << 'EOF'
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512" role="img" aria-label="Ruby diamond">
+  <defs>
+    <linearGradient id="rubyTop" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#ffd0d8" />
+      <stop offset="40%" stop-color="#ff8095" />
+      <stop offset="100%" stop-color="#ff3a5f" />
+    </linearGradient>
+    <linearGradient id="rubyLeft" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#ff3a5f" />
+      <stop offset="60%" stop-color="#e01a40" />
+      <stop offset="100%" stop-color="#a80d28" />
+    </linearGradient>
+    <linearGradient id="rubyRight" x1="1" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#f02050" />
+      <stop offset="60%" stop-color="#900b20" />
+      <stop offset="100%" stop-color="#4a0612" />
+    </linearGradient>
+    <linearGradient id="rubyBottom" x1="0" y1="1" x2="0" y2="0">
+      <stop offset="0%" stop-color="#700a1c" />
+      <stop offset="60%" stop-color="#e01a40" />
+      <stop offset="100%" stop-color="#ff3a5f" />
+    </linearGradient>
+    <radialGradient id="glowOuter" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="rgba(255, 90, 120, 0.85)" />
+      <stop offset="35%" stop-color="rgba(255, 40, 80, 0.45)" />
+      <stop offset="70%" stop-color="rgba(200, 20, 50, 0.15)" />
+      <stop offset="100%" stop-color="rgba(200, 20, 50, 0)" />
+    </radialGradient>
+    <radialGradient id="glowInner" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="rgba(255, 220, 230, 0.95)" />
+      <stop offset="40%" stop-color="rgba(255, 100, 130, 0.6)" />
+      <stop offset="100%" stop-color="rgba(255, 40, 80, 0)" />
+    </radialGradient>
+    <radialGradient id="coreGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="rgba(255, 255, 255, 1)" />
+      <stop offset="30%" stop-color="rgba(255, 180, 200, 0.8)" />
+      <stop offset="100%" stop-color="rgba(255, 100, 130, 0)" />
+    </radialGradient>
+    <linearGradient id="rayGradient" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="rgba(255, 180, 200, 0)" />
+      <stop offset="50%" stop-color="rgba(255, 220, 230, 0.9)" />
+      <stop offset="100%" stop-color="rgba(255, 180, 200, 0)" />
+    </linearGradient>
+  </defs>
+
+  <g transform="translate(256 256)">
+    <circle cx="0" cy="0" r="220" fill="url(#glowOuter)">
+      <animate attributeName="r" values="200; 250; 200" dur="2.5s" repeatCount="indefinite" />
+      <animate attributeName="opacity" values="0.7; 1; 0.7" dur="2.5s" repeatCount="indefinite" />
+    </circle>
+  </g>
+
+  <g transform="translate(256 256)">
+    <circle cx="0" cy="0" r="130" fill="url(#glowInner)">
+      <animate attributeName="r" values="110; 150; 110" dur="2s" repeatCount="indefinite" />
+      <animate attributeName="opacity" values="0.8; 1; 0.8" dur="2s" repeatCount="indefinite" />
+    </circle>
+  </g>
+
+  <g transform="translate(256 256)" opacity="0.85">
+    <g>
+      <animateTransform attributeName="transform" type="rotate" from="0" to="360" dur="20s" repeatCount="indefinite" />
+      <rect x="-2" y="-260" width="4" height="80" fill="url(#rayGradient)" rx="2" />
+      <rect x="-2" y="-260" width="4" height="80" fill="url(#rayGradient)" rx="2" transform="rotate(45)" />
+      <rect x="-2" y="-260" width="4" height="80" fill="url(#rayGradient)" rx="2" transform="rotate(90)" />
+      <rect x="-2" y="-260" width="4" height="80" fill="url(#rayGradient)" rx="2" transform="rotate(135)" />
+      <rect x="-2" y="-260" width="4" height="80" fill="url(#rayGradient)" rx="2" transform="rotate(180)" />
+      <rect x="-2" y="-260" width="4" height="80" fill="url(#rayGradient)" rx="2" transform="rotate(225)" />
+      <rect x="-2" y="-260" width="4" height="80" fill="url(#rayGradient)" rx="2" transform="rotate(270)" />
+      <rect x="-2" y="-260" width="4" height="80" fill="url(#rayGradient)" rx="2" transform="rotate(315)" />
+    </g>
+  </g>
+
+  <g transform="translate(256 256)" style="transform-origin: 256px 256px;">
+    <animateTransform attributeName="transform" type="scale" values="1; 1.04; 1" dur="2s" repeatCount="indefinite" additive="replace" />
+    <g transform="translate(-256 -256)">
+      <polygon points="166,140 346,140 306,216 206,216" fill="url(#rubyTop)" stroke="rgba(255, 255, 255, 0.75)" stroke-width="2" />
+      <polygon points="126,220 206,216 166,140" fill="url(#rubyLeft)" stroke="rgba(255, 255, 255, 0.55)" stroke-width="2" />
+      <polygon points="306,216 386,220 346,140" fill="url(#rubyRight)" stroke="rgba(255, 255, 255, 0.55)" stroke-width="2" />
+      <polygon points="126,220 206,216 256,300" fill="url(#rubyLeft)" stroke="rgba(255, 255, 255, 0.5)" stroke-width="2" />
+      <polygon points="306,216 386,220 256,300" fill="url(#rubyRight)" stroke="rgba(255, 255, 255, 0.5)" stroke-width="2" />
+      <polygon points="206,216 306,216 256,300" fill="url(#rubyTop)" stroke="rgba(255, 255, 255, 0.65)" stroke-width="2" />
+      <polygon points="126,220 256,300 256,400" fill="url(#rubyLeft)" stroke="rgba(255, 255, 255, 0.4)" stroke-width="2" />
+      <polygon points="386,220 256,300 256,400" fill="url(#rubyRight)" stroke="rgba(255, 255, 255, 0.4)" stroke-width="2" />
+      <polygon points="256,300 256,400 220,340" fill="url(#rubyBottom)" opacity="0.7" />
+      <polygon points="206,216 306,216 256,300" fill="url(#coreGlow)" opacity="0.7">
+        <animate attributeName="opacity" values="0.4; 0.9; 0.4" dur="1.8s" repeatCount="indefinite" />
+      </polygon>
+      <ellipse cx="256" cy="260" rx="60" ry="50" fill="url(#coreGlow)" opacity="0.5">
+        <animate attributeName="opacity" values="0.3; 0.8; 0.3" dur="1.8s" repeatCount="indefinite" begin="0.3s" />
+      </ellipse>
+      <polygon points="180,168 210,182 190,196 160,182" fill="rgba(255, 255, 255, 0.95)">
+        <animate attributeName="fill-opacity" values="0.6; 1; 0.6" dur="1.4s" repeatCount="indefinite" />
+      </polygon>
+      <polygon points="290,180 305,190 295,200 280,190" fill="rgba(255, 255, 255, 0.85)">
+        <animate attributeName="fill-opacity" values="0.5; 1; 0.5" dur="1.4s" repeatCount="indefinite" begin="0.5s" />
+      </polygon>
+      <polygon points="166,140 346,140 386,220 256,400 126,220" fill="none" stroke="rgba(255, 220, 230, 0.7)" stroke-width="2.5">
+        <animate attributeName="stroke-opacity" values="0.5; 1; 0.5" dur="2s" repeatCount="indefinite" />
+      </polygon>
+    </g>
+  </g>
+
+  <g transform="translate(256 256)">
+    <polygon points="0,-180 180,0 0,180 -180,0" fill="none" stroke="rgba(255, 120, 150, 0.85)" stroke-width="2.5">
+      <animate attributeName="opacity" values="0.9; 0; 0.9" dur="2s" repeatCount="indefinite" />
+    </polygon>
+    <polygon points="0,-210 210,0 0,210 -210,0" fill="none" stroke="rgba(255, 150, 170, 0.6)" stroke-width="1.5">
+      <animate attributeName="opacity" values="0.7; 0; 0.7" dur="2s" repeatCount="indefinite" begin="0.5s" />
+    </polygon>
+    <polygon points="0,-240 240,0 0,240 -240,0" fill="none" stroke="rgba(255, 180, 200, 0.4)" stroke-width="1">
+      <animate attributeName="opacity" values="0.5; 0; 0.5" dur="2s" repeatCount="indefinite" begin="1s" />
+    </polygon>
+  </g>
+
+  <g transform="translate(256 256)">
+    <ellipse cx="0" cy="0" rx="150" ry="150" fill="url(#coreGlow)" opacity="0">
+      <animate attributeName="opacity" values="0; 0; 0.7; 0; 0" dur="4s" repeatCount="indefinite" keyTimes="0; 0.7; 0.85; 0.95; 1" />
+    </ellipse>
+  </g>
+</svg>
+EOF
