@@ -1,30 +1,39 @@
+import { useEffect, useRef } from "react";
 import { useAppKit } from "@reown/appkit/react";
 import { useAccount, useDisconnect } from "wagmi";
-import { Wallet, LogOut } from "lucide-react";
+import { Wallet } from "lucide-react";
 import { shorten } from "../utils/format";
 
-export default function WalletButton({ compact = false, full = false }) {
+export default function WalletButton({ compact = false }) {
   const { open } = useAppKit();
   const { address, isConnected } = useAccount();
   const { disconnect } = useDisconnect();
+  const wasConnected = useRef(false);
 
-  const handleClick = () => {
-    if (isConnected) {
-      disconnect();
-    } else {
-      open();
+  // On first connect, scroll to the trade panel
+  useEffect(() => {
+    if (isConnected && !wasConnected.current) {
+      wasConnected.current = true;
+      const el = document.getElementById("trade");
+      if (el) {
+        const top = el.getBoundingClientRect().top + window.scrollY - 100;
+        window.scrollTo({ top, behavior: "smooth" });
+      }
     }
-  };
+    if (!isConnected) {
+      wasConnected.current = false;
+    }
+  }, [isConnected]);
 
   if (isConnected) {
     return (
       <button
-        onClick={handleClick}
-        className={`btn-feedback glass-button text-sm flex items-center justify-center gap-2 ${full ? "w-full" : ""}`}
+        onClick={() => disconnect()}
+        className="glass-button text-sm flex items-center gap-2"
       >
-        <LogOut className="w-4 h-4 text-[#00ffff]" />
-        <span className="text-mono text-warm">
-          {compact ? "Disconnect" : shorten(address)}
+        <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
+        <span className={compact ? "" : "hidden sm:inline"}>
+          {compact ? "Connected" : shorten(address)}
         </span>
       </button>
     );
@@ -32,11 +41,11 @@ export default function WalletButton({ compact = false, full = false }) {
 
   return (
     <button
-      onClick={handleClick}
-      className={`btn-feedback btn-feedback-strong btn-gold text-sm flex items-center justify-center gap-2 ${full ? "w-full" : ""}`}
+      onClick={() => open()}
+      className="glow-btn text-white text-sm font-semibold rounded-full px-5 py-2.5 flex items-center gap-2"
     >
       <Wallet className="w-4 h-4" />
-      <span>Connect Wallet</span>
+      <span>Connect</span>
     </button>
   );
 }
