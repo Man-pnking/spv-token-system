@@ -64,10 +64,10 @@ export default function Docs() {
       <Animated variant="up" className="mb-20">
         <h3 className="display-md text-warm mb-4">Creator Fee</h3>
         <p className="text-body mb-8 max-w-3xl">
-          The creator earns less as the token succeeds. As price rises, the fee
-          shrinks. As volume grows, it grows. This means the creator's incentive
-          is aligned with holders — success reduces the founder's cut, not
-          increases it.
+          The creator fee adjusts automatically between 0.5% and 5%. It shrinks
+          as the price rises and grows with trading volume. The design is
+          deliberate: the more the token succeeds, the lower the creator's cut.
+          Fees fund ongoing development of the SPV ecosystem.
         </p>
         <div className="overflow-x-auto">
           <table className="w-full text-sm">
@@ -140,9 +140,9 @@ export default function Docs() {
           <li className="flex gap-3"><span className="text-[#00ffff]">03</span> Unique buyers reach 500</li>
         </ul>
         <p className="text-body max-w-3xl">
-          If the market has not proven itself within 90 days, migration happens
-          anyway. Either way, LP tokens are burned on migration — permanent
-          liquidity, no exceptions, no rug.
+          If the market triggers migration earlier, it happens sooner. Otherwise,
+          graduation is guaranteed within 90 days. On graduation, LP tokens are
+          burned and liquidity becomes permanent — no exceptions.
         </p>
       </Animated>
 

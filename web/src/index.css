@@ -102,6 +102,7 @@
 
 @layer components {
   .display-xl {
+    font-family: "Space Grotesk", Inter, system-ui, sans-serif;
     font-size: clamp(2.75rem, 7vw, 6rem);
     line-height: 0.95;
     font-weight: 900;
@@ -109,6 +110,7 @@
   }
 
   .display-lg {
+    font-family: "Space Grotesk", Inter, system-ui, sans-serif;
     font-size: clamp(2rem, 5vw, 3.5rem);
     line-height: 1.05;
     font-weight: 900;
@@ -116,6 +118,7 @@
   }
 
   .display-md {
+    font-family: "Space Grotesk", Inter, system-ui, sans-serif;
     font-size: clamp(1.25rem, 2vw, 1.75rem);
     line-height: 1.2;
     font-weight: 700;

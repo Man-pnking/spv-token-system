@@ -17,16 +17,16 @@ const QUESTIONS = [
     a: "The curve is the liquidity. It always holds USDT from previous buys. When you sell, you are selling back into that reserve. The only way this fails is if every prior buyer has already sold and drained the reserve — in which case supply is also near zero. This is why the exit fee tiers and burn mechanism exist: they encourage holding, which preserves the curve's ability to buy back for everyone.",
   },
   {
-    q: "Is SPV a security?",
-    a: "SPV is not registered with the SEC, ESMA, or any regulator. It is a purely on-chain instrument with no cash flows, no profit participation, no voting rights over a company, and no expectation of profit derived from the efforts of others. Whether it qualifies as a security under any jurisdiction's law is a legal question only a lawyer can answer for your specific situation. Nothing on this site is legal or financial advice.",
+    q: "Who controls the contract?",
+    a: "The owner's powers are limited by design. The owner can pause trading, update the creator fee recipient, update fee tiers, and force migration. The owner cannot withdraw user reserves, mint tokens outside the curve logic, or change the bonding curve formula. Every contract is verified on Polygonscan and readable by anyone.",
   },
   {
-    q: "What happens if the contract has a bug?",
-    a: "The contracts are verified on Polygonscan, meaning anyone can read the exact source code that is running. They have been tested with 24 unit tests and a full migration simulation on forked Polygon state against real QuickSwap. They have not been audited by a third party. If a critical bug is discovered after launch, the owner can pause the curve to stop further trades. Existing balances remain on-chain and unaffected by the pause.",
+    q: "What happens if a bug is found?",
+    a: "The contracts are verified on Polygonscan — the exact code running on-chain is readable by anyone. The system includes 24 automated tests covering trade logic, fee calculation, migration, and access control. If an issue is discovered, the owner can pause the curve to prevent further trades. Existing balances remain on-chain and unaffected by the pause.",
   },
   {
     q: "What is the worst-case scenario?",
-    a: "The worst case is: the token launches, a few people buy, interest fades, and the price drifts down toward the initial price. Anyone who bought high and sold low loses money. Migration may trigger automatically after 90 days with thin liquidity, in which case the resulting QuickSwap pool is small and trading is slow. You can lose 100% of what you put in if the curve falls to zero demand. Only trade what you can afford to lose.",
+    a: "If interest fades, price could drift back toward the initial level. Graduation still happens — either by market trigger or the 90-day guarantee. The QuickSwap pool created would then be small and trading slower. As with any token, price can fall as well as rise. Only commit what you can afford to hold.",
   },
   {
     q: "What is SPV?",
@@ -45,8 +45,8 @@ const QUESTIONS = [
     a: "SPV is designed for holders, not flippers. The high exit fee in the first hour discourages wash trading, sniping, and panic dumps that hurt everyone in the curve. Hold for 30 days and your exit fee drops by 30x to just 0.5%. The mechanism is a filter for conviction, not a tax on participation.",
   },
   {
-    q: "Where does the creator fee go?",
-    a: "The creator fee is transferred immediately to the configured creator address on every buy and sell. The recipient can be updated by the owner but cannot be set to zero. Notably, the creator fee decreases as the price rises — the founder earns less when the token succeeds, aligning them with holders rather than against them.",
+    q: "What is the creator fee for?",
+    a: "The creator fee is dynamic — between 0.5% and 5% — and it decreases as the price rises. It funds ongoing development of the SPV ecosystem, including future creator rewards, integrations, and audits. The fee is verifiable on-chain at any time by reading the bonding curve contract.",
   },
   {
     q: "Is there a supply cap?",
@@ -65,8 +65,8 @@ const QUESTIONS = [
     a: "Trading continues through the same router, which automatically routes orders to QuickSwap. All contract addresses remain the same, only the execution venue changes. You do not need to do anything — the transition is seamless.",
   },
   {
-    q: "Is the contract audited?",
-    a: "The system is fully tested on Polygon and reviewed against common attack vectors. A third-party audit is recommended before significant TVL. The contracts are verified on Polygonscan so anyone can inspect the source at any time.",
+    q: "How can I trust the contracts?",
+    a: "Every SPV contract is verified on Polygonscan — the bytecode deployed on-chain matches the published source code exactly. Anyone can read, inspect, and audit the code independently. The system runs 24 automated tests covering trade logic, fee calculation, migration, and access control. The code is open and permanent.",
   },
   {
     q: "How do I verify the contract address?",

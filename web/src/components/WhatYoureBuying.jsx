@@ -14,7 +14,7 @@ const WHAT_IT_IS = [
 const WHAT_IT_IS_NOT = [
   "Not equity in a company. SPV is not stock. There are no dividends, no profits, no ownership rights in any business.",
   "Not a security. It is not registered with any regulator. You buy it at your own risk and on your own judgment.",
-  "Not a get-rich-quick scheme. The exit fee starts higher than most tokens and drops to one of the lowest in the market for holders who stay 30 days. SPV rewards conviction, not speculation.",
+  "Not a get-rich-quick scheme. The exit fee is highest in the first hour and drops to one of the lowest in the market for holders who stay 30 days. SPV rewards conviction, not speculation.",
   "Not a governance token (yet). SPV holders do not currently vote on protocol decisions. Governance is a stated future goal.",
   "Not insurance. There is no fund protecting your position if the price collapses.",
 ];

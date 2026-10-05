@@ -8,18 +8,18 @@ const HOW_TO_BUY = [
   { n: "02", title: "Connect your wallet", desc: "Click Connect, choose your wallet, and approve the connection. You stay in control." },
   { n: "03", title: "Approve USDT once", desc: "One-time approval lets the router spend USDT on your behalf. You can revoke it anytime." },
   { n: "04", title: "Enter the amount", desc: "Type USDT to spend or SPV to receive. The other field fills automatically." },
-  { n: "05", title: "Confirm in wallet", desc: "Sign the transaction. SPV mints to your wallet instantly. Creator fee goes to the project wallet." },
+  { n: "05", title: "Confirm in wallet", desc: "Sign the transaction. SPV mints to your wallet instantly. The dynamic creator fee funds ongoing development." },
 ];
 
 const ROADMAP = [
   { phase: "Stage 1 · Foundation", status: "Complete", items: ["Mint-on-demand token live on Polygon Mainnet", "Bonding curve with dynamic fees and burn", "Automatic migration to QuickSwap", "LP tokens burned for permanent liquidity"] },
-  { phase: "Stage 2 · Adoption", status: "In Progress", items: ["Community building on X and Telegram", "Verified token metadata on DEX Screener and GeckoTerminal", "Public brand assets and logo across all platforms", "First 500 unique wallets to trigger migration"] },
+  { phase: "Stage 2 · Adoption", status: "In Progress", items: ["Community building on X and Telegram", "Verified token metadata on DEX Screener and GeckoTerminal", "Public brand assets and logo across all platforms", "Growing toward the 500-holder signal that accelerates graduation"] },
   { phase: "Stage 3 · Utility", status: "Planned", items: ["SPV-gated access to premium tools and data", "Staking mechanism that rewards long-term holders", "Treasury funded by creator fees for buybacks and grants", "Cross-chain messaging to other EVM networks"] },
   { phase: "Stage 4 · Ecosystem", status: "Planned", items: ["SPV used as collateral in lending markets", "Partnerships with RWA and DePIN protocols", "Community governance over future parameters", "Audited, upgraded contracts with migration path"] },
 ];
 
 const GOALS = [
-  "Migrate to QuickSwap and lock liquidity permanently",
+  "Graduate to QuickSwap and lock liquidity permanently",
   "Reach 500 unique holders without paid marketing",
   "Build a treasury from creator fees to fund development",
   "Ship staking and holder rewards within six months",

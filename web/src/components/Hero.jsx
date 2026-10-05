@@ -88,9 +88,8 @@ export default function Hero() {
           transition={{ duration: 1, delay: 0.4 }}
           className="text-body max-w-2xl mx-auto mb-14"
         >
-          Hold for rewards. Every holder starts at the same exit fee — stay 30 days
-          and it drops by 30x. When the market proves real demand, liquidity
-          migrates to QuickSwap and locks forever.
+          Your exit fee drops by 30x the longer you hold. Real demand triggers
+          migration to QuickSwap — where liquidity locks forever.
         </motion.p>
 
         <motion.div
