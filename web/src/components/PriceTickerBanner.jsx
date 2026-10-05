@@ -101,14 +101,16 @@ export default function PriceTickerBanner() {
     <div
       className="w-full overflow-hidden"
       style={{
-        background: "rgba(15, 11, 7, 0.6)",
-        backdropFilter: "blur(40px) saturate(140%)",
-        WebkitBackdropFilter: "blur(40px) saturate(140%)",
-        borderBottom: "1px solid rgba(0, 255, 255, 0.06)",
+        background: "rgba(10, 8, 6, 0.92)",
+        borderBottom: "1px solid rgba(0, 255, 255, 0.08)",
+        contain: "layout paint",
       }}
     >
       <div className="flex items-center h-8">
-        <div className="ticker-track flex items-center min-w-max">
+        <div
+          className="ticker-track flex items-center min-w-max"
+          style={{ willChange: "transform" }}
+        >
           {row}
           {row}
           {row}
@@ -116,14 +118,17 @@ export default function PriceTickerBanner() {
       </div>
       <style>{`
         @keyframes tickerScroll {
-          from { transform: translateX(0); }
-          to   { transform: translateX(-33.333%); }
+          from { transform: translate3d(0, 0, 0); }
+          to   { transform: translate3d(-33.333%, 0, 0); }
         }
         .ticker-track {
           animation: tickerScroll 60s linear infinite;
         }
         .ticker-track:hover {
           animation-play-state: paused;
+        }
+        @media (prefers-reduced-motion: reduce) {
+          .ticker-track { animation: none; }
         }
       `}</style>
     </div>

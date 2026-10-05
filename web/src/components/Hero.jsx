@@ -29,7 +29,6 @@ export default function Hero() {
           marginTop: "min(-45vw, -450px)",
           border: "1px solid rgba(0, 255, 255, 0.06)",
           transform: `translate3d(${mouse.x * 6}px, ${mouse.y * 6 + scrollY * 0.05}px, 0)`,
-          transition: "transform 0.4s cubic-bezier(0.16, 1, 0.3, 1)",
           willChange: "transform",
         }}
       />
@@ -44,8 +43,7 @@ export default function Hero() {
           marginLeft: "min(-30vw, -300px)",
           marginTop: "min(-30vw, -300px)",
           border: "1px dashed rgba(0, 255, 255, 0.05)",
-          transform: `translate3d(${mouse.x * -10}px, ${mouse.y * -10 + scrollY * 0.08}px, 0) rotate(${scrollY * 0.02}deg)`,
-          transition: "transform 0.4s cubic-bezier(0.16, 1, 0.3, 1)",
+          transform: `translate3d(${mouse.x * -10}px, ${mouse.y * -10 + scrollY * 0.08}px, 0)`,
           willChange: "transform",
         }}
       />
@@ -57,7 +55,6 @@ export default function Hero() {
           left: "10%",
           opacity: 0.15,
           transform: `translate3d(${mouse.x * -14}px, ${mouse.y * -14 + scrollY * 0.22}px, 0)`,
-          transition: "transform 0.5s cubic-bezier(0.16, 1, 0.3, 1)",
           willChange: "transform",
         }}
       >
@@ -98,7 +95,7 @@ export default function Hero() {
               height: "min(70vw, 560px)",
               background:
                 "radial-gradient(circle, rgba(0,255,255,0.28) 0%, rgba(0,255,255,0.10) 40%, transparent 70%)",
-              filter: "blur(60px)",
+              filter: "blur(30px)",
             }}
           />
           <div
@@ -108,7 +105,7 @@ export default function Hero() {
               height: "min(50vw, 380px)",
               background:
                 "radial-gradient(circle, rgba(255,140,0,0.22) 0%, rgba(255,140,0,0.06) 50%, transparent 75%)",
-              filter: "blur(50px)",
+              filter: "blur(25px)",
               mixBlendMode: "screen",
             }}
           />
@@ -120,7 +117,7 @@ export default function Hero() {
               height: "min(400px, 60vw)",
               width: "auto",
               filter:
-                "drop-shadow(0 0 40px rgba(0,255,255,0.55)) drop-shadow(0 0 80px rgba(255,140,0,0.28))",
+                "drop-shadow(0 0 30px rgba(0,255,255,0.5)) drop-shadow(0 0 60px rgba(255,140,0,0.25))",
             }}
           />
         </motion.div>
@@ -188,7 +185,7 @@ export default function Hero() {
         animate={{ opacity: 1 }}
         transition={{ delay: 1.5, duration: 1 }}
         className="absolute bottom-6 left-1/2 -translate-x-1/2"
-        style={{ opacity: Math.max(0, 1 - scrollY / 400), willChange: "opacity" }}
+        style={{ opacity: Math.max(0, 1 - scrollY / 400) }}
       >
         <div className="w-px h-10 bg-gradient-to-b from-transparent via-[#00ffff]/60 to-transparent mx-auto" />
         <div className="text-label mt-2 text-center">Scroll</div>

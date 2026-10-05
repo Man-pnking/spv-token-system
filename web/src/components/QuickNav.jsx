@@ -41,7 +41,7 @@ export default function QuickNav() {
   const scrollToTrade = () => {
     const el = document.querySelector("#trade");
     if (el) {
-      const top = el.getBoundingClientRect().top + window.scrollY - 80;
+      const top = el.getBoundingClientRect().top + window.scrollY - 100;
       window.scrollTo({ top, behavior: "smooth" });
     }
   };
@@ -56,9 +56,13 @@ export default function QuickNav() {
       <button
         onClick={scrollToTop}
         aria-label="Scroll to top"
-        className={`group glass-strong w-11 h-11 sm:w-12 sm:h-12 rounded-full flex items-center justify-center transition-all hover:scale-105 ${
+        className={`group w-11 h-11 sm:w-12 sm:h-12 rounded-full flex items-center justify-center transition-all hover:scale-105 ${
           active === "top" ? "ring-1 ring-[#00ffff]/50" : ""
         }`}
+        style={{
+          background: "rgba(10, 8, 6, 0.92)",
+          border: "1px solid rgba(0, 255, 255, 0.12)",
+        }}
       >
         <ArrowUp className="w-4 h-4 sm:w-5 sm:h-5 text-white/80 group-hover:text-white transition-colors" />
       </button>
@@ -74,9 +78,13 @@ export default function QuickNav() {
       <button
         onClick={scrollToFooter}
         aria-label="Scroll to footer"
-        className={`group glass-strong w-11 h-11 sm:w-12 sm:h-12 rounded-full flex items-center justify-center transition-all hover:scale-105 ${
+        className={`group w-11 h-11 sm:w-12 sm:h-12 rounded-full flex items-center justify-center transition-all hover:scale-105 ${
           active === "bottom" ? "ring-1 ring-[#00ffff]/50" : ""
         }`}
+        style={{
+          background: "rgba(10, 8, 6, 0.92)",
+          border: "1px solid rgba(0, 255, 255, 0.12)",
+        }}
       >
         <ArrowDown className="w-4 h-4 sm:w-5 sm:h-5 text-white/80 group-hover:text-white transition-colors" />
       </button>

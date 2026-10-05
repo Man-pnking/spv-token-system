@@ -40,19 +40,14 @@ export default function Navbar() {
   }, [open]);
 
   return (
-    <header
-      className="fixed top-0 left-0 right-0 z-50 safe-top"
-      style={{ willChange: "transform" }}
-    >
-      {/* Main nav bar — full width, fixed padding */}
+    <header className="fixed top-0 left-0 right-0 z-50 safe-top">
       <div
         className="w-full py-3"
         style={{
-          background: "rgba(15, 11, 7, 0.75)",
-          backdropFilter: "blur(40px) saturate(140%)",
-          WebkitBackdropFilter: "blur(40px) saturate(140%)",
-          borderBottom: "1px solid rgba(0, 255, 255, 0.06)",
-          boxShadow: "0 4px 24px rgba(0, 0, 0, 0.3)",
+          background: "rgba(10, 8, 6, 0.92)",
+          borderBottom: "1px solid rgba(0, 255, 255, 0.08)",
+          boxShadow: "0 4px 24px rgba(0, 0, 0, 0.4)",
+          contain: "layout paint",
         }}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 flex items-center justify-between">
@@ -106,7 +101,6 @@ export default function Navbar() {
         </div>
       </div>
 
-      {/* Ticker — full width, flush, always visible */}
       <PriceTickerBanner />
 
       <AnimatePresence>
@@ -119,7 +113,7 @@ export default function Navbar() {
               exit={{ opacity: 0 }}
               transition={{ duration: 0.25 }}
               className="xl:hidden fixed inset-0 z-40"
-              style={{ background: "rgba(0,0,0,0.5)", backdropFilter: "blur(20px)" }}
+              style={{ background: "rgba(0,0,0,0.6)" }}
               onClick={() => setOpen(false)}
               aria-hidden="true"
             />
@@ -137,9 +131,7 @@ export default function Navbar() {
               transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
               className="xl:hidden fixed top-24 left-4 right-4 z-50 rounded-2xl p-5"
               style={{
-                background: "rgba(15, 11, 7, 0.75)",
-                backdropFilter: "blur(50px) saturate(140%)",
-                WebkitBackdropFilter: "blur(50px) saturate(140%)",
+                background: "rgba(10, 8, 6, 0.96)",
                 border: "1px solid rgba(0, 255, 255, 0.08)",
                 boxShadow: "0 20px 60px rgba(0, 0, 0, 0.5)",
               }}
