@@ -23,8 +23,12 @@ export function useSPVFees() {
 
   const [price, creatorFee, burnBps, progress, check, minted, buyers, migrated, initialPrice, floor] = data;
 
+  // Current price is returned in 18-decimal format from the contract
   const priceNum = Number(formatUnits(price.result ?? 0n, 18));
-  const initialNum = Number(formatUnits(initialPrice.result ?? 1n, 18));
+
+  // initialPrice is stored in USDT's 6-decimal format (10000 = 0.01 USDT)
+  const initialNum = Number(formatUnits(initialPrice.result ?? 1n, 6));
+
   const priceRatio = initialNum > 0 ? priceNum / initialNum : 1;
 
   return {

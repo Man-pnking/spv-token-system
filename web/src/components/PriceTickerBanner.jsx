@@ -7,10 +7,14 @@ export default function PriceTickerBanner() {
   const { activities } = useRecentActivity();
 
   const price = fees.loading ? "—" : Number(fees.priceDisplay).toFixed(6);
-  const changePct = fees.loading
-    ? "—"
-    : ((fees.priceRatio - 1) * 100).toFixed(2);
-  const changePositive = !fees.loading && fees.priceRatio >= 1;
+
+  // Guard against bad ratios — if something upstream breaks, show 0.00% rather than garbage
+  const safeRatio = Number(fees.priceRatio);
+  const validRatio = Number.isFinite(safeRatio) && safeRatio > 0 && safeRatio < 100;
+  const changePct = fees.loading || !validRatio
+    ? "0.00"
+    : ((safeRatio - 1) * 100).toFixed(2);
+  const changePositive = validRatio && safeRatio >= 1;
 
   const items = [];
 
