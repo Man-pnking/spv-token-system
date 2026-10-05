@@ -53,20 +53,20 @@ export default function ActivityFeed() {
                 initial={{ opacity: 0, y: 8 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.4, delay: i * 0.04 }}
-                className="flex items-center justify-between py-3 border-b border-[#d4af37]/8 group transition-colors hover:border-[#d4af37]/25"
+                className="flex items-center justify-between py-3 border-b border-[#00ffff]/8 group transition-colors hover:border-[#00ffff]/25"
               >
                 <div className="flex items-center gap-3 min-w-0">
                   <div
                     className="w-8 h-8 rounded-lg flex items-center justify-center shrink-0"
                     style={{
                       background: isBuy
-                        ? "rgba(212, 175, 55, 0.08)"
+                        ? "rgba(0, 255, 255, 0.08)"
                         : "rgba(255, 255, 255, 0.03)",
-                      border: `1px solid ${isBuy ? "rgba(212, 175, 55, 0.2)" : "rgba(245, 239, 224, 0.08)"}`,
+                      border: `1px solid ${isBuy ? "rgba(0, 255, 255, 0.2)" : "rgba(240, 240, 240, 0.08)"}`,
                     }}
                   >
                     {isBuy ? (
-                      <ArrowUpRight className="w-4 h-4 text-[#d4af37]" />
+                      <ArrowUpRight className="w-4 h-4 text-[#00ffff]" />
                     ) : (
                       <ArrowDownRight className="w-4 h-4 text-warm-dim" />
                     )}
@@ -76,7 +76,7 @@ export default function ActivityFeed() {
                     <div className="flex items-baseline gap-2">
                       <span
                         className="font-mono text-xs"
-                        style={{ color: isBuy ? "rgba(212, 175, 55, 0.85)" : "rgba(245, 239, 224, 0.6)" }}
+                        style={{ color: isBuy ? "rgba(0, 255, 255, 0.85)" : "rgba(240, 240, 240, 0.6)" }}
                       >
                         {isBuy ? "Buy" : "Sell"}
                       </span>

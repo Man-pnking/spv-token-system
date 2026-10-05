@@ -76,7 +76,7 @@ export default function CursorGlow() {
         opacity: 0,
         transition: "opacity 0.6s ease",
         background:
-          "radial-gradient(circle, rgba(212, 175, 55, 0.14) 0%, rgba(212, 175, 55, 0.05) 30%, transparent 70%)",
+          "radial-gradient(circle, rgba(0, 255, 255, 0.14) 0%, rgba(0, 255, 255, 0.05) 30%, transparent 70%)",
         mixBlendMode: "screen",
         willChange: "transform",
       }}

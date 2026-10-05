@@ -109,7 +109,7 @@ export default function Intro() {
           </p>
         </Animated>
         <Animated variant="up">
-          <div className="text-mono text-sm sm:text-base break-all text-[#d4af37] py-6 border-y border-[#d4af37]/15">
+          <div className="text-mono text-sm sm:text-base break-all text-[#00ffff] py-6 border-y border-[#00ffff]/15">
             0x3d838A7aa293F4371F4C23dD0906FEaCa1b83FB3
           </div>
         </Animated>
@@ -144,7 +144,7 @@ export default function Intro() {
                 <div className="display-md text-warm">{phase.phase}</div>
                 <div
                   className={`text-label mt-2 ${
-                    phase.status === "Planned" ? "" : "!text-[#d4af37]"
+                    phase.status === "Planned" ? "" : "!text-[#00ffff]"
                   }`}
                 >
                   {phase.status}
@@ -154,7 +154,7 @@ export default function Intro() {
                 <ul className="space-y-3">
                   {phase.items.map((item, j) => (
                     <li key={j} className="flex items-start gap-3 text-sm text-warm-dim">
-                      <span className="text-[#d4af37] mt-1">·</span>
+                      <span className="text-[#00ffff] mt-1">·</span>
                       <span>{item}</span>
                     </li>
                   ))}
@@ -179,7 +179,7 @@ export default function Intro() {
           <Animated variant="left">
             <div>
               <div className="flex items-center gap-3 mb-6">
-                <Target className="w-5 h-5 text-[#d4af37]" />
+                <Target className="w-5 h-5 text-[#00ffff]" />
                 <h4 className="display-md text-warm">Mission</h4>
               </div>
               <p className="text-body mb-8">
@@ -198,13 +198,13 @@ export default function Intro() {
           <Animated variant="right">
             <div>
               <div className="flex items-center gap-3 mb-6">
-                <Eye className="w-5 h-5 text-[#d4af37]" />
+                <Eye className="w-5 h-5 text-[#00ffff]" />
                 <h4 className="display-md text-warm">Goals</h4>
               </div>
               <ul className="space-y-4">
                 {GOALS.map((item, i) => (
                   <li key={i} className="flex items-start gap-3 text-sm text-warm-dim">
-                    <span className="text-[#d4af37] mt-0.5">·</span>
+                    <span className="text-[#00ffff] mt-0.5">·</span>
                     <span>{item}</span>
                   </li>
                 ))}

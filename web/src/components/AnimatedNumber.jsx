@@ -75,14 +75,14 @@ export default function AnimatedNumber({
     if (!flash || flashState === "idle") return {};
     if (flashState === "up") {
       return {
-        textShadow: "0 0 12px rgba(212, 175, 55, 0.7)",
-        color: "rgba(244, 196, 48, 0.95)",
+        textShadow: "0 0 12px rgba(0, 255, 255, 0.7)",
+        color: "rgba(255, 140, 0, 0.95)",
       };
     }
     if (flashState === "down") {
       return {
         textShadow: "0 0 8px rgba(255, 255, 255, 0.1)",
-        color: "rgba(245, 239, 224, 0.5)",
+        color: "rgba(240, 240, 240, 0.5)",
       };
     }
     return {};

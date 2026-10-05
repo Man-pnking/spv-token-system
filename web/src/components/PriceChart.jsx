@@ -20,7 +20,7 @@ function CustomTooltip({ active, payload }) {
       style={{
         background: "rgba(15, 11, 7, 0.9)",
         backdropFilter: "blur(20px)",
-        border: "1px solid rgba(212, 175, 55, 0.15)",
+        border: "1px solid rgba(0, 255, 255, 0.15)",
       }}
     >
       <div className="text-warm-mute uppercase tracking-wider text-[10px] mb-1">
@@ -63,7 +63,7 @@ export default function PriceChart() {
         <div className="text-label">Price history</div>
         <div className="flex items-baseline gap-6 text-[10px] uppercase tracking-[0.25em] text-warm-mute">
           <span>Start {initialPrice.toFixed(6)}</span>
-          <span className="text-[#d4af37]">
+          <span className="text-[#00ffff]">
             {currentPrice ? (
               <>
                 Now <AnimatedNumber value={currentPrice} decimals={6} />
@@ -100,13 +100,13 @@ export default function PriceChart() {
               <defs>
                 <linearGradient id="goldStroke" x1="0" y1="0" x2="1" y2="0">
                   <stop offset="0%" stopColor="rgba(184, 134, 11, 0.7)" />
-                  <stop offset="50%" stopColor="#d4af37" />
-                  <stop offset="100%" stopColor="#f4c430" />
+                  <stop offset="50%" stopColor="#00ffff" />
+                  <stop offset="100%" stopColor="#ff8c00" />
                 </linearGradient>
               </defs>
               <ReferenceLine
                 y={initialPrice}
-                stroke="rgba(245, 239, 224, 0.15)"
+                stroke="rgba(240, 240, 240, 0.15)"
                 strokeDasharray="3 3"
               />
               <XAxis dataKey="index" hide />

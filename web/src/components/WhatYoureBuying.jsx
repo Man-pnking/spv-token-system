@@ -55,11 +55,11 @@ export default function WhatYoureBuying() {
                 <div
                   className="w-10 h-10 rounded-xl flex items-center justify-center shrink-0"
                   style={{
-                    background: "rgba(212, 175, 55, 0.08)",
-                    border: "1px solid rgba(212, 175, 55, 0.2)",
+                    background: "rgba(0, 255, 255, 0.08)",
+                    border: "1px solid rgba(0, 255, 255, 0.2)",
                   }}
                 >
-                  <item.icon className="w-5 h-5 text-[#d4af37]" />
+                  <item.icon className="w-5 h-5 text-[#00ffff]" />
                 </div>
                 <div>
                   <h4 className="text-warm font-bold mb-2">{item.title}</h4>

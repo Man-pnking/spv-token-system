@@ -94,18 +94,18 @@ export default function FAQ() {
       <div>
         {QUESTIONS.map((item, i) => (
           <Animated key={i} variant="up" delay={i * 30}>
-            <div className="border-b border-[#d4af37]/10">
+            <div className="border-b border-[#00ffff]/10">
               <button
                 onClick={() => setOpen(open === i ? null : i)}
                 className="w-full flex items-center justify-between gap-6 py-6 text-left group"
               >
-                <span className="font-semibold text-base sm:text-lg text-warm group-hover:text-[#d4af37] transition-colors">
+                <span className="font-semibold text-base sm:text-lg text-warm group-hover:text-[#00ffff] transition-colors">
                   {item.q}
                 </span>
                 {open === i ? (
-                  <Minus className="w-4 h-4 text-[#d4af37] shrink-0" />
+                  <Minus className="w-4 h-4 text-[#00ffff] shrink-0" />
                 ) : (
-                  <Plus className="w-4 h-4 text-warm-mute shrink-0 group-hover:text-[#d4af37] transition-colors" />
+                  <Plus className="w-4 h-4 text-warm-mute shrink-0 group-hover:text-[#00ffff] transition-colors" />
                 )}
               </button>
               <AnimatePresence>

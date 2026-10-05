@@ -7,7 +7,7 @@ export default function SectionLabel({ current, total = 9, title }) {
         {title}
       </div>
       <div className="text-[10px] uppercase tracking-[0.3em] text-warm-mute font-mono">
-        <span className="text-[#d4af37]">{pad(current)}</span>
+        <span className="text-[#00ffff]">{pad(current)}</span>
         <span className="mx-1 opacity-40">/</span>
         <span className="opacity-60">{pad(total)}</span>
       </div>

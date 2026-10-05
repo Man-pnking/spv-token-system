@@ -26,7 +26,7 @@ export default function Footer() {
             <input
               type="email"
               placeholder="your@email.com"
-              className="flex-1 bg-transparent border-b border-[#d4af37]/20 px-0 py-3 text-sm outline-none focus:border-[#d4af37]/60 transition-colors placeholder:text-warm-mute"
+              className="flex-1 bg-transparent border-b border-[#00ffff]/20 px-0 py-3 text-sm outline-none focus:border-[#00ffff]/60 transition-colors placeholder:text-warm-mute"
             />
             <button className="btn-gold px-6 py-3">
               <Send className="w-4 h-4" />
@@ -36,7 +36,7 @@ export default function Footer() {
 
         <div className="grid grid-cols-2 md:grid-cols-4 gap-10 mb-16">
           <div>
-            <h4 className="text-[10px] uppercase tracking-[0.3em] text-[#d4af37] mb-6 font-bold">
+            <h4 className="text-[10px] uppercase tracking-[0.3em] text-[#00ffff] mb-6 font-bold">
               Product
             </h4>
             <ul className="space-y-3 text-sm">
@@ -51,7 +51,7 @@ export default function Footer() {
                 { label: "How to Verify", href: "#verify" },
               ].map((item, i) => (
                 <li key={i}>
-                  <a href={item.href} className="text-warm-dim hover:text-[#d4af37] transition-colors">
+                  <a href={item.href} className="text-warm-dim hover:text-[#00ffff] transition-colors">
                     {item.label}
                   </a>
                 </li>
@@ -60,22 +60,22 @@ export default function Footer() {
           </div>
 
           <div>
-            <h4 className="text-[10px] uppercase tracking-[0.3em] text-[#d4af37] mb-6 font-bold">
+            <h4 className="text-[10px] uppercase tracking-[0.3em] text-[#00ffff] mb-6 font-bold">
               Resources
             </h4>
             <ul className="space-y-3 text-sm">
               <li>
-                <a href={CONFIG.explorer} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-warm-dim hover:text-[#d4af37] transition-colors">
+                <a href={CONFIG.explorer} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-warm-dim hover:text-[#00ffff] transition-colors">
                   Polygonscan <ExternalLink className="w-3 h-3" />
                 </a>
               </li>
               <li>
-                <a href="https://github.com/Man-pnking/spv-token-system" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-warm-dim hover:text-[#d4af37] transition-colors">
+                <a href="https://github.com/Man-pnking/spv-token-system" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-warm-dim hover:text-[#00ffff] transition-colors">
                   GitHub <ExternalLink className="w-3 h-3" />
                 </a>
               </li>
               <li>
-                <a href={`${CONFIG.explorer}/token/${CONFIG.spvToken}`} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-warm-dim hover:text-[#d4af37] transition-colors">
+                <a href={`${CONFIG.explorer}/token/${CONFIG.spvToken}`} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-warm-dim hover:text-[#00ffff] transition-colors">
                   Token Page <ExternalLink className="w-3 h-3" />
                 </a>
               </li>
@@ -83,22 +83,22 @@ export default function Footer() {
           </div>
 
           <div>
-            <h4 className="text-[10px] uppercase tracking-[0.3em] text-[#d4af37] mb-6 font-bold">
+            <h4 className="text-[10px] uppercase tracking-[0.3em] text-[#00ffff] mb-6 font-bold">
               Community
             </h4>
             <ul className="space-y-3 text-sm">
               <li>
-                <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 text-warm-dim hover:text-[#d4af37] transition-colors">
+                <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 text-warm-dim hover:text-[#00ffff] transition-colors">
                   <Twitter className="w-4 h-4" /> Twitter
                 </a>
               </li>
               <li>
-                <a href="https://discord.com" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 text-warm-dim hover:text-[#d4af37] transition-colors">
+                <a href="https://discord.com" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 text-warm-dim hover:text-[#00ffff] transition-colors">
                   <MessageCircle className="w-4 h-4" /> Discord
                 </a>
               </li>
               <li>
-                <a href="https://github.com/Man-pnking/spv-token-system" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 text-warm-dim hover:text-[#d4af37] transition-colors">
+                <a href="https://github.com/Man-pnking/spv-token-system" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 text-warm-dim hover:text-[#00ffff] transition-colors">
                   <Github className="w-4 h-4" /> GitHub
                 </a>
               </li>
@@ -106,22 +106,22 @@ export default function Footer() {
           </div>
 
           <div>
-            <h4 className="text-[10px] uppercase tracking-[0.3em] text-[#d4af37] mb-6 font-bold">
+            <h4 className="text-[10px] uppercase tracking-[0.3em] text-[#00ffff] mb-6 font-bold">
               Contracts
             </h4>
             <ul className="space-y-3 text-xs font-mono">
               <li>
-                <a href={`${CONFIG.explorer}/address/${CONFIG.spvToken}`} target="_blank" rel="noopener noreferrer" className="text-warm-dim hover:text-[#d4af37] transition-colors">
+                <a href={`${CONFIG.explorer}/address/${CONFIG.spvToken}`} target="_blank" rel="noopener noreferrer" className="text-warm-dim hover:text-[#00ffff] transition-colors">
                   SPV · {shorten(CONFIG.spvToken)}
                 </a>
               </li>
               <li>
-                <a href={`${CONFIG.explorer}/address/${CONFIG.curve}`} target="_blank" rel="noopener noreferrer" className="text-warm-dim hover:text-[#d4af37] transition-colors">
+                <a href={`${CONFIG.explorer}/address/${CONFIG.curve}`} target="_blank" rel="noopener noreferrer" className="text-warm-dim hover:text-[#00ffff] transition-colors">
                   Curve · {shorten(CONFIG.curve)}
                 </a>
               </li>
               <li>
-                <a href={`${CONFIG.explorer}/address/${CONFIG.router}`} target="_blank" rel="noopener noreferrer" className="text-warm-dim hover:text-[#d4af37] transition-colors">
+                <a href={`${CONFIG.explorer}/address/${CONFIG.router}`} target="_blank" rel="noopener noreferrer" className="text-warm-dim hover:text-[#00ffff] transition-colors">
                   Router · {shorten(CONFIG.router)}
                 </a>
               </li>
@@ -131,12 +131,12 @@ export default function Footer() {
 
         <div
           className="rounded-xl px-5 py-4 mb-8 flex items-start gap-3"
-          style={{ background: "rgba(212, 175, 55, 0.03)", border: "1px solid rgba(212, 175, 55, 0.08)" }}
+          style={{ background: "rgba(0, 255, 255, 0.03)", border: "1px solid rgba(0, 255, 255, 0.08)" }}
         >
-          <Shield className="w-4 h-4 text-[#d4af37] shrink-0 mt-0.5" />
+          <Shield className="w-4 h-4 text-[#00ffff] shrink-0 mt-0.5" />
           <div className="text-xs text-warm-dim leading-relaxed">
             <strong className="text-warm">Verify before you trade.</strong> All three SPV contracts are verified on Polygonscan. Follow the{" "}
-            <a href="#verify" className="text-[#d4af37] hover:text-[#f4c430] transition-colors">verification guide</a>{" "}
+            <a href="#verify" className="text-[#00ffff] hover:text-[#ff8c00] transition-colors">verification guide</a>{" "}
             to independently confirm the deployed code matches the source.
           </div>
         </div>
@@ -150,9 +150,9 @@ export default function Footer() {
             <span>Built on Polygon</span>
           </div>
           <div className="flex items-center gap-6">
-            <a href="#docs" className="hover:text-[#d4af37] transition-colors">Terms</a>
-            <a href="#docs" className="hover:text-[#d4af37] transition-colors">Privacy</a>
-            <a href="#faq" className="hover:text-[#d4af37] transition-colors">Support</a>
+            <a href="#docs" className="hover:text-[#00ffff] transition-colors">Terms</a>
+            <a href="#docs" className="hover:text-[#00ffff] transition-colors">Privacy</a>
+            <a href="#faq" className="hover:text-[#00ffff] transition-colors">Support</a>
           </div>
         </div>
 

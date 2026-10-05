@@ -37,8 +37,8 @@ export default function ScrollProgress() {
         style={{
           width: `${progress}%`,
           background:
-            "linear-gradient(90deg, rgba(184, 134, 11, 0.9) 0%, #d4af37 50%, #f4c430 100%)",
-          boxShadow: "0 0 12px rgba(212, 175, 55, 0.6)",
+            "linear-gradient(90deg, rgba(184, 134, 11, 0.9) 0%, #00ffff 50%, #ff8c00 100%)",
+          boxShadow: "0 0 12px rgba(0, 255, 255, 0.6)",
         }}
       />
     </div>

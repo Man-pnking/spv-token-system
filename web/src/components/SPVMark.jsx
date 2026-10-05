@@ -9,9 +9,9 @@ export default function SPVMark({ size = 36, className = "" }) {
     >
       <defs>
         <linearGradient id="spvGold" x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0%" stopColor="#f4c430" />
-          <stop offset="50%" stopColor="#d4af37" />
-          <stop offset="100%" stopColor="#8a6f22" />
+          <stop offset="0%" stopColor="#ff8c00" />
+          <stop offset="50%" stopColor="#00ffff" />
+          <stop offset="100%" stopColor="#00a8a8" />
         </linearGradient>
       </defs>
 

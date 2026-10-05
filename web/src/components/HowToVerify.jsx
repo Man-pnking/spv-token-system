@@ -80,7 +80,7 @@ export default function HowToVerify() {
                     href={step.action.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 text-xs font-medium text-[#d4af37] hover:text-[#f4c430] transition-colors"
+                    className="inline-flex items-center gap-2 text-xs font-medium text-[#00ffff] hover:text-[#ff8c00] transition-colors"
                   >
                     {step.action.label}
                     <ExternalLink className="w-3 h-3" />
@@ -98,11 +98,11 @@ export default function HowToVerify() {
           <div
             className="w-10 h-10 rounded-xl flex items-center justify-center shrink-0"
             style={{
-              background: "rgba(212, 175, 55, 0.08)",
-              border: "1px solid rgba(212, 175, 55, 0.2)",
+              background: "rgba(0, 255, 255, 0.08)",
+              border: "1px solid rgba(0, 255, 255, 0.2)",
             }}
           >
-            <Shield className="w-5 h-5 text-[#d4af37]" />
+            <Shield className="w-5 h-5 text-[#00ffff]" />
           </div>
           <div>
             <h3 className="display-md text-warm mb-3">
@@ -110,23 +110,23 @@ export default function HowToVerify() {
             </h3>
             <ul className="space-y-3 text-sm text-warm-dim leading-relaxed">
               <li className="flex items-start gap-3">
-                <CheckCircle2 className="w-4 h-4 text-[#d4af37] shrink-0 mt-0.5" />
+                <CheckCircle2 className="w-4 h-4 text-[#00ffff] shrink-0 mt-0.5" />
                 <span>All three contracts (token, curve, router) show a green verification checkmark on Polygonscan.</span>
               </li>
               <li className="flex items-start gap-3">
-                <CheckCircle2 className="w-4 h-4 text-[#d4af37] shrink-0 mt-0.5" />
+                <CheckCircle2 className="w-4 h-4 text-[#00ffff] shrink-0 mt-0.5" />
                 <span>The curve holds user USDT in the contract itself, not in the creator's wallet.</span>
               </li>
               <li className="flex items-start gap-3">
-                <CheckCircle2 className="w-4 h-4 text-[#d4af37] shrink-0 mt-0.5" />
+                <CheckCircle2 className="w-4 h-4 text-[#00ffff] shrink-0 mt-0.5" />
                 <span>There is no function that lets the owner withdraw user funds.</span>
               </li>
               <li className="flex items-start gap-3">
-                <CheckCircle2 className="w-4 h-4 text-[#d4af37] shrink-0 mt-0.5" />
+                <CheckCircle2 className="w-4 h-4 text-[#00ffff] shrink-0 mt-0.5" />
                 <span>On migration, LP tokens are sent to 0x...dEaD and cannot be retrieved.</span>
               </li>
               <li className="flex items-start gap-3">
-                <CheckCircle2 className="w-4 h-4 text-[#d4af37] shrink-0 mt-0.5" />
+                <CheckCircle2 className="w-4 h-4 text-[#00ffff] shrink-0 mt-0.5" />
                 <span>The router address on Polygonscan matches the one shown in this site's footer.</span>
               </li>
             </ul>
@@ -141,7 +141,7 @@ export default function HowToVerify() {
             target="_blank"
             rel="noopener noreferrer"
             className="block py-4 px-5 rounded-xl transition-colors hover:bg-white/[0.02]"
-            style={{ border: "1px solid rgba(212, 175, 55, 0.1)" }}
+            style={{ border: "1px solid rgba(0, 255, 255, 0.1)" }}
           >
             <div className="text-label mb-1">SPV Token</div>
             <div className="text-mono text-xs text-warm-dim flex items-center gap-2">
@@ -153,7 +153,7 @@ export default function HowToVerify() {
             target="_blank"
             rel="noopener noreferrer"
             className="block py-4 px-5 rounded-xl transition-colors hover:bg-white/[0.02]"
-            style={{ border: "1px solid rgba(212, 175, 55, 0.1)" }}
+            style={{ border: "1px solid rgba(0, 255, 255, 0.1)" }}
           >
             <div className="text-label mb-1">Bonding Curve</div>
             <div className="text-mono text-xs text-warm-dim flex items-center gap-2">
@@ -165,7 +165,7 @@ export default function HowToVerify() {
             target="_blank"
             rel="noopener noreferrer"
             className="block py-4 px-5 rounded-xl transition-colors hover:bg-white/[0.02]"
-            style={{ border: "1px solid rgba(212, 175, 55, 0.1)" }}
+            style={{ border: "1px solid rgba(0, 255, 255, 0.1)" }}
           >
             <div className="text-label mb-1">Router</div>
             <div className="text-mono text-xs text-warm-dim flex items-center gap-2">

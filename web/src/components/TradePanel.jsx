@@ -160,7 +160,7 @@ export default function TradePanel() {
             {t.mode === m && (
               <motion.div
                 layoutId="trade-mode-underline"
-                className="absolute bottom-0 left-0 right-0 h-[2px] bg-gradient-to-r from-[#d4af37] to-[#f4c430]"
+                className="absolute bottom-0 left-0 right-0 h-[2px] bg-gradient-to-r from-[#00ffff] to-[#ff8c00]"
               />
             )}
           </button>
@@ -180,7 +180,7 @@ export default function TradePanel() {
               type="button"
               onClick={() => applyPercent(btn.pct)}
               aria-label={`Fill ${btn.label} of balance`}
-              className="btn-feedback flex-1 py-2 rounded-full border border-[#d4af37]/15 text-xs font-bold text-warm-dim hover:border-[#d4af37]/40 hover:text-[#d4af37] transition-colors"
+              className="btn-feedback flex-1 py-2 rounded-full border border-[#00ffff]/15 text-xs font-bold text-warm-dim hover:border-[#00ffff]/40 hover:text-[#00ffff] transition-colors"
             >
               {btn.label}
             </button>
@@ -195,7 +195,7 @@ export default function TradePanel() {
         >
           {topLabel}
         </label>
-        <div className="flex items-baseline gap-4 pb-4 border-b border-[#d4af37]/15">
+        <div className="flex items-baseline gap-4 pb-4 border-b border-[#00ffff]/15">
           <input
             id="trade-top"
             type="number"
@@ -222,7 +222,7 @@ export default function TradePanel() {
       </div>
 
       <div className="flex justify-center py-4" aria-hidden="true">
-        <ArrowDownUp className="w-5 h-5 text-[#d4af37]/60" />
+        <ArrowDownUp className="w-5 h-5 text-[#00ffff]/60" />
       </div>
 
       <div className="mb-12">
@@ -232,7 +232,7 @@ export default function TradePanel() {
         >
           {bottomLabel}
         </label>
-        <div className="flex items-baseline gap-4 pb-4 border-b border-[#d4af37]/15">
+        <div className="flex items-baseline gap-4 pb-4 border-b border-[#00ffff]/15">
           <input
             id="trade-bottom"
             type="number"
@@ -302,7 +302,7 @@ export default function TradePanel() {
           target="_blank"
           rel="noopener noreferrer"
           aria-label="View transaction on Polygonscan"
-          className="flex items-center justify-center gap-2 text-xs text-warm-dim mt-6 hover:text-[#d4af37]"
+          className="flex items-center justify-center gap-2 text-xs text-warm-dim mt-6 hover:text-[#00ffff]"
         >
           View on Polygonscan <ExternalLink className="w-3 h-3" />
         </a>

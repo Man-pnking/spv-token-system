@@ -23,7 +23,7 @@ const CREATOR_FEES = [
 function CopyAddr({ label, addr }) {
   const copy = () => navigator.clipboard.writeText(addr);
   return (
-    <div className="flex items-center justify-between py-4 border-b border-[#d4af37]/10">
+    <div className="flex items-center justify-between py-4 border-b border-[#00ffff]/10">
       <div className="min-w-0">
         <div className="text-label mb-1">{label}</div>
         <div className="text-mono text-xs sm:text-sm truncate text-warm-dim">{addr}</div>
@@ -76,11 +76,11 @@ export default function Docs() {
             </thead>
             <tbody>
               {CREATOR_FEES.map(([s, p, v, f]) => (
-                <tr key={s} className="border-t border-[#d4af37]/10">
+                <tr key={s} className="border-t border-[#00ffff]/10">
                   <td className="py-3 pr-6 text-warm-dim">{s}</td>
                   <td className="py-3 pr-6 text-mono text-warm-dim">{p}</td>
                   <td className="py-3 pr-6 text-mono text-warm-dim">{v}</td>
-                  <td className="py-3 text-mono text-[#d4af37]">{f}</td>
+                  <td className="py-3 text-mono text-[#00ffff]">{f}</td>
                 </tr>
               ))}
             </tbody>
@@ -125,9 +125,9 @@ export default function Docs() {
           The curve migrates to QuickSwap when 2 of 3 conditions are met:
         </p>
         <ul className="space-y-3 text-sm text-warm-dim mb-6">
-          <li className="flex gap-3"><span className="text-[#d4af37]">01</span> Price reaches 5x the initial price (0.05 USDT)</li>
-          <li className="flex gap-3"><span className="text-[#d4af37]">02</span> Total minted reaches 5,000,000 SPV</li>
-          <li className="flex gap-3"><span className="text-[#d4af37]">03</span> Unique buyers reach 500</li>
+          <li className="flex gap-3"><span className="text-[#00ffff]">01</span> Price reaches 5x the initial price (0.05 USDT)</li>
+          <li className="flex gap-3"><span className="text-[#00ffff]">02</span> Total minted reaches 5,000,000 SPV</li>
+          <li className="flex gap-3"><span className="text-[#00ffff]">03</span> Unique buyers reach 500</li>
         </ul>
         <p className="text-body max-w-3xl">
           Fallback: migration is forced after 90 days if no triggers fire. LP tokens

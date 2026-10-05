@@ -106,13 +106,13 @@ export default function CurveStats() {
             <div key={i}>
               <div className="flex items-center justify-between mb-3">
                 <span className="text-sm text-warm-dim">{trigger.label}</span>
-                <span className={trigger.ok ? "text-[#d4af37]" : "text-warm-mute"}>
+                <span className={trigger.ok ? "text-[#00ffff]" : "text-warm-mute"}>
                   {trigger.ok ? "Met" : trigger.display}
                 </span>
               </div>
               <div className="h-px bg-white/5 relative overflow-hidden">
                 <div
-                  className="h-full bg-gradient-to-r from-[#d4af37] to-[#f4c430] transition-all duration-1000"
+                  className="h-full bg-gradient-to-r from-[#00ffff] to-[#ff8c00] transition-all duration-1000"
                   style={{ width: `${Math.min(100, Math.max(0, trigger.value * 100))}%` }}
                 />
               </div>

@@ -4,13 +4,22 @@ export default {
   theme: {
     extend: {
       colors: {
-        gold: {
-          DEFAULT: "#d4af37",
-          light: "#f4c430",
-          dark: "#8a6f22",
+        holo: {
+          cyan: "#00ffff",
+          orange: "#ff8c00",
+          white: "#ffffff",
+          dark: "#00a8a8",
         },
-        obsidian: "#0a0705",
-        warm: "#f5efe0",
+        // Legacy aliases — anything still using `gold` classes keeps working
+        // but now renders as cyan
+        gold: {
+          DEFAULT: "#00ffff",
+          light: "#ff8c00",
+          dark: "#00a8a8",
+        },
+        obsidian: "#0a0a0a",
+        neutral: "#111111",
+        warm: "#f0f0f0",
       },
       fontFamily: {
         sans: ["Inter", "system-ui", "sans-serif"],
@@ -21,7 +30,10 @@ export default {
         aurora: "aurora 22s ease infinite",
         "float-slow": "float 9s ease-in-out infinite",
         "float-medium": "float 7s ease-in-out infinite",
-        "pulse-gold": "pulse-gold 3s ease-in-out infinite",
+        "pulse-holo": "pulse-holo 3s ease-in-out infinite",
+        "butterfly-drift": "butterfly-drift 45s ease-in-out infinite",
+        "butterfly-drift-reverse": "butterfly-drift-reverse 60s ease-in-out infinite",
+        "butterfly-spin": "butterfly-spin 90s linear infinite",
       },
       keyframes: {
         "gradient-shift": {
@@ -36,9 +48,27 @@ export default {
           "0%, 100%": { transform: "translateY(0px)" },
           "50%": { transform: "translateY(-24px)" },
         },
-        "pulse-gold": {
-          "0%, 100%": { boxShadow: "0 0 30px rgba(212, 175, 55, 0.35)" },
-          "50%": { boxShadow: "0 0 60px rgba(212, 175, 55, 0.65)" },
+        "pulse-holo": {
+          "0%, 100%": { boxShadow: "0 0 30px rgba(0, 255, 255, 0.35)" },
+          "50%": { boxShadow: "0 0 60px rgba(0, 255, 255, 0.65)" },
+        },
+        "butterfly-drift": {
+          "0%": { transform: "rotate(0deg) translate(0, 0) scale(1)" },
+          "25%": { transform: "rotate(90deg) translate(20px, -20px) scale(1.03)" },
+          "50%": { transform: "rotate(180deg) translate(0, -40px) scale(1.06)" },
+          "75%": { transform: "rotate(270deg) translate(-20px, -20px) scale(1.03)" },
+          "100%": { transform: "rotate(360deg) translate(0, 0) scale(1)" },
+        },
+        "butterfly-drift-reverse": {
+          "0%": { transform: "rotate(360deg) translate(0, 0) scale(1)" },
+          "25%": { transform: "rotate(270deg) translate(-30px, 15px) scale(1.04)" },
+          "50%": { transform: "rotate(180deg) translate(0, 30px) scale(1.08)" },
+          "75%": { transform: "rotate(90deg) translate(30px, 15px) scale(1.04)" },
+          "100%": { transform: "rotate(0deg) translate(0, 0) scale(1)" },
+        },
+        "butterfly-spin": {
+          "0%": { transform: "rotate(0deg)" },
+          "100%": { transform: "rotate(360deg)" },
         },
       },
       backdropBlur: { xs: "2px" },

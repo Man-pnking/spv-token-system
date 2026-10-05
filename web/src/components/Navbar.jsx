@@ -59,7 +59,7 @@ export default function Navbar() {
             background: "rgba(15, 11, 7, 0.5)",
             backdropFilter: "blur(40px) saturate(140%)",
             WebkitBackdropFilter: "blur(40px) saturate(140%)",
-            border: "1px solid rgba(212, 175, 55, 0.06)",
+            border: "1px solid rgba(0, 255, 255, 0.06)",
             boxShadow: "0 8px 32px rgba(0, 0, 0, 0.25)",
           }}
         >
@@ -80,9 +80,9 @@ export default function Navbar() {
                   <a
                     href={l.href}
                     className="text-sm transition-colors whitespace-nowrap"
-                    style={{ color: "rgba(245, 239, 224, 0.55)" }}
-                    onMouseEnter={(e) => { e.currentTarget.style.color = "rgba(212, 175, 55, 0.9)"; }}
-                    onMouseLeave={(e) => { e.currentTarget.style.color = "rgba(245, 239, 224, 0.55)"; }}
+                    style={{ color: "rgba(240, 240, 240, 0.55)" }}
+                    onMouseEnter={(e) => { e.currentTarget.style.color = "rgba(0, 255, 255, 0.9)"; }}
+                    onMouseLeave={(e) => { e.currentTarget.style.color = "rgba(240, 240, 240, 0.55)"; }}
                   >
                     {l.label}
                   </a>
@@ -104,7 +104,7 @@ export default function Navbar() {
               aria-controls="mobile-menu"
               style={{
                 background: "rgba(255, 255, 255, 0.03)",
-                border: "1px solid rgba(212, 175, 55, 0.08)",
+                border: "1px solid rgba(0, 255, 255, 0.08)",
               }}
             >
               {open ? <X className="w-5 h-5 text-warm" /> : <Menu className="w-5 h-5 text-warm" />}
@@ -144,7 +144,7 @@ export default function Navbar() {
                 background: "rgba(15, 11, 7, 0.7)",
                 backdropFilter: "blur(50px) saturate(140%)",
                 WebkitBackdropFilter: "blur(50px) saturate(140%)",
-                border: "1px solid rgba(212, 175, 55, 0.08)",
+                border: "1px solid rgba(0, 255, 255, 0.08)",
                 boxShadow: "0 20px 60px rgba(0, 0, 0, 0.5)",
               }}
             >
@@ -156,9 +156,9 @@ export default function Navbar() {
                         href={l.href}
                         onClick={() => setOpen(false)}
                         className="block px-4 py-3 rounded-xl transition-colors text-sm"
-                        style={{ color: "rgba(245, 239, 224, 0.7)" }}
-                        onMouseEnter={(e) => { e.currentTarget.style.color = "rgba(212, 175, 55, 0.9)"; e.currentTarget.style.background = "rgba(212, 175, 55, 0.04)"; }}
-                        onMouseLeave={(e) => { e.currentTarget.style.color = "rgba(245, 239, 224, 0.7)"; e.currentTarget.style.background = "transparent"; }}
+                        style={{ color: "rgba(240, 240, 240, 0.7)" }}
+                        onMouseEnter={(e) => { e.currentTarget.style.color = "rgba(0, 255, 255, 0.9)"; e.currentTarget.style.background = "rgba(0, 255, 255, 0.04)"; }}
+                        onMouseLeave={(e) => { e.currentTarget.style.color = "rgba(240, 240, 240, 0.7)"; e.currentTarget.style.background = "transparent"; }}
                       >
                         {l.label}
                       </a>
@@ -166,7 +166,7 @@ export default function Navbar() {
                   ))}
                 </ul>
               </nav>
-              <div className="pt-4" style={{ borderTop: "1px solid rgba(212, 175, 55, 0.08)" }}>
+              <div className="pt-4" style={{ borderTop: "1px solid rgba(0, 255, 255, 0.08)" }}>
                 <WalletButton full />
               </div>
             </motion.div>

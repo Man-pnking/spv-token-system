@@ -30,7 +30,7 @@ export default function StatsStrip() {
 
   if (s.loading) {
     return (
-      <div className="border-y border-[#d4af37]/10">
+      <div className="border-y border-[#00ffff]/10">
         <div className="max-w-6xl mx-auto px-6 py-10">
           <div className="text-label">Loading stats…</div>
         </div>
@@ -44,9 +44,9 @@ export default function StatsStrip() {
   const marketCap = priceUsdt * totalSupply;
 
   return (
-    <div className="border-y border-[#d4af37]/10">
+    <div className="border-y border-[#00ffff]/10">
       <div className="max-w-6xl mx-auto px-6 py-12">
-        <div className="flex flex-col sm:flex-row divide-y sm:divide-y-0 sm:divide-x divide-[#d4af37]/10 gap-y-8 sm:gap-y-0 sm:gap-x-8">
+        <div className="flex flex-col sm:flex-row divide-y sm:divide-y-0 sm:divide-x divide-[#00ffff]/10 gap-y-8 sm:gap-y-0 sm:gap-x-8">
           <StatBlock
             label="Unique buyers"
             value={s.uniqueBuyers}

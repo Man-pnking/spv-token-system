@@ -17,7 +17,7 @@ function Bar({ label, value, target, ok, format }) {
         </span>
         <span
           className={`text-[10px] uppercase tracking-[0.2em] ${
-            ok ? "text-[#d4af37]" : "text-warm-mute"
+            ok ? "text-[#00ffff]" : "text-warm-mute"
           }`}
         >
           {ok ? "Met" : `${pct.toFixed(1)}%`}
@@ -33,7 +33,7 @@ function Bar({ label, value, target, ok, format }) {
       </div>
       <div className="h-px bg-white/5 relative overflow-hidden">
         <motion.div
-          className="h-full bg-gradient-to-r from-[#d4af37] to-[#f4c430]"
+          className="h-full bg-gradient-to-r from-[#00ffff] to-[#ff8c00]"
           initial={{ width: 0 }}
           animate={{ width: `${pct}%` }}
           transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
@@ -72,7 +72,7 @@ export default function GraduationProgress() {
           Migration progress
         </div>
         <div className="text-[10px] uppercase tracking-[0.2em] text-warm-mute">
-          <span className="text-[#d4af37]">{triggersMet}</span> of 2 triggers met
+          <span className="text-[#00ffff]">{triggersMet}</span> of 2 triggers met
         </div>
       </div>
 
@@ -100,7 +100,7 @@ export default function GraduationProgress() {
         />
       </div>
 
-      <div className="mt-8 pt-6 border-t border-[#d4af37]/10 text-center">
+      <div className="mt-8 pt-6 border-t border-[#00ffff]/10 text-center">
         <div className="text-[10px] uppercase tracking-[0.3em] text-warm-mute mb-2">
           Once graduated
         </div>
