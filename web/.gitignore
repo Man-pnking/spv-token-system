@@ -1,1 +1,6 @@
 *.pre-reframe.bak
+
+# Temporary scripts and backups
+web/scripts/*.mjs
+*.pre-marketing.bak
+*.pre-reframe.bak
