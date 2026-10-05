@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200" role="img" aria-label="Gold key">
+  <defs>
+    <!-- Gold gradient for the key -->
+    <linearGradient id="gold" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#fff3b0" />
+      <stop offset="25%" stop-color="#f4c430" />
+      <stop offset="55%" stop-color="#d4af37" />
+      <stop offset="85%" stop-color="#a8811f" />
+      <stop offset="100%" stop-color="#6b5210" />
+    </linearGradient>
+
+    <!-- Brighter highlight band that will sweep across -->
+    <linearGradient id="shine" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="rgba(255, 255, 255, 0)" />
+      <stop offset="45%" stop-color="rgba(255, 255, 255, 0)" />
+      <stop offset="50%" stop-color="rgba(255, 255, 255, 0.9)" />
+      <stop offset="55%" stop-color="rgba(255, 255, 255, 0)" />
+      <stop offset="100%" stop-color="rgba(255, 255, 255, 0)" />
+      <animate
+        attributeName="x1"
+        values="-1; 1; -1"
+        dur="3.5s"
+        repeatCount="indefinite"
+      />
+      <animate
+        attributeName="x2"
+        values="0; 2; 0"
+        dur="3.5s"
+        repeatCount="indefinite"
+      />
+    </linearGradient>
+
+    <!-- Mask that confines the shine to the key shape -->
+    <mask id="keyMask">
+      <rect width="200" height="200" fill="black" />
+      <g fill="white">
+        <!-- Key head (circle) -->
+        <circle cx="60" cy="100" r="34" />
+        <!-- Shaft -->
+        <rect x="90" y="92" width="90" height="16" rx="3" />
+        <!-- Teeth -->
+        <rect x="150" y="92" width="10" height="30" rx="2" />
+        <rect x="166" y="92" width="10" height="22" rx="2" />
+      </g>
+    </mask>
+  </defs>
+
+  <!-- Key group with gentle sway -->
+  <g transform="translate(100 100)" style="transform-origin: 100px 100px;">
+    <animateTransform
+      attributeName="transform"
+      type="rotate"
+      values="-4 100 100; 4 100 100; -4 100 100"
+      dur="4s"
+      repeatCount="indefinite"
+      additive="replace"
+    />
+
+    <!-- Key body -->
+    <g>
+      <!-- Head — outer ring -->
+      <circle
+        cx="60"
+        cy="100"
+        r="34"
+        fill="none"
+        stroke="url(#gold)"
+        stroke-width="14"
+      />
+      <!-- Head — inner hole -->
+      <circle
+        cx="60"
+        cy="100"
+        r="12"
+        fill="none"
+        stroke="url(#gold)"
+        stroke-width="6"
+      />
+      <!-- Shaft -->
+      <rect x="90" y="92" width="90" height="16" rx="3" fill="url(#gold)" />
+      <!-- Teeth -->
+      <rect x="150" y="92" width="10" height="30" rx="2" fill="url(#gold)" />
+      <rect x="166" y="92" width="10" height="22" rx="2" fill="url(#gold)" />
+    </g>
+
+    <!-- Animated shine overlay, masked to the key -->
+    <g mask="url(#keyMask)">
+      <rect
+        x="0"
+        y="0"
+        width="200"
+        height="200"
+        fill="url(#shine)"
+        opacity="0.7"
+        style="mix-blend-mode: screen;"
+      />
+    </g>
+
+    <!-- Subtle pulsing glow behind the key -->
+    <circle cx="60" cy="100" r="46" fill="rgba(212, 175, 55, 0.15)">
+      <animate
+        attributeName="r"
+        values="42; 52; 42"
+        dur="3.5s"
+        repeatCount="indefinite"
+      />
+      <animate
+        attributeName="opacity"
+        values="0.15; 0.35; 0.15"
+        dur="3.5s"
+        repeatCount="indefinite"
+      />
+    </circle>
+  </g>
+</svg>
