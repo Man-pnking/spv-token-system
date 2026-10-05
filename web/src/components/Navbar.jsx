@@ -18,22 +18,9 @@ const LINKS = [
 ];
 
 export default function Navbar() {
-  const [scrolled, setScrolled] = useState(false);
-  const [tickerVisible, setTickerVisible] = useState(false);
   const [open, setOpen] = useState(false);
   const menuRef = useRef(null);
   const toggleRef = useRef(null);
-
-  useEffect(() => {
-    const onScroll = () => {
-      const y = window.scrollY;
-      setScrolled(y > 30);
-      setTickerVisible(y > 200);
-    };
-    window.addEventListener("scroll", onScroll, { passive: true });
-    onScroll();
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
 
   useEffect(() => {
     document.body.style.overflow = open ? "hidden" : "";
@@ -54,21 +41,21 @@ export default function Navbar() {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 safe-top ${
-        scrolled ? "py-3" : "py-5"
-      }`}
+      className="fixed top-0 left-0 right-0 z-50 safe-top"
+      style={{ willChange: "transform" }}
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6">
-        <div
-          className="rounded-2xl px-4 sm:px-6 py-3 flex items-center justify-between transition-all duration-500"
-          style={{
-            background: "rgba(15, 11, 7, 0.5)",
-            backdropFilter: "blur(40px) saturate(140%)",
-            WebkitBackdropFilter: "blur(40px) saturate(140%)",
-            border: "1px solid rgba(0, 255, 255, 0.06)",
-            boxShadow: "0 8px 32px rgba(0, 0, 0, 0.25)",
-          }}
-        >
+      {/* Main nav bar — full width, fixed padding */}
+      <div
+        className="w-full py-3"
+        style={{
+          background: "rgba(15, 11, 7, 0.75)",
+          backdropFilter: "blur(40px) saturate(140%)",
+          WebkitBackdropFilter: "blur(40px) saturate(140%)",
+          borderBottom: "1px solid rgba(0, 255, 255, 0.06)",
+          boxShadow: "0 4px 24px rgba(0, 0, 0, 0.3)",
+        }}
+      >
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 flex items-center justify-between">
           <a href="#home" className="flex items-center gap-3 shrink-0" aria-label="SPV home">
             <SPVMark size={32} />
             <span className="hidden md:block text-sm font-medium text-warm">
@@ -117,9 +104,10 @@ export default function Navbar() {
             </button>
           </div>
         </div>
-
-        <PriceTickerBanner visible={tickerVisible} />
       </div>
+
+      {/* Ticker — full width, flush, always visible */}
+      <PriceTickerBanner />
 
       <AnimatePresence>
         {open && (
@@ -149,7 +137,7 @@ export default function Navbar() {
               transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
               className="xl:hidden fixed top-24 left-4 right-4 z-50 rounded-2xl p-5"
               style={{
-                background: "rgba(15, 11, 7, 0.7)",
+                background: "rgba(15, 11, 7, 0.75)",
                 backdropFilter: "blur(50px) saturate(140%)",
                 WebkitBackdropFilter: "blur(50px) saturate(140%)",
                 border: "1px solid rgba(0, 255, 255, 0.08)",

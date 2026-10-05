@@ -2,7 +2,7 @@ import { useSPVFees } from "../hooks/useSPVFees";
 import { useRecentActivity } from "../hooks/useRecentActivity";
 import { formatSpv } from "../utils/format";
 
-export default function PriceTickerBanner({ visible }) {
+export default function PriceTickerBanner() {
   const fees = useSPVFees();
   const { activities } = useRecentActivity();
 
@@ -35,7 +35,7 @@ export default function PriceTickerBanner({ visible }) {
         <span className="text-warm font-mono">
           {fees.loading ? "—" : `${fees.progress.toFixed(1)}%`}
         </span>
-        <span className="text-warm-mute">({fees.triggersMet}/2 triggers)</span>
+        <span className="text-warm-mute">({fees.triggersMet}/2)</span>
       </>
     ),
   });
@@ -99,25 +99,15 @@ export default function PriceTickerBanner({ visible }) {
 
   return (
     <div
-      className="overflow-hidden transition-all duration-500 ease-out"
+      className="w-full overflow-hidden"
       style={{
-        maxHeight: visible ? "56px" : "0px",
-        opacity: visible ? 1 : 0,
-        marginTop: visible ? "8px" : "0px",
-        transform: visible ? "translateY(0)" : "translateY(-8px)",
-        pointerEvents: visible ? "auto" : "none",
+        background: "rgba(15, 11, 7, 0.6)",
+        backdropFilter: "blur(40px) saturate(140%)",
+        WebkitBackdropFilter: "blur(40px) saturate(140%)",
+        borderBottom: "1px solid rgba(0, 255, 255, 0.06)",
       }}
-      aria-hidden={!visible}
     >
-      <div
-        className="rounded-2xl py-2.5 flex items-center h-12"
-        style={{
-          background: "rgba(15, 11, 7, 0.5)",
-          backdropFilter: "blur(40px) saturate(140%)",
-          WebkitBackdropFilter: "blur(40px) saturate(140%)",
-          border: "1px solid rgba(0, 255, 255, 0.06)",
-        }}
-      >
+      <div className="flex items-center h-8">
         <div className="ticker-track flex items-center min-w-max">
           {row}
           {row}
