@@ -7,7 +7,6 @@ import WalletButton from "./WalletButton";
 import GraduationProgress from "./GraduationProgress";
 import SPVMark from "./SPVMark";
 import AnimatedNumber from "./AnimatedNumber";
-import ButterflyBanner from "./ButterflyBanner";
 
 export default function Hero() {
   const scrollY = useParallax();
@@ -29,8 +28,9 @@ export default function Hero() {
           marginLeft: "min(-45vw, -450px)",
           marginTop: "min(-45vw, -450px)",
           border: "1px solid rgba(0, 255, 255, 0.06)",
-          transform: `translate(${mouse.x * 6}px, ${mouse.y * 6 + scrollY * 0.05}px)`,
+          transform: `translate3d(${mouse.x * 6}px, ${mouse.y * 6 + scrollY * 0.05}px, 0)`,
           transition: "transform 0.4s cubic-bezier(0.16, 1, 0.3, 1)",
+          willChange: "transform",
         }}
       />
 
@@ -44,14 +44,11 @@ export default function Hero() {
           marginLeft: "min(-30vw, -300px)",
           marginTop: "min(-30vw, -300px)",
           border: "1px dashed rgba(0, 255, 255, 0.05)",
-          transform: `translate(${mouse.x * -10}px, ${mouse.y * -10 + scrollY * 0.08}px) rotate(${scrollY * 0.02}deg)`,
+          transform: `translate3d(${mouse.x * -10}px, ${mouse.y * -10 + scrollY * 0.08}px, 0) rotate(${scrollY * 0.02}deg)`,
           transition: "transform 0.4s cubic-bezier(0.16, 1, 0.3, 1)",
+          willChange: "transform",
         }}
       />
-
-      <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-        <ButterflyBanner />
-      </div>
 
       <div
         className="absolute pointer-events-none animate-float-slow"
@@ -59,8 +56,9 @@ export default function Hero() {
           top: "18%",
           left: "10%",
           opacity: 0.15,
-          transform: `translate(${mouse.x * -14}px, ${mouse.y * -14 + scrollY * 0.22}px)`,
+          transform: `translate3d(${mouse.x * -14}px, ${mouse.y * -14 + scrollY * 0.22}px, 0)`,
           transition: "transform 0.5s cubic-bezier(0.16, 1, 0.3, 1)",
+          willChange: "transform",
         }}
       >
         <SPVMark size={48} />
@@ -73,7 +71,8 @@ export default function Hero() {
         className="relative z-10 max-w-4xl mx-auto px-6 text-center"
         style={{
           opacity: heroOpacity,
-          transform: `translateY(${scrollY * 0.25}px)`,
+          transform: `translate3d(0, ${scrollY * 0.25}px, 0)`,
+          willChange: "transform, opacity",
         }}
       >
         <motion.div
@@ -86,16 +85,45 @@ export default function Hero() {
           <span>Live on Polygon</span>
         </motion.div>
 
-        <motion.h1
-          initial={{ opacity: 0, y: 40 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1.2, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
-          className="display-xl mb-10"
+        <motion.div
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 1.4, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
+          className="relative flex items-center justify-center mb-10"
         >
-          <span className="shimmer">Special Purpose Vehicle</span>
-          <br />
-          <span className="text-warm">SPV Token</span>
-        </motion.h1>
+          <div
+            className="absolute rounded-full pointer-events-none"
+            style={{
+              width: "min(70vw, 560px)",
+              height: "min(70vw, 560px)",
+              background:
+                "radial-gradient(circle, rgba(0,255,255,0.28) 0%, rgba(0,255,255,0.10) 40%, transparent 70%)",
+              filter: "blur(60px)",
+            }}
+          />
+          <div
+            className="absolute rounded-full pointer-events-none"
+            style={{
+              width: "min(50vw, 380px)",
+              height: "min(50vw, 380px)",
+              background:
+                "radial-gradient(circle, rgba(255,140,0,0.22) 0%, rgba(255,140,0,0.06) 50%, transparent 75%)",
+              filter: "blur(50px)",
+              mixBlendMode: "screen",
+            }}
+          />
+          <img
+            src="/ruby-diamond-32.svg"
+            alt="SPV Token"
+            className="relative select-none"
+            style={{
+              height: "min(400px, 60vw)",
+              width: "auto",
+              filter:
+                "drop-shadow(0 0 40px rgba(0,255,255,0.55)) drop-shadow(0 0 80px rgba(255,140,0,0.28))",
+            }}
+          />
+        </motion.div>
 
         <motion.p
           initial={{ opacity: 0, y: 30 }}
@@ -160,7 +188,7 @@ export default function Hero() {
         animate={{ opacity: 1 }}
         transition={{ delay: 1.5, duration: 1 }}
         className="absolute bottom-6 left-1/2 -translate-x-1/2"
-        style={{ opacity: Math.max(0, 1 - scrollY / 400) }}
+        style={{ opacity: Math.max(0, 1 - scrollY / 400), willChange: "opacity" }}
       >
         <div className="w-px h-10 bg-gradient-to-b from-transparent via-[#00ffff]/60 to-transparent mx-auto" />
         <div className="text-label mt-2 text-center">Scroll</div>
