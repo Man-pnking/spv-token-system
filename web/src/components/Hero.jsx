@@ -76,66 +76,27 @@ export default function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
-          className="inline-flex items-center gap-3 mb-10 text-label"
+          className="inline-flex items-center gap-3 mb-14 text-label"
         >
           <span className="w-1.5 h-1.5 rounded-full bg-[#00ffff] animate-pulse" />
           <span>Live on Polygon</span>
         </motion.div>
 
-        <motion.div
-          initial={{ opacity: 0, scale: 0.9 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 1.4, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
-          className="relative flex items-center justify-center mb-10"
-        >
-          <div
-            className="absolute rounded-full pointer-events-none"
-            style={{
-              width: "min(70vw, 560px)",
-              height: "min(70vw, 560px)",
-              background:
-                "radial-gradient(circle, rgba(0,255,255,0.28) 0%, rgba(0,255,255,0.10) 40%, transparent 70%)",
-              filter: "blur(30px)",
-            }}
-          />
-          <div
-            className="absolute rounded-full pointer-events-none"
-            style={{
-              width: "min(50vw, 380px)",
-              height: "min(50vw, 380px)",
-              background:
-                "radial-gradient(circle, rgba(255,140,0,0.22) 0%, rgba(255,140,0,0.06) 50%, transparent 75%)",
-              filter: "blur(25px)",
-              mixBlendMode: "screen",
-            }}
-          />
-          <img
-            src="/ruby-diamond-32.svg"
-            alt="SPV Token"
-            className="relative select-none"
-            style={{
-              height: "min(400px, 60vw)",
-              width: "auto",
-              filter:
-                "drop-shadow(0 0 30px rgba(0,255,255,0.5)) drop-shadow(0 0 60px rgba(255,140,0,0.25))",
-            }}
-          />
-        </motion.div>
-
         <motion.p
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 0.5 }}
+          transition={{ duration: 1, delay: 0.4 }}
           className="text-body max-w-2xl mx-auto mb-14"
         >
-          SPV starts at 0.01 USDT, mints on every buy, and burns on every sell.
-          When the market proves demand, liquidity migrates to QuickSwap and locks forever.
+          Hold for rewards. Every holder starts at the same exit fee — stay 30 days
+          and it drops by 30x. When the market proves real demand, liquidity
+          migrates to QuickSwap and locks forever.
         </motion.p>
 
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 0.7 }}
+          transition={{ duration: 1, delay: 0.6 }}
           className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-14"
         >
           <WalletButton />
@@ -147,7 +108,7 @@ export default function Hero() {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 0.9 }}
+          transition={{ duration: 1, delay: 0.8 }}
           className="inline-flex items-baseline gap-10 mb-16"
         >
           <div>
@@ -172,7 +133,7 @@ export default function Hero() {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1.2, delay: 1.1 }}
+          transition={{ duration: 1.2, delay: 1.0 }}
           className="pt-10"
         >
           <div className="divider mb-10" />
