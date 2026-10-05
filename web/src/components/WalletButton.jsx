@@ -31,9 +31,7 @@ export default function WalletButton({ compact = false }) {
         className="glass-button text-sm flex items-center gap-2"
       >
         <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
-        <span className={compact ? "" : "hidden sm:inline"}>
-          {compact ? "Connected" : shorten(address)}
-        </span>
+        <span>Disconnect</span>
       </button>
     );
   }
