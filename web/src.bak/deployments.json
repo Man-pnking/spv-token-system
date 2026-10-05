@@ -1,9 +1,0 @@
-{
-  "polygon": {
-    "chainId": 137,
-    "usdt": "0xc2132D05D31c914a87C6611C10748AEb04B58e8F",
-    "spvToken": "0x3d838A7aa293F4371F4C23dD0906FEaCa1b83FB3",
-    "bondingCurve": "0xaB698e133aCf194f9F5470E81a0c999537340F4B",
-    "router": "0xDB3fD54dD51B25aB226955B8DF632D0c01E38fB2"
-  }
-}

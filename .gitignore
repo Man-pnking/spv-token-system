@@ -20,4 +20,4 @@ Thumbs.db
 *.swo
 coverage/
 coverage.json
-typechain-types/
+typechain-types/web/src.bak/
