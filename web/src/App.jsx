@@ -5,7 +5,6 @@ import ScrollProgress from "./components/ScrollProgress";
 import Navbar from "./components/Navbar";
 import QuickNav from "./components/QuickNav";
 import CommandPalette from "./components/CommandPalette";
-import TradeModal from "./components/TradeModal";
 import Hero from "./components/Hero";
 import StatsStrip from "./components/StatsStrip";
 import Intro from "./components/Intro";
@@ -20,7 +19,6 @@ import Footer from "./components/Footer";
 
 export default function App() {
   const [paletteOpen, setPaletteOpen] = useState(false);
-  const [tradeOpen, setTradeOpen] = useState(false);
 
   useEffect(() => {
     const onKey = (e) => {
@@ -44,7 +42,7 @@ export default function App() {
       <CursorGlow />
 
       <div className="frost-layer relative z-10 min-h-screen w-full">
-        <Navbar onOpenPalette={() => setPaletteOpen(true)} />
+        <Navbar />
 
         <main id="main-content" className="w-full" aria-label="Main content">
           <section id="home" aria-label="Hero"><Hero /></section>
@@ -62,13 +60,11 @@ export default function App() {
         <Footer />
       </div>
 
-      <QuickNav onOpenTrade={() => setTradeOpen(true)} />
+      <QuickNav />
       <CommandPalette
         open={paletteOpen}
         onClose={() => setPaletteOpen(false)}
-        onOpenTrade={() => setTradeOpen(true)}
       />
-      <TradeModal open={tradeOpen} onClose={() => setTradeOpen(false)} />
     </div>
   );
 }

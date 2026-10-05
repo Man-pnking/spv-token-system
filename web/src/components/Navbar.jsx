@@ -118,7 +118,6 @@ export default function Navbar() {
           </div>
         </div>
 
-        {/* Price ticker banner — slides in on scroll */}
         <PriceTickerBanner visible={tickerVisible} />
       </div>
 
