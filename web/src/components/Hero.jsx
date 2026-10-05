@@ -4,6 +4,9 @@ import { useParallax } from "../hooks/useParallax";
 import { useMousePosition } from "../hooks/useMousePosition";
 import { useSPVFees } from "../hooks/useSPVFees";
 import WalletButton from "./WalletButton";
+import GraduationProgress from "./GraduationProgress";
+import SPVMark from "./SPVMark";
+import AnimatedNumber from "./AnimatedNumber";
 
 export default function Hero() {
   const scrollY = useParallax();
@@ -11,21 +14,66 @@ export default function Hero() {
   const { priceDisplay, loading } = useSPVFees();
 
   const heroOpacity = Math.max(0, 1 - scrollY / 700);
+  const priceNumber = Number(priceDisplay);
 
   return (
     <div className="relative min-h-screen flex items-center justify-center overflow-hidden pt-32 pb-16">
       <div
-        className="absolute top-[20%] left-[15%] w-3 h-3 rounded-full bg-[#d4af37] shadow-[0_0_40px_#d4af37] animate-float-slow"
-        style={{ transform: `translateY(${scrollY * 0.4}px)` }}
+        className="absolute rounded-full pointer-events-none"
+        style={{
+          width: "min(90vw, 900px)",
+          height: "min(90vw, 900px)",
+          top: "50%",
+          left: "50%",
+          marginLeft: "min(-45vw, -450px)",
+          marginTop: "min(-45vw, -450px)",
+          border: "1px solid rgba(212, 175, 55, 0.06)",
+          transform: `translate(${mouse.x * 6}px, ${mouse.y * 6 + scrollY * 0.05}px)`,
+          transition: "transform 0.4s cubic-bezier(0.16, 1, 0.3, 1)",
+        }}
       />
+
       <div
-        className="absolute bottom-[25%] right-[20%] w-2 h-2 rounded-full bg-[#f4c430] shadow-[0_0_30px_#f4c430] animate-float-medium"
-        style={{ transform: `translateY(${scrollY * 0.25}px)` }}
+        className="absolute rounded-full pointer-events-none"
+        style={{
+          width: "min(60vw, 600px)",
+          height: "min(60vw, 600px)",
+          top: "50%",
+          left: "50%",
+          marginLeft: "min(-30vw, -300px)",
+          marginTop: "min(-30vw, -300px)",
+          border: "1px dashed rgba(212, 175, 55, 0.05)",
+          transform: `translate(${mouse.x * -10}px, ${mouse.y * -10 + scrollY * 0.08}px) rotate(${scrollY * 0.02}deg)`,
+          transition: "transform 0.4s cubic-bezier(0.16, 1, 0.3, 1)",
+        }}
       />
+
       <div
-        className="absolute top-[40%] right-[10%] w-1.5 h-1.5 rounded-full bg-[#7c5cff] shadow-[0_0_20px_#7c5cff] animate-float-fast"
-        style={{ transform: `translateY(${scrollY * 0.55}px)` }}
-      />
+        className="absolute pointer-events-none animate-float-slow"
+        style={{
+          top: "18%",
+          left: "10%",
+          opacity: 0.15,
+          transform: `translate(${mouse.x * -14}px, ${mouse.y * -14 + scrollY * 0.22}px)`,
+          transition: "transform 0.5s cubic-bezier(0.16, 1, 0.3, 1)",
+        }}
+      >
+        <SPVMark size={48} />
+      </div>
+
+      <div
+        className="absolute pointer-events-none text-[#d4af37] animate-float-medium"
+        style={{
+          bottom: "22%",
+          right: "12%",
+          opacity: 0.22,
+          transform: `translate(${mouse.x * 18}px, ${mouse.y * 18 + scrollY * 0.28}px) rotate(45deg)`,
+          transition: "transform 0.5s cubic-bezier(0.16, 1, 0.3, 1)",
+          fontSize: "24px",
+        }}
+      >
+        ◇
+      </div>
 
       <motion.div
         initial={{ opacity: 0, y: 40 }}
@@ -41,21 +89,19 @@ export default function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
-          className="inline-flex items-center gap-3 mb-10 text-xs"
+          className="inline-flex items-center gap-3 mb-10 text-label"
         >
           <span className="w-1.5 h-1.5 rounded-full bg-[#d4af37] animate-pulse" />
-          <span className="text-warm-dim tracking-[0.3em] uppercase">
-            Live on Polygon
-          </span>
+          <span>Live on Polygon</span>
         </motion.div>
 
         <motion.h1
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1.2, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
-          className="text-5xl sm:text-7xl md:text-8xl font-black leading-[0.95] mb-10"
+          className="display-xl mb-10"
         >
-          <span className="gradient-text">Special Purpose Vehicle</span>
+          <span className="shimmer">Special Purpose Vehicle</span>
           <br />
           <span className="text-warm">SPV Token</span>
         </motion.h1>
@@ -64,7 +110,7 @@ export default function Hero() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 0.5 }}
-          className="text-lg sm:text-xl text-warm-dim max-w-2xl mx-auto mb-14 leading-relaxed"
+          className="text-body max-w-2xl mx-auto mb-14"
         >
           SPV starts at 0.01 USDT, mints on every buy, and burns on every sell.
           When the market proves demand, liquidity migrates to QuickSwap and locks forever.
@@ -74,10 +120,10 @@ export default function Hero() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 0.7 }}
-          className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-20"
+          className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-14"
         >
           <WalletButton />
-          <a href="#intro" className="btn-ghost inline-flex items-center gap-2 text-sm">
+          <a href="#intro" className="btn-feedback btn-ghost inline-flex items-center gap-2 text-sm">
             Learn more <ArrowRight className="w-4 h-4" />
           </a>
         </motion.div>
@@ -86,23 +132,35 @@ export default function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 0.9 }}
-          className="inline-flex items-baseline gap-10"
+          className="inline-flex items-baseline gap-10 mb-16"
         >
           <div>
-            <div className="text-[10px] uppercase tracking-[0.3em] text-warm-mute mb-2">
-              Current price
-            </div>
-            <div className="font-mono text-2xl text-warm">
-              {loading ? "..." : `${priceDisplay} USDT`}
+            <div className="text-label mb-2">Current price</div>
+            <div className="text-mono text-2xl text-warm">
+              {loading ? (
+                "..."
+              ) : (
+                <>
+                  <AnimatedNumber value={priceNumber} decimals={6} /> USDT
+                </>
+              )}
             </div>
           </div>
           <div className="w-px h-10 bg-[#d4af37]/20" />
           <div>
-            <div className="text-[10px] uppercase tracking-[0.3em] text-warm-mute mb-2">
-              Initial
-            </div>
-            <div className="font-mono text-2xl text-warm-dim">0.010000 USDT</div>
+            <div className="text-label mb-2">Initial</div>
+            <div className="text-mono text-2xl text-warm-dim">0.010000 USDT</div>
           </div>
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1.2, delay: 1.1 }}
+          className="pt-10"
+        >
+          <div className="divider mb-10" />
+          <GraduationProgress />
         </motion.div>
       </motion.div>
 
@@ -110,13 +168,11 @@ export default function Hero() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1.5, duration: 1 }}
-        className="absolute bottom-10 left-1/2 -translate-x-1/2"
+        className="absolute bottom-6 left-1/2 -translate-x-1/2"
         style={{ opacity: Math.max(0, 1 - scrollY / 400) }}
       >
-        <div className="w-px h-12 bg-gradient-to-b from-transparent via-[#d4af37]/60 to-transparent mx-auto" />
-        <div className="text-[10px] uppercase tracking-[0.3em] text-warm-mute mt-3 text-center">
-          Scroll
-        </div>
+        <div className="w-px h-10 bg-gradient-to-b from-transparent via-[#d4af37]/60 to-transparent mx-auto" />
+        <div className="text-label mt-2 text-center">Scroll</div>
       </motion.div>
     </div>
   );

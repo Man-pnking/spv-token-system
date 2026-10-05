@@ -1,5 +1,5 @@
 import {
-  Github, Twitter, MessageCircle, ExternalLink, Send,
+  Github, Twitter, MessageCircle, ExternalLink, Send, Shield,
 } from "lucide-react";
 import { CONFIG } from "../config";
 import { shorten } from "../utils/format";
@@ -43,10 +43,12 @@ export default function Footer() {
               {[
                 { label: "Home", href: "#home" },
                 { label: "Introduction", href: "#intro" },
+                { label: "What You're Buying", href: "#what" },
                 { label: "Live Stats", href: "#stats" },
                 { label: "Trade", href: "#trade" },
                 { label: "Docs", href: "#docs" },
                 { label: "FAQ", href: "#faq" },
+                { label: "How to Verify", href: "#verify" },
               ].map((item, i) => (
                 <li key={i}>
                   <a href={item.href} className="text-warm-dim hover:text-[#d4af37] transition-colors">
@@ -124,6 +126,18 @@ export default function Footer() {
                 </a>
               </li>
             </ul>
+          </div>
+        </div>
+
+        <div
+          className="rounded-xl px-5 py-4 mb-8 flex items-start gap-3"
+          style={{ background: "rgba(212, 175, 55, 0.03)", border: "1px solid rgba(212, 175, 55, 0.08)" }}
+        >
+          <Shield className="w-4 h-4 text-[#d4af37] shrink-0 mt-0.5" />
+          <div className="text-xs text-warm-dim leading-relaxed">
+            <strong className="text-warm">Verify before you trade.</strong> All three SPV contracts are verified on Polygonscan. Follow the{" "}
+            <a href="#verify" className="text-[#d4af37] hover:text-[#f4c430] transition-colors">verification guide</a>{" "}
+            to independently confirm the deployed code matches the source.
           </div>
         </div>
 

@@ -1,4 +1,5 @@
 import Animated from "./Animated";
+import SectionWatermark from "./SectionWatermark";
 import { Copy, ExternalLink } from "lucide-react";
 import { CONFIG } from "../config";
 
@@ -24,10 +25,8 @@ function CopyAddr({ label, addr }) {
   return (
     <div className="flex items-center justify-between py-4 border-b border-[#d4af37]/10">
       <div className="min-w-0">
-        <div className="text-[10px] uppercase tracking-[0.25em] text-warm-mute mb-1">
-          {label}
-        </div>
-        <div className="font-mono text-xs sm:text-sm truncate text-warm-dim">{addr}</div>
+        <div className="text-label mb-1">{label}</div>
+        <div className="text-mono text-xs sm:text-sm truncate text-warm-dim">{addr}</div>
       </div>
       <div className="flex items-center gap-1 shrink-0 ml-4">
         <button onClick={copy} className="p-2 rounded-lg hover:bg-white/5 transition-colors">
@@ -48,19 +47,19 @@ function CopyAddr({ label, addr }) {
 
 export default function Docs() {
   return (
-    <div className="max-w-4xl mx-auto px-6 py-16">
-      <div className="mb-20">
-        <div className="text-xs uppercase tracking-[0.3em] text-warm-mute mb-4">
-          Documentation
-        </div>
-        <h2 className="text-4xl sm:text-6xl font-black leading-tight">
+    <div className="relative max-w-4xl mx-auto px-6 py-16 overflow-hidden">
+      <SectionWatermark position="bottom-left" size={480} opacity={0.03} rotate={-12} />
+
+      <div className="mb-24">
+        <div className="text-label mb-4">Documentation</div>
+        <h2 className="display-lg">
           Everything about <span className="gradient-text">SPV</span>
         </h2>
       </div>
 
       <Animated variant="up" className="mb-20">
-        <h3 className="text-2xl font-black text-warm mb-4">Dynamic Creator Fee</h3>
-        <p className="text-sm text-warm-dim leading-relaxed mb-8 max-w-3xl">
+        <h3 className="display-md text-warm mb-4">Dynamic Creator Fee</h3>
+        <p className="text-body mb-8 max-w-3xl">
           The creator fee adjusts automatically from 0.5% to 5% based on price and
           volume. It decreases as price rises to reward holders and increases with
           daily volume to capture upside during active trading.
@@ -69,19 +68,19 @@ export default function Docs() {
           <table className="w-full text-sm">
             <thead>
               <tr className="text-warm-mute text-left">
-                <th className="py-3 pr-6 font-normal text-[10px] uppercase tracking-[0.25em]">Scenario</th>
-                <th className="py-3 pr-6 font-normal text-[10px] uppercase tracking-[0.25em]">Price</th>
-                <th className="py-3 pr-6 font-normal text-[10px] uppercase tracking-[0.25em]">Volume</th>
-                <th className="py-3 font-normal text-[10px] uppercase tracking-[0.25em]">Fee</th>
+                <th className="py-3 pr-6 font-normal text-label">Scenario</th>
+                <th className="py-3 pr-6 font-normal text-label">Price</th>
+                <th className="py-3 pr-6 font-normal text-label">Volume</th>
+                <th className="py-3 font-normal text-label">Fee</th>
               </tr>
             </thead>
             <tbody>
               {CREATOR_FEES.map(([s, p, v, f]) => (
                 <tr key={s} className="border-t border-[#d4af37]/10">
                   <td className="py-3 pr-6 text-warm-dim">{s}</td>
-                  <td className="py-3 pr-6 font-mono text-warm-dim">{p}</td>
-                  <td className="py-3 pr-6 font-mono text-warm-dim">{v}</td>
-                  <td className="py-3 font-mono text-[#d4af37]">{f}</td>
+                  <td className="py-3 pr-6 text-mono text-warm-dim">{p}</td>
+                  <td className="py-3 pr-6 text-mono text-warm-dim">{v}</td>
+                  <td className="py-3 text-mono text-[#d4af37]">{f}</td>
                 </tr>
               ))}
             </tbody>
@@ -92,17 +91,15 @@ export default function Docs() {
       <div className="divider mb-20" />
 
       <Animated variant="up" className="mb-20">
-        <h3 className="text-2xl font-black text-warm mb-4">Sell Fee Tiers</h3>
-        <p className="text-sm text-warm-dim leading-relaxed mb-8 max-w-3xl">
+        <h3 className="display-md text-warm mb-4">Sell Fee Tiers</h3>
+        <p className="text-body mb-8 max-w-3xl">
           Sell fees decrease with hold time. Long-term holders pay almost nothing.
         </p>
         <div className="grid grid-cols-2 sm:grid-cols-5 gap-8">
           {SELL_TIERS.map(([t, f]) => (
             <div key={t}>
-              <div className="text-[10px] uppercase tracking-[0.25em] text-warm-mute mb-2">
-                {t}
-              </div>
-              <div className="text-3xl font-black font-mono gradient-text">{f}</div>
+              <div className="text-label mb-2">{t}</div>
+              <div className="text-3xl font-black text-mono gradient-text">{f}</div>
             </div>
           ))}
         </div>
@@ -111,8 +108,8 @@ export default function Docs() {
       <div className="divider mb-20" />
 
       <Animated variant="up" className="mb-20">
-        <h3 className="text-2xl font-black text-warm mb-4">Burn Mechanism</h3>
-        <p className="text-sm text-warm-dim leading-relaxed max-w-3xl">
+        <h3 className="display-md text-warm mb-4">Burn Mechanism</h3>
+        <p className="text-body max-w-3xl">
           Every sell burns 0.5% to 12% of the token amount, scaled by daily volume.
           Burn stops when total supply reaches the supply floor at 10% of peak supply.
           This prevents total supply collapse while keeping deflationary pressure
@@ -123,8 +120,8 @@ export default function Docs() {
       <div className="divider mb-20" />
 
       <Animated variant="up" className="mb-20">
-        <h3 className="text-2xl font-black text-warm mb-4">Migration Triggers</h3>
-        <p className="text-sm text-warm-dim leading-relaxed mb-6 max-w-3xl">
+        <h3 className="display-md text-warm mb-4">Migration Triggers</h3>
+        <p className="text-body mb-6 max-w-3xl">
           The curve migrates to QuickSwap when 2 of 3 conditions are met:
         </p>
         <ul className="space-y-3 text-sm text-warm-dim mb-6">
@@ -132,7 +129,7 @@ export default function Docs() {
           <li className="flex gap-3"><span className="text-[#d4af37]">02</span> Total minted reaches 5,000,000 SPV</li>
           <li className="flex gap-3"><span className="text-[#d4af37]">03</span> Unique buyers reach 500</li>
         </ul>
-        <p className="text-sm text-warm-dim leading-relaxed max-w-3xl">
+        <p className="text-body max-w-3xl">
           Fallback: migration is forced after 90 days if no triggers fire. LP tokens
           are burned to the dead address, making liquidity permanent.
         </p>
@@ -141,7 +138,7 @@ export default function Docs() {
       <div className="divider mb-20" />
 
       <Animated variant="up">
-        <h3 className="text-2xl font-black text-warm mb-6">Contract Addresses</h3>
+        <h3 className="display-md text-warm mb-6">Contract Addresses</h3>
         <div>
           <CopyAddr label="SPV Token" addr={CONFIG.spvToken} />
           <CopyAddr label="Bonding Curve" addr={CONFIG.curve} />

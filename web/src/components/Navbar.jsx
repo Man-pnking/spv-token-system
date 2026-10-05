@@ -1,21 +1,26 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import WalletButton from "./WalletButton";
+import SPVMark from "./SPVMark";
 
 const LINKS = [
   { href: "#home", label: "Home" },
   { href: "#intro", label: "Introduction" },
+  { href: "#what", label: "What You're Buying" },
   { href: "#stats", label: "Stats" },
   { href: "#how", label: "How it Works" },
   { href: "#trade", label: "Trade" },
   { href: "#docs", label: "Docs" },
   { href: "#faq", label: "FAQ" },
+  { href: "#verify", label: "Verify" },
 ];
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
+  const menuRef = useRef(null);
+  const toggleRef = useRef(null);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 30);
@@ -26,6 +31,19 @@ export default function Navbar() {
   useEffect(() => {
     document.body.style.overflow = open ? "hidden" : "";
     return () => { document.body.style.overflow = ""; };
+  }, [open]);
+
+  // Close on Escape and return focus to the toggle button
+  useEffect(() => {
+    if (!open) return;
+    const onKey = (e) => {
+      if (e.key === "Escape") {
+        setOpen(false);
+        toggleRef.current?.focus();
+      }
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
   }, [open]);
 
   return (
@@ -45,37 +63,32 @@ export default function Navbar() {
             boxShadow: "0 8px 32px rgba(0, 0, 0, 0.25)",
           }}
         >
-          <a href="#home" className="flex items-center gap-2 shrink-0">
-            <div
-              className="w-9 h-9 rounded-xl flex items-center justify-center font-black text-xs"
-              style={{
-                background: "linear-gradient(135deg, #d4af37 0%, #8a6f22 100%)",
-                color: "#0a0705",
-              }}
-            >
-              SPV
-            </div>
-            <span className="font-medium text-base hidden md:block" style={{ color: "rgba(245, 239, 224, 0.85)" }}>
+          <a href="#home" className="flex items-center gap-3 shrink-0" aria-label="SPV home">
+            <SPVMark size={32} />
+            <span className="hidden md:block text-sm font-medium text-warm">
               Special Purpose Vehicle
             </span>
-            <span className="font-medium text-base md:hidden" style={{ color: "rgba(245, 239, 224, 0.85)" }}>
+            <span className="md:hidden text-sm font-medium text-warm">
               SPV
             </span>
           </a>
 
-          <nav className="hidden lg:flex items-center gap-7">
-            {LINKS.map((l) => (
-              <a
-                key={l.href}
-                href={l.href}
-                className="text-sm transition-colors"
-                style={{ color: "rgba(245, 239, 224, 0.55)" }}
-                onMouseEnter={(e) => { e.currentTarget.style.color = "rgba(212, 175, 55, 0.9)"; }}
-                onMouseLeave={(e) => { e.currentTarget.style.color = "rgba(245, 239, 224, 0.55)"; }}
-              >
-                {l.label}
-              </a>
-            ))}
+          <nav className="hidden xl:block" aria-label="Primary">
+            <ul className="flex items-center gap-5">
+              {LINKS.map((l) => (
+                <li key={l.href}>
+                  <a
+                    href={l.href}
+                    className="text-sm transition-colors whitespace-nowrap"
+                    style={{ color: "rgba(245, 239, 224, 0.55)" }}
+                    onMouseEnter={(e) => { e.currentTarget.style.color = "rgba(212, 175, 55, 0.9)"; }}
+                    onMouseLeave={(e) => { e.currentTarget.style.color = "rgba(245, 239, 224, 0.55)"; }}
+                  >
+                    {l.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
           </nav>
 
           <div className="flex items-center gap-2">
@@ -83,9 +96,12 @@ export default function Navbar() {
               <WalletButton />
             </div>
             <button
+              ref={toggleRef}
               onClick={() => setOpen((v) => !v)}
-              className="lg:hidden rounded-xl p-2.5"
-              aria-label="Menu"
+              className="xl:hidden rounded-xl p-2.5"
+              aria-label={open ? "Close menu" : "Open menu"}
+              aria-expanded={open}
+              aria-controls="mobile-menu"
               style={{
                 background: "rgba(255, 255, 255, 0.03)",
                 border: "1px solid rgba(212, 175, 55, 0.08)",
@@ -106,18 +122,24 @@ export default function Navbar() {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.25 }}
-              className="lg:hidden fixed inset-0 z-40"
+              className="xl:hidden fixed inset-0 z-40"
               style={{ background: "rgba(0,0,0,0.5)", backdropFilter: "blur(20px)" }}
               onClick={() => setOpen(false)}
+              aria-hidden="true"
             />
 
             <motion.div
               key="menu"
+              id="mobile-menu"
+              ref={menuRef}
+              role="dialog"
+              aria-modal="true"
+              aria-label="Navigation"
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}
               transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
-              className="lg:hidden fixed top-24 left-4 right-4 z-50 rounded-2xl p-5"
+              className="xl:hidden fixed top-24 left-4 right-4 z-50 rounded-2xl p-5"
               style={{
                 background: "rgba(15, 11, 7, 0.7)",
                 backdropFilter: "blur(50px) saturate(140%)",
@@ -126,21 +148,24 @@ export default function Navbar() {
                 boxShadow: "0 20px 60px rgba(0, 0, 0, 0.5)",
               }}
             >
-              <div className="space-y-1 mb-5">
-                {LINKS.map((l) => (
-                  <a
-                    key={l.href}
-                    href={l.href}
-                    onClick={() => setOpen(false)}
-                    className="block px-4 py-3 rounded-xl transition-colors text-sm"
-                    style={{ color: "rgba(245, 239, 224, 0.7)" }}
-                    onMouseEnter={(e) => { e.currentTarget.style.color = "rgba(212, 175, 55, 0.9)"; e.currentTarget.style.background = "rgba(212, 175, 55, 0.04)"; }}
-                    onMouseLeave={(e) => { e.currentTarget.style.color = "rgba(245, 239, 224, 0.7)"; e.currentTarget.style.background = "transparent"; }}
-                  >
-                    {l.label}
-                  </a>
-                ))}
-              </div>
+              <nav aria-label="Mobile">
+                <ul className="space-y-1 mb-5">
+                  {LINKS.map((l) => (
+                    <li key={l.href}>
+                      <a
+                        href={l.href}
+                        onClick={() => setOpen(false)}
+                        className="block px-4 py-3 rounded-xl transition-colors text-sm"
+                        style={{ color: "rgba(245, 239, 224, 0.7)" }}
+                        onMouseEnter={(e) => { e.currentTarget.style.color = "rgba(212, 175, 55, 0.9)"; e.currentTarget.style.background = "rgba(212, 175, 55, 0.04)"; }}
+                        onMouseLeave={(e) => { e.currentTarget.style.color = "rgba(245, 239, 224, 0.7)"; e.currentTarget.style.background = "transparent"; }}
+                      >
+                        {l.label}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </nav>
               <div className="pt-4" style={{ borderTop: "1px solid rgba(212, 175, 55, 0.08)" }}>
                 <WalletButton full />
               </div>
