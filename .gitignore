@@ -21,3 +21,6 @@ apps/chat/.next/
 apply-*.mjs
 remove-*.mjs
 setup-*.mjs
+
+# Local Ganache database
+contracts/ganache-db/
