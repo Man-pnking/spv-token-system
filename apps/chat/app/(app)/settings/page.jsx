@@ -1,10 +1,10 @@
 import { redirect } from "next/navigation";
 import Link from "next/link";
 import { createClient } from "@/lib/supabase-server";
+import ProfileForm from "@/components/ProfileForm";
 import SignOutButton from "@/components/SignOutButton";
-import Avatar from "@/components/Avatar";
 
-export default async function FeedPage() {
+export default async function SettingsPage() {
   const supabase = createClient();
   const { data: { user } } = await supabase.auth.getUser();
   if (!user) redirect("/sign-in");
@@ -21,21 +21,21 @@ export default async function FeedPage() {
     <div className="min-h-screen px-6 py-12">
       <div className="max-w-2xl mx-auto">
         <div className="flex items-center justify-between mb-8">
-          <Link href={"/profile/" + profile.username} className="flex items-center gap-3">
-            <Avatar url={profile.avatar_url} username={profile.username} size={40} />
-            <div>
-              <div className="text-label mb-1">SPV Chat</div>
-              <div className="text-warm text-sm font-mono">@{profile.username}</div>
-            </div>
+          <Link href={"/profile/" + profile.username} className="text-label hover:text-[#00ffff]">
+            ← Back to profile
           </Link>
           <SignOutButton />
         </div>
 
+        <h1 className="display-lg gradient-text mb-8">Settings</h1>
+
         <div className="glass p-6">
-          <div className="text-warm text-sm">Level 7 complete. Profiles working.</div>
-          <div className="text-warm-dim text-xs mt-2">
-            Level 8 adds the app shell. Level 9 adds the feed.
-          </div>
+          <ProfileForm existing={profile} />
+        </div>
+
+        <div className="glass p-6 mt-6">
+          <div className="text-label mb-2">Email</div>
+          <div className="text-mono text-sm text-warm-dim">{user.email}</div>
         </div>
       </div>
     </div>
