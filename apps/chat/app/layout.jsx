@@ -1,4 +1,5 @@
 import "./globals.css";
+import { AuthProvider } from "@/components/AuthProvider";
 
 export const metadata = {
   title: "SPV Chat",
@@ -16,7 +17,9 @@ export default function RootLayout({ children }) {
           rel="stylesheet"
         />
       </head>
-      <body>{children}</body>
+      <body>
+        <AuthProvider>{children}</AuthProvider>
+      </body>
     </html>
   );
 }
