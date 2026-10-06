@@ -11,6 +11,8 @@ export default function ProfileForm({ existing, isSetup = false }) {
   const [userId, setUserId] = useState(null);
   const [username, setUsername] = useState(existing?.username || "");
   const [bio, setBio] = useState(existing?.bio || "");
+  const [location, setLocation] = useState(existing?.location || "");
+  const [website, setWebsite] = useState(existing?.website || "");
   const [avatarUrl, setAvatarUrl] = useState(existing?.avatar_url || null);
   const [error, setError] = useState(null);
   const [saving, setSaving] = useState(false);
@@ -39,11 +41,21 @@ export default function ProfileForm({ existing, isSetup = false }) {
       const { available } = await checkUsernameAvailable(username, userId);
       if (!available) throw new Error("Username already taken");
 
-      const { error: saveError } = await upsertProfile({
-        username,
-        bio,
-        avatarUrl,
-      });
+      const { data: { user } } = await supabase.auth.getUser();
+
+      const { error: saveError } = await supabase
+        .from("users")
+        .upsert({
+          id: user.id,
+          wallet_address: user.email,
+          username: username.toLowerCase(),
+          bio: bio || "",
+          location: location || "",
+          website: website || "",
+          avatar_url: avatarUrl,
+          updated_at: new Date().toISOString(),
+        }, { onConflict: "id" });
+
       if (saveError) throw saveError;
 
       router.push("/profile/" + username.toLowerCase());
@@ -91,6 +103,30 @@ export default function ProfileForm({ existing, isSetup = false }) {
           className="w-full bg-transparent border border-[#00ffff]/20 rounded-lg px-3 py-2 text-sm outline-none focus:border-[#00ffff]/60 transition-colors resize-none"
         />
         <div className="text-[10px] text-warm-mute mt-1">{bio.length} / 160</div>
+      </div>
+
+      <div>
+        <label className="text-xs text-warm-dim block mb-1">Location</label>
+        <input
+          type="text"
+          value={location}
+          onChange={(e) => setLocation(e.target.value)}
+          placeholder="City, Country"
+          maxLength={40}
+          className="w-full bg-transparent border-b border-[#00ffff]/20 px-0 py-2 text-sm outline-none focus:border-[#00ffff]/60 transition-colors"
+        />
+      </div>
+
+      <div>
+        <label className="text-xs text-warm-dim block mb-1">Website</label>
+        <input
+          type="text"
+          value={website}
+          onChange={(e) => setWebsite(e.target.value)}
+          placeholder="yourdomain.com"
+          maxLength={80}
+          className="w-full bg-transparent border-b border-[#00ffff]/20 px-0 py-2 text-sm outline-none focus:border-[#00ffff]/60 transition-colors"
+        />
       </div>
 
       {error && <div className="text-xs text-red-400">{error}</div>}

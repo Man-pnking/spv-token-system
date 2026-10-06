@@ -1,8 +1,7 @@
 import { redirect } from "next/navigation";
-import Link from "next/link";
 import { createClient } from "@/lib/supabase-server";
-import SignOutButton from "@/components/SignOutButton";
-import Avatar from "@/components/Avatar";
+import PostComposer from "@/components/PostComposer";
+import Feed from "@/components/Feed";
 
 export default async function FeedPage() {
   const supabase = createClient();
@@ -17,27 +16,27 @@ export default async function FeedPage() {
 
   if (!profile) redirect("/profile/setup");
 
-  return (
-    <div className="min-h-screen px-6 py-12">
-      <div className="max-w-2xl mx-auto">
-        <div className="flex items-center justify-between mb-8">
-          <Link href={"/profile/" + profile.username} className="flex items-center gap-3">
-            <Avatar url={profile.avatar_url} username={profile.username} size={40} />
-            <div>
-              <div className="text-label mb-1">SPV Chat</div>
-              <div className="text-warm text-sm font-mono">@{profile.username}</div>
-            </div>
-          </Link>
-          <SignOutButton />
-        </div>
+  const { data: posts } = await supabase
+    .from("posts")
+    .select(`
+      id, content, image_url, created_at, author_id,
+      users:author_id ( id, username, avatar_url )
+    `)
+    .is("parent_id", null)
+    .order("created_at", { ascending: false })
+    .limit(50);
 
-        <div className="glass p-6">
-          <div className="text-warm text-sm">Level 7 complete. Profiles working.</div>
-          <div className="text-warm-dim text-xs mt-2">
-            Level 8 adds the app shell. Level 9 adds the feed.
-          </div>
+  return (
+    <div className="max-w-2xl mx-auto">
+      <div className="sticky top-0 z-20 backdrop-blur-xl border-b border-[#00ffff]/10"
+        style={{ background: "rgba(5, 5, 16, 0.92)" }}>
+        <div className="px-4 py-3">
+          <h1 className="text-warm font-bold text-lg">Home</h1>
         </div>
       </div>
+
+      <PostComposer profile={profile} />
+      <Feed posts={posts || []} emptyMessage="Be the first to post." />
     </div>
   );
 }
