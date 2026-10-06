@@ -138,7 +138,7 @@ export default function HowToVerify() {
             href={`${CONFIG.explorer}/token/${CONFIG.spvToken}`}
             target="_blank"
             rel="noopener noreferrer"
-            className="block py-4 px-5 rounded-xl transition-colors hover:bg-white/[0.02]"
+            className="block py-4 px-6 rounded-xl transition-colors hover:bg-white/[0.02]"
             style={{ border: "1px solid rgba(0, 255, 255, 0.1)" }}
           >
             <div className="text-label mb-1">SPV Token</div>
@@ -150,7 +150,7 @@ export default function HowToVerify() {
             href={`${CONFIG.explorer}/address/${CONFIG.curve}`}
             target="_blank"
             rel="noopener noreferrer"
-            className="block py-4 px-5 rounded-xl transition-colors hover:bg-white/[0.02]"
+            className="block py-4 px-6 rounded-xl transition-colors hover:bg-white/[0.02]"
             style={{ border: "1px solid rgba(0, 255, 255, 0.1)" }}
           >
             <div className="text-label mb-1">Bonding Curve</div>
@@ -162,7 +162,7 @@ export default function HowToVerify() {
             href={`${CONFIG.explorer}/address/${CONFIG.router}`}
             target="_blank"
             rel="noopener noreferrer"
-            className="block py-4 px-5 rounded-xl transition-colors hover:bg-white/[0.02]"
+            className="block py-4 px-6 rounded-xl transition-colors hover:bg-white/[0.02]"
             style={{ border: "1px solid rgba(0, 255, 255, 0.1)" }}
           >
             <div className="text-label mb-1">Router</div>
