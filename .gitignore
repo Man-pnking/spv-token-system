@@ -29,3 +29,7 @@ apps/chat/.next/
 
 # Next.js build cache
 apps/chat/.next/
+
+# One-shot setup scripts
+apps/chat/apply-*.mjs
+apps/chat/remove-*.mjs
