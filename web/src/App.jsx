@@ -17,9 +17,12 @@ import Docs from "./components/Docs";
 import FAQ from "./components/FAQ";
 import HowToVerify from "./components/HowToVerify";
 import Footer from "./components/Footer";
+import { useMobileReconnect } from "./hooks/useMobileReconnect";
 
 export default function App() {
   const [paletteOpen, setPaletteOpen] = useState(false);
+
+  useMobileReconnect();
 
   useEffect(() => {
     const onKey = (e) => {
