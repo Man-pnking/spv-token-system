@@ -24,3 +24,11 @@ setup-*.mjs
 
 # Local Ganache database
 contracts/ganache-db/
+
+# One-shot setup scripts
+apply-*.mjs
+remove-*.mjs
+fix-*.mjs
+check-*.mjs
+hide-*.mjs
+add-*.mjs
