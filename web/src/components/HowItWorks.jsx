@@ -14,7 +14,7 @@ export default function HowItWorks() {
     <div className="max-w-5xl mx-auto px-6 py-16">
       <Stagger delay={0} stagger={120} className="mb-16">
         <Animated variant="up">
-          <SectionLabel current={9} total={9} title="How it works" />
+          <SectionLabel current={4} total={8} title="How it works" />
         </Animated>
         <Animated variant="up">
           <h2 className="display-lg mt-6">

@@ -7,7 +7,6 @@ import Navbar from "./components/Navbar";
 import QuickNav from "./components/QuickNav";
 import CommandPalette from "./components/CommandPalette";
 import Hero from "./components/Hero";
-import StatsStrip from "./components/StatsStrip";
 import Intro from "./components/Intro";
 import WhatYoureBuying from "./components/WhatYoureBuying";
 import CurveStats from "./components/CurveStats";
@@ -52,10 +51,6 @@ export default function App() {
         <main id="main-content" className="w-full" aria-label="Main content">
           <section id="home" aria-label="Hero">
             <Hero />
-          </section>
-
-          <section id="stripped" aria-label="Key stats">
-            <StatsStrip />
           </section>
 
           <section id="intro" aria-label="Introduction">

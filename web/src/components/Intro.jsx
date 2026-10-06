@@ -34,7 +34,7 @@ export default function Intro() {
     <div className="max-w-5xl mx-auto px-6 py-16">
       <Stagger delay={0} stagger={120} className="mb-20">
         <Animated variant="up">
-          <SectionLabel current={2} total={9} title="What is SPV" />
+          <SectionLabel current={1} total={8} title="What is SPV" />
         </Animated>
         <Animated variant="up">
           <h2 className="display-lg mt-6 mb-10">
@@ -43,11 +43,9 @@ export default function Intro() {
         </Animated>
         <Animated variant="up">
           <p className="text-body max-w-3xl">
-            SPV (Special Purpose Vehicle) is a mint-on-demand token on Polygon. Every buy
-            mints new tokens. Every sell burns them. The price is set by a bonding curve
-            — a mathematical formula that adjusts price as supply grows. When the market
-            proves real demand, liquidity automatically migrates to a public DEX and locks
-            forever.
+            SPV is a mint-on-demand token on Polygon. Buys mint, sells burn, price is set
+            by a bonding curve. On graduation, liquidity migrates to QuickSwap and locks
+            permanently.
           </p>
         </Animated>
       </Stagger>

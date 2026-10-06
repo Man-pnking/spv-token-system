@@ -26,7 +26,7 @@ export default function WhatYoureBuying() {
 
       <Stagger delay={0} stagger={110} className="mb-16">
         <Animated variant="up">
-          <SectionLabel current={3} total={9} title="What you are buying" />
+          <SectionLabel current={2} total={8} title="What you are buying" />
         </Animated>
         <Animated variant="up">
           <h2 className="display-lg mt-6">
@@ -35,9 +35,7 @@ export default function WhatYoureBuying() {
         </Animated>
         <Animated variant="up">
           <p className="text-body max-w-3xl mt-8">
-            Before you buy SPV, you should understand exactly what the token is,
-            how its price is set, and what it is not. Nothing on this page is
-            financial advice.
+            What SPV is, how its price is set, and what it is not. Not financial advice.
           </p>
         </Animated>
       </Stagger>

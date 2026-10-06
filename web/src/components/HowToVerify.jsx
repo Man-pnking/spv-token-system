@@ -51,9 +51,7 @@ export default function HowToVerify() {
           Do not <span className="gradient-text">trust</span> us. Verify.
         </h2>
         <p className="text-body max-w-3xl mt-8">
-          Every claim on this site can be checked on Polygonscan. Below are the six
-          steps anyone can take to confirm that the SPV contracts do exactly what
-          this site says they do. If you find a discrepancy, do not buy.
+          Every claim on this site can be checked on Polygonscan.
         </p>
       </Animated>
 

@@ -20,7 +20,7 @@ export default function CurveStats() {
   return (
     <div className="max-w-6xl mx-auto px-6 py-16">
       <div className="mb-20">
-        <SectionLabel current={7} total={9} title="Live Curve Stats" />
+        <SectionLabel current={3} total={8} title="Live Curve Stats" />
         <h2 className="text-4xl sm:text-6xl font-black leading-tight mt-6">
           Numbers from the <span className="gradient-text">chain</span>
         </h2>
@@ -87,7 +87,7 @@ export default function CurveStats() {
       </div>
 
       <div className="mt-24">
-        <SectionLabel current={8} total={9} title="Migration Progress" />
+        <SectionLabel current={3} total={8} title="Migration Progress" />
         <div className="flex items-baseline justify-between mb-8 mt-6">
           <div className="text-5xl sm:text-7xl font-black gradient-text">
             <AnimatedNumber value={s.progress} decimals={1} suffix="%" />

@@ -56,8 +56,7 @@ export default function Docs() {
           Everything about <span className="gradient-text">SPV</span>
         </h2>
         <p className="text-body mt-6 max-w-3xl">
-          Every number on this page is enforced on-chain. Nothing here is a
-          promise — it is the current state of the contracts.
+          Every number on this page is enforced on-chain.
         </p>
       </div>
 

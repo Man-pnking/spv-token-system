@@ -88,8 +88,7 @@ export default function Hero() {
           transition={{ duration: 1, delay: 0.4 }}
           className="text-body max-w-2xl mx-auto mb-14"
         >
-          Your exit fee drops by 30x the longer you hold. Real demand triggers
-          migration to QuickSwap — where liquidity locks forever.
+          Hold longer, exit cheaper. Real demand migrates liquidity to QuickSwap — locked forever.
         </motion.p>
 
         <motion.div

@@ -87,8 +87,7 @@ export default function FAQ() {
           Frequently <span className="gradient-text">asked</span>
         </h2>
         <p className="text-warm-dim mt-6 max-w-2xl">
-          The hard questions first. If a project will not answer them, do not
-          buy the token.
+          The hard questions first.
         </p>
       </Animated>
 
