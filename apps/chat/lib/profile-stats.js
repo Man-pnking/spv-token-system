@@ -1,6 +1,6 @@
 import { supabase } from "./supabase";
 
-export async function getUserStats(userId) {
+export async function getProfileStats(userId) {
   const [
     { count: tweets },
     { count: following },

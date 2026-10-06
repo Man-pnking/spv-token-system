@@ -8,6 +8,7 @@ import { useGasEstimate } from "../hooks/useGasEstimate";
 import { CONFIG } from "../config";
 import { formatUsdt, formatSpv } from "../utils/format";
 import AnimatedNumber from "./AnimatedNumber";
+import AddTokenButton from "./AddTokenButton";
 
 const MIN_USDT = 0.01;
 const MIN_SPV = 1;
@@ -285,15 +286,18 @@ export default function TradePanel() {
       )}
 
       {t.txHash && (
-        <a
-          href={`${CONFIG.explorer}/tx/${t.txHash}`}
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label="View transaction on Polygonscan"
-          className="flex items-center justify-center gap-2 text-xs text-warm-dim mt-6 hover:text-[#00ffff]"
-        >
-          View on Polygonscan <ExternalLink className="w-3 h-3" />
-        </a>
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-6">
+          <a
+            href={`${CONFIG.explorer}/tx/${t.txHash}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="View transaction on Polygonscan"
+            className="flex items-center gap-2 text-xs text-warm-dim hover:text-[#00ffff]"
+          >
+            View on Polygonscan <ExternalLink className="w-3 h-3" />
+          </a>
+          {t.mode === "buy" && <AddTokenButton compact />}
+        </div>
       )}
     </div>
   );

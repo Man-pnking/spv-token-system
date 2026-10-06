@@ -23,7 +23,7 @@ export async function getProfileByUsername(username) {
   return { profile: data, error };
 }
 
-export async function upsertProfile({ username, bio, avatarUrl }) {
+export async function upsertProfile({ username, bio, website, avatarUrl }) {
   const { data: { user } } = await supabase.auth.getUser();
   if (!user) return { profile: null, error: new Error("Not authenticated") };
 
@@ -32,6 +32,7 @@ export async function upsertProfile({ username, bio, avatarUrl }) {
     wallet_address: user.email,
     username: username.toLowerCase(),
     bio: bio || "",
+    website: website || null,
     avatar_url: avatarUrl || null,
     updated_at: new Date().toISOString(),
   };

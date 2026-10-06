@@ -4,7 +4,9 @@ import ProfileDesktopHeader from "@/components/ProfileDesktopHeader";
 import ProfileMobileCard from "@/components/ProfileMobileCard";
 import ProfileTabs from "@/components/ProfileTabs";
 import Feed from "@/components/Feed";
-import { getFollowCounts } from "@/lib/follows";
+import { getProfileStats } from "@/lib/profile-stats";
+import { getLikeCountsForPosts } from "@/lib/likes";
+import { getReplyCountsForPosts } from "@/lib/replies";
 
 export default async function ProfilePage({ params }) {
   const supabase = createClient();
@@ -20,7 +22,7 @@ export default async function ProfilePage({ params }) {
   if (!profile) notFound();
 
   const isMe = user.id === profile.id;
-  const counts = await getFollowCounts(profile.id);
+  const stats = await getProfileStats(profile.id);
 
   const { data: posts } = await supabase
     .from("posts")
@@ -33,16 +35,33 @@ export default async function ProfilePage({ params }) {
     .order("created_at", { ascending: false })
     .limit(50);
 
+  const postIds = (posts || []).map((p) => p.id);
+  const likeCounts = await getLikeCountsForPosts(postIds);
+  const replyCounts = await getReplyCountsForPosts(postIds);
+
   return (
     <div>
-      <ProfileDesktopHeader profile={profile} isMe={isMe} counts={counts} />
-      <ProfileMobileCard profile={profile} isMe={isMe} counts={counts} />
+      {/* Desktop — two column layout */}
+      <ProfileDesktopHeader
+        profile={profile}
+        isMe={isMe}
+        stats={stats}
+        currentUserId={user.id}
+        posts={posts || []}
+        likeCounts={likeCounts}
+        replyCounts={replyCounts}
+      />
 
-      <div className="mt-2 md:mt-0">
+      {/* Mobile — card layout + feed below */}
+      <div className="md:hidden">
+        <ProfileMobileCard profile={profile} isMe={isMe} counts={stats} />
         <ProfileTabs />
         <Feed
           posts={posts || []}
-          emptyMessage={isMe ? "You haven't posted yet. Go to the feed to post." : "No posts yet."}
+          currentUserId={user.id}
+          likeCounts={likeCounts}
+          replyCounts={replyCounts}
+          emptyMessage={isMe ? "You haven't posted yet." : "No posts yet."}
         />
       </div>
     </div>

@@ -1,6 +1,6 @@
 import PostCard from "./PostCard";
 
-export default function Feed({ posts, emptyMessage }) {
+export default function Feed({ posts, emptyMessage, currentUserId, likeCounts = {}, replyCounts = {} }) {
   if (!posts || posts.length === 0) {
     return (
       <div className="px-6 py-16 text-center">
@@ -15,7 +15,13 @@ export default function Feed({ posts, emptyMessage }) {
   return (
     <div>
       {posts.map((post) => (
-        <PostCard key={post.id} post={post} />
+        <PostCard
+          key={post.id}
+          post={post}
+          currentUserId={currentUserId}
+          likeCount={likeCounts[post.id] || 0}
+          replyCount={replyCounts[post.id] || 0}
+        />
       ))}
     </div>
   );

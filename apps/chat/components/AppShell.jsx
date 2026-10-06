@@ -13,7 +13,7 @@ export default function AppShell({ profile, children }) {
 
         <div className="flex-1 min-w-0 flex flex-col">
           <DesktopTopNav />
-          <main className="flex-1 pb-20 md:pb-0">
+          <main className="flex-1 pb-24 md:pb-0">
             {children}
           </main>
         </div>

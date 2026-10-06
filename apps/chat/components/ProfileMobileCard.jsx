@@ -1,3 +1,5 @@
+"use client";
+
 import Link from "next/link";
 import { ArrowLeft, MessageCircle, UserPlus, UserCheck } from "lucide-react";
 import { useEffect, useState } from "react";
@@ -81,7 +83,6 @@ export default function ProfileMobileCard({ profile, isMe, counts }) {
 
   return (
     <div className="md:hidden px-4 pt-4 pb-6">
-      {/* Back link */}
       <div className="flex items-center gap-3 mb-4">
         <Link href="/feed" className="p-2 rounded-full hover:bg-white/5 transition-colors">
           <ArrowLeft className="w-5 h-5 text-warm" />
@@ -89,14 +90,10 @@ export default function ProfileMobileCard({ profile, isMe, counts }) {
         <span className="text-warm-mute text-sm">Profile</span>
       </div>
 
-      {/* Card */}
       <div className="relative rounded-3xl overflow-hidden shadow-2xl">
-        {/* Banner */}
         <div className="h-28 w-full" style={{ background: bannerGradient }} />
 
-        {/* White lower body */}
         <div className="relative bg-white px-5 pt-16 pb-5">
-          {/* Avatar overlapping */}
           <div
             className="absolute -top-14 left-5 rounded-full p-1"
             style={{ background: "#ffffff" }}
@@ -106,7 +103,6 @@ export default function ProfileMobileCard({ profile, isMe, counts }) {
             </div>
           </div>
 
-          {/* Name + handle */}
           <div className="mb-4">
             <h1 className="text-2xl font-bold text-black leading-tight">
               {profile.username}
@@ -114,14 +110,12 @@ export default function ProfileMobileCard({ profile, isMe, counts }) {
             <div className="text-gray-500 text-sm">@{profile.username}</div>
           </div>
 
-          {/* Bio */}
           {profile.bio && (
             <p className="text-gray-700 text-sm leading-relaxed mb-4 whitespace-pre-wrap">
               {profile.bio}
             </p>
           )}
 
-          {/* Stats */}
           <div className="flex items-center gap-6 text-sm mb-5">
             <div>
               <span className="text-black font-bold">{counts.following}</span>{" "}
@@ -133,7 +127,6 @@ export default function ProfileMobileCard({ profile, isMe, counts }) {
             </div>
           </div>
 
-          {/* Action row */}
           <div className="flex items-center gap-3">
             {isMe ? (
               <Link
