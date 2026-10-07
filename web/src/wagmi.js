@@ -1,12 +1,9 @@
 import { createAppKit } from "@reown/appkit/react";
 import { WagmiAdapter } from "@reown/appkit-adapter-wagmi";
 import { polygon, polygonAmoy, mainnet } from "@reown/appkit/networks";
+import { http } from "wagmi";
 
-const projectId = import.meta.env.VITE_WC_PROJECT_ID;
-
-if (!projectId) {
-  console.warn("VITE_WC_PROJECT_ID is missing - WalletConnect will not work");
-}
+const projectId = "51cd3b45476208218ad7bf80015380d9";
 
 const metadata = {
   name: "SPV Token",
@@ -17,22 +14,25 @@ const metadata = {
 
 const networks = [polygon, polygonAmoy, mainnet];
 
+const transports = {
+  [polygon.id]: http("https://polygon-rpc.com"),
+  [polygonAmoy.id]: http("https://rpc-amoy.polygon.technology"),
+  [mainnet.id]: http("https://eth.llamarpc.com"),
+};
+
 export const wagmiAdapter = new WagmiAdapter({
   networks,
-  projectId: projectId || "missing",
+  projectId,
   ssr: false,
+  transports,
 });
 
 createAppKit({
   adapters: [wagmiAdapter],
   networks,
-  projectId: projectId || "missing",
+  projectId,
   metadata,
-  features: {
-    analytics: false,
-    email: false,
-    socials: false,
-  },
+  features: { analytics: false, email: false, socials: false },
   themeMode: "dark",
   themeVariables: {
     "--w3m-accent": "#7c5cff",
