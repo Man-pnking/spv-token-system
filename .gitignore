@@ -46,3 +46,5 @@ raccoon-*.txt
 # Raccoon vercel fix artifacts
 raccoon-vercel-fix*.txt
 *.bak.*
+# Raccoon services artifacts
+raccoon-services*.txt
