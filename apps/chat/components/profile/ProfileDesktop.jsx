@@ -1,14 +1,14 @@
 import Link from "next/link";
 import { ArrowLeft, Share2, MoreHorizontal } from "lucide-react";
-import Avatar from "./Avatar";
-import ProfileActions from "./ProfileActions";
-import ProfileStatsRow from "./ProfileStatsRow";
-import ProfileAbout from "./ProfileAbout";
-import ProfileTabs from "./ProfileTabs";
-import Feed from "./Feed";
+import Avatar from "../Avatar";
+import ProfileActions from "../ProfileActions";
+import ProfileStatsRow from "../ProfileStatsRow";
+import ProfileAbout from "../ProfileAbout";
+import ProfileTabs from "../ProfileTabs";
+import FeedDesktop from "../feed/FeedDesktop";
 import { gradientForUsername } from "@/lib/colors";
 
-export default function ProfileDesktopHeader({
+export default function ProfileDesktop({
   profile,
   isMe,
   stats,
@@ -20,7 +20,7 @@ export default function ProfileDesktopHeader({
   const gradient = gradientForUsername(profile.username);
 
   return (
-    <div className="hidden md:block max-w-3xl mx-auto border-x border-white/5">
+    <div className="max-w-3xl mx-auto border-x border-white/5">
       <div className="relative h-52" style={{ background: gradient }}>
         <div className="absolute top-3 left-4 right-4 flex items-center justify-between">
           <Link
@@ -30,21 +30,14 @@ export default function ProfileDesktopHeader({
             <ArrowLeft className="w-4 h-4 text-white" />
           </Link>
           <div className="flex items-center gap-2">
-            <button
-              className="w-9 h-9 rounded-full bg-black/40 backdrop-blur flex items-center justify-center"
-              aria-label="Share"
-            >
+            <button className="w-9 h-9 rounded-full bg-black/40 backdrop-blur flex items-center justify-center">
               <Share2 className="w-4 h-4 text-white" />
             </button>
-            <button
-              className="w-9 h-9 rounded-full bg-black/40 backdrop-blur flex items-center justify-center"
-              aria-label="More"
-            >
+            <button className="w-9 h-9 rounded-full bg-black/40 backdrop-blur flex items-center justify-center">
               <MoreHorizontal className="w-4 h-4 text-white" />
             </button>
           </div>
         </div>
-
         <div className="absolute -bottom-14 left-6">
           <div className="rounded-full p-1 bg-[#050510]">
             <Avatar url={profile.avatar_url} username={profile.username} size={112} />
@@ -75,13 +68,11 @@ export default function ProfileDesktopHeader({
       </div>
 
       <div className="border-t border-dashed border-white/10 mx-6" />
-
       <ProfileAbout profile={profile} />
 
-      <div className="border-t border-white/10" />
-
+      <div className="border-t border-white/10 mt-2" />
       <ProfileTabs />
-      <Feed
+      <FeedDesktop
         posts={posts || []}
         currentUserId={currentUserId}
         likeCounts={likeCounts}

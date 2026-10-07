@@ -26,9 +26,13 @@ setup-*.mjs
 contracts/ganache-db/
 
 # One-shot setup scripts
-apply-*.mjs
-remove-*.mjs
 fix-*.mjs
 check-*.mjs
 hide-*.mjs
 add-*.mjs
+# Audit & recon scripts (local only, never commit)
+step*-*.sh
+step*-*.txt
+# Throwaway refactor helpers
+apps/chat/finish-split.mjs
+apps/chat/split-layouts.mjs

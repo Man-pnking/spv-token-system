@@ -1,7 +1,9 @@
 import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase-server";
+import LayoutSwitch from "@/components/LayoutSwitch";
 import PostComposer from "@/components/PostComposer";
-import Feed from "@/components/Feed";
+import FeedMobile from "@/components/feed/FeedMobile";
+import FeedDesktop from "@/components/feed/FeedDesktop";
 import { getLikeCountsForPosts } from "@/lib/likes";
 import { getReplyCountsForPosts } from "@/lib/replies";
 
@@ -35,7 +37,7 @@ export default async function FeedPage() {
   return (
     <div className="max-w-2xl mx-auto">
       <div
-        className="sticky top-0 z-20 backdrop-blur-xl border-b border-[#00ffff]/10"
+        className="sticky top-0 z-20 backdrop-blur-xl border-b border-white/5"
         style={{ background: "rgba(5, 5, 16, 0.92)" }}
       >
         <div className="px-4 py-3">
@@ -44,12 +46,26 @@ export default async function FeedPage() {
       </div>
 
       <PostComposer profile={profile} />
-      <Feed
-        posts={posts || []}
-        currentUserId={user.id}
-        likeCounts={likeCounts}
-        replyCounts={replyCounts}
-        emptyMessage="Be the first to post."
+
+      <LayoutSwitch
+        mobile={
+          <FeedMobile
+            posts={posts || []}
+            currentUserId={user.id}
+            likeCounts={likeCounts}
+            replyCounts={replyCounts}
+            emptyMessage="Be the first to post."
+          />
+        }
+        desktop={
+          <FeedDesktop
+            posts={posts || []}
+            currentUserId={user.id}
+            likeCounts={likeCounts}
+            replyCounts={replyCounts}
+            emptyMessage="Be the first to post."
+          />
+        }
       />
     </div>
   );

@@ -3,20 +3,18 @@
 import { useEffect, useRef } from "react";
 import { useMessages } from "@/hooks/useMessages";
 import { useTypingIndicator } from "@/hooks/useTypingIndicator";
-import MessageBubble from "./MessageBubble";
-import MessageComposer from "./MessageComposer";
-import TypingIndicator from "./TypingIndicator";
+import MessageBubble from "../MessageBubble";
+import MessageComposer from "../MessageComposer";
+import TypingIndicator from "../TypingIndicator";
 
-export default function ChatView({ conversationId, currentUserId, otherUser }) {
+export default function ChatMobile({ conversationId, currentUserId, otherUser }) {
   const { messages, loading } = useMessages(conversationId);
   const { isOtherTyping, notifyTyping, notifyStopTyping } =
     useTypingIndicator(conversationId, currentUserId);
   const endRef = useRef(null);
 
   useEffect(() => {
-    if (endRef.current) {
-      endRef.current.scrollIntoView({ behavior: "smooth" });
-    }
+    if (endRef.current) endRef.current.scrollIntoView({ behavior: "smooth" });
   }, [messages.length, isOtherTyping]);
 
   if (loading) {
@@ -29,7 +27,7 @@ export default function ChatView({ conversationId, currentUserId, otherUser }) {
 
   return (
     <>
-      <div className="flex-1 overflow-y-auto px-4 py-6">
+      <div className="flex-1 overflow-y-auto px-3 py-4">
         {messages.length === 0 ? (
           <div className="text-center text-warm-mute text-sm py-12">
             No messages yet. Say hi to @{otherUser.username}.

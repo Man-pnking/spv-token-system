@@ -1,0 +1,22 @@
+# Dependencies
+node_modules/
+
+# Hardhat build artifacts
+artifacts/
+cache/
+typechain-types/
+
+# Coverage
+coverage/
+coverage.json
+
+# Local env
+.env
+.env.local
+
+# Local deployments & chain state
+deployments-*.json
+ganache-db/
+
+# Logs
+*.log

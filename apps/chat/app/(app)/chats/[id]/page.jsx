@@ -2,7 +2,9 @@ import { notFound, redirect } from "next/navigation";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 import { createClient } from "@/lib/supabase-server";
-import ChatView from "@/components/ChatView";
+import LayoutSwitch from "@/components/LayoutSwitch";
+import ChatMobile from "@/components/chat/ChatMobile";
+import ChatDesktop from "@/components/chat/ChatDesktop";
 import Avatar from "@/components/Avatar";
 
 export default async function ChatDetailPage({ params }) {
@@ -27,7 +29,8 @@ export default async function ChatDetailPage({ params }) {
 
   if (!isParticipant) notFound();
 
-  const otherUser = conversation.user_a === user.id ? conversation.b : conversation.a;
+  const otherUser =
+    conversation.user_a === user.id ? conversation.b : conversation.a;
 
   return (
     <div className="flex flex-col h-screen">
@@ -58,10 +61,21 @@ export default async function ChatDetailPage({ params }) {
         </Link>
       </div>
 
-      <ChatView
-        conversationId={conversation.id}
-        currentUserId={user.id}
-        otherUser={otherUser}
+      <LayoutSwitch
+        mobile={
+          <ChatMobile
+            conversationId={conversation.id}
+            currentUserId={user.id}
+            otherUser={otherUser}
+          />
+        }
+        desktop={
+          <ChatDesktop
+            conversationId={conversation.id}
+            currentUserId={user.id}
+            otherUser={otherUser}
+          />
+        }
       />
     </div>
   );

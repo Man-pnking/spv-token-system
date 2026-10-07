@@ -1,9 +1,8 @@
 import { notFound, redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase-server";
-import ProfileDesktopHeader from "@/components/ProfileDesktopHeader";
-import ProfileMobileCard from "@/components/ProfileMobileCard";
-import ProfileTabs from "@/components/ProfileTabs";
-import Feed from "@/components/Feed";
+import LayoutSwitch from "@/components/LayoutSwitch";
+import ProfileMobile from "@/components/profile/ProfileMobile";
+import ProfileDesktop from "@/components/profile/ProfileDesktop";
 import { getProfileStats } from "@/lib/profile-stats";
 import { getLikeCountsForPosts } from "@/lib/likes";
 import { getReplyCountsForPosts } from "@/lib/replies";
@@ -40,30 +39,29 @@ export default async function ProfilePage({ params }) {
   const replyCounts = await getReplyCountsForPosts(postIds);
 
   return (
-    <div>
-      {/* Desktop — two column layout */}
-      <ProfileDesktopHeader
-        profile={profile}
-        isMe={isMe}
-        stats={stats}
-        currentUserId={user.id}
-        posts={posts || []}
-        likeCounts={likeCounts}
-        replyCounts={replyCounts}
-      />
-
-      {/* Mobile — card layout + feed below */}
-      <div className="md:hidden">
-        <ProfileMobileCard profile={profile} isMe={isMe} counts={stats} />
-        <ProfileTabs />
-        <Feed
-          posts={posts || []}
+    <LayoutSwitch
+      mobile={
+        <ProfileMobile
+          profile={profile}
+          isMe={isMe}
+          stats={stats}
           currentUserId={user.id}
+          posts={posts || []}
           likeCounts={likeCounts}
           replyCounts={replyCounts}
-          emptyMessage={isMe ? "You haven't posted yet." : "No posts yet."}
         />
-      </div>
-    </div>
+      }
+      desktop={
+        <ProfileDesktop
+          profile={profile}
+          isMe={isMe}
+          stats={stats}
+          currentUserId={user.id}
+          posts={posts || []}
+          likeCounts={likeCounts}
+          replyCounts={replyCounts}
+        />
+      }
+    />
   );
 }

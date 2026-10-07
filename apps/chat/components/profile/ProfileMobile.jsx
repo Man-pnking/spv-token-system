@@ -1,16 +1,26 @@
 import Link from "next/link";
 import { ArrowLeft, Share2, MoreHorizontal } from "lucide-react";
-import Avatar from "./Avatar";
-import ProfileActions from "./ProfileActions";
-import ProfileStatsRow from "./ProfileStatsRow";
-import ProfileAbout from "./ProfileAbout";
+import Avatar from "../Avatar";
+import ProfileActions from "../ProfileActions";
+import ProfileStatsRow from "../ProfileStatsRow";
+import ProfileAbout from "../ProfileAbout";
+import ProfileTabs from "../ProfileTabs";
+import FeedMobile from "../feed/FeedMobile";
 import { gradientForUsername } from "@/lib/colors";
 
-export default function ProfileMobileCard({ profile, isMe, counts }) {
+export default function ProfileMobile({
+  profile,
+  isMe,
+  stats,
+  currentUserId,
+  posts,
+  likeCounts,
+  replyCounts,
+}) {
   const gradient = gradientForUsername(profile.username);
 
   return (
-    <div className="md:hidden">
+    <div>
       <div className="relative h-40" style={{ background: gradient }}>
         <div className="absolute top-3 left-3 right-3 flex items-center justify-between">
           <Link
@@ -20,21 +30,14 @@ export default function ProfileMobileCard({ profile, isMe, counts }) {
             <ArrowLeft className="w-4 h-4 text-white" />
           </Link>
           <div className="flex items-center gap-2">
-            <button
-              className="w-9 h-9 rounded-full bg-black/40 backdrop-blur flex items-center justify-center"
-              aria-label="Share"
-            >
+            <button className="w-9 h-9 rounded-full bg-black/40 backdrop-blur flex items-center justify-center">
               <Share2 className="w-4 h-4 text-white" />
             </button>
-            <button
-              className="w-9 h-9 rounded-full bg-black/40 backdrop-blur flex items-center justify-center"
-              aria-label="More"
-            >
+            <button className="w-9 h-9 rounded-full bg-black/40 backdrop-blur flex items-center justify-center">
               <MoreHorizontal className="w-4 h-4 text-white" />
             </button>
           </div>
         </div>
-
         <div className="absolute -bottom-10 left-5">
           <div className="rounded-full p-1 bg-[#050510]">
             <Avatar url={profile.avatar_url} username={profile.username} size={80} />
@@ -48,7 +51,7 @@ export default function ProfileMobileCard({ profile, isMe, counts }) {
       </div>
 
       <div className="px-5 pb-5">
-        <ProfileStatsRow stats={counts} />
+        <ProfileStatsRow stats={stats} />
       </div>
 
       <div className="px-5 pb-6">
@@ -65,8 +68,17 @@ export default function ProfileMobileCard({ profile, isMe, counts }) {
       </div>
 
       <div className="border-t border-dashed border-white/10 mx-5" />
-
       <ProfileAbout profile={profile} />
+
+      <div className="border-t border-white/10 mt-2" />
+      <ProfileTabs />
+      <FeedMobile
+        posts={posts || []}
+        currentUserId={currentUserId}
+        likeCounts={likeCounts}
+        replyCounts={replyCounts}
+        emptyMessage={isMe ? "You haven't posted yet." : "No posts yet."}
+      />
     </div>
   );
 }
