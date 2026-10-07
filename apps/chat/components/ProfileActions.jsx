@@ -6,7 +6,7 @@ import { UserPlus, UserCheck, MessageCircle, Bookmark } from "lucide-react";
 import { supabase } from "@/lib/supabase";
 import { followUser, unfollowUser, isFollowing } from "@/lib/follows";
 
-export default function ProfileActions({ targetUserId, targetUsername }) {
+export default function ProfileActions({ targetUser }) {
   const [currentUserId, setCurrentUserId] = useState(null);
   const [following, setFollowing] = useState(false);
   const [loading, setLoading] = useState(true);
@@ -21,24 +21,24 @@ export default function ProfileActions({ targetUserId, targetUsername }) {
         return;
       }
       setCurrentUserId(user.id);
-      const { following } = await isFollowing(user.id, targetUserId);
+      const { following } = await isFollowing(user.id, targetUser.id);
       if (mounted) {
         setFollowing(following);
         setLoading(false);
       }
     });
     return () => { mounted = false; };
-  }, [targetUserId]);
+  }, [targetUser.id]);
 
   const toggleFollow = async () => {
     if (!currentUserId || pending) return;
     setPending(true);
     try {
       if (following) {
-        await unfollowUser(currentUserId, targetUserId);
+        await unfollowUser(currentUserId, targetUser.id);
         setFollowing(false);
       } else {
-        await followUser(currentUserId, targetUserId);
+        await followUser(currentUserId, targetUser.id);
         setFollowing(true);
       }
     } finally {
@@ -67,7 +67,7 @@ export default function ProfileActions({ targetUserId, targetUsername }) {
       </button>
 
       <Link
-        href={"/chats/new?to=" + targetUsername}
+        href={"/chats/new?to=" + targetUser.username}
         className="flex-1 inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-full text-sm font-semibold border border-white/15 text-warm hover:bg-white/5 transition-colors"
       >
         <MessageCircle className="w-4 h-4" />

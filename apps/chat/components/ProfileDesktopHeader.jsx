@@ -21,7 +21,6 @@ export default function ProfileDesktopHeader({
 
   return (
     <div className="hidden md:block max-w-3xl mx-auto border-x border-white/5">
-      {/* Banner */}
       <div className="relative h-52" style={{ background: gradient }}>
         <div className="absolute top-3 left-4 right-4 flex items-center justify-between">
           <Link
@@ -53,18 +52,15 @@ export default function ProfileDesktopHeader({
         </div>
       </div>
 
-      {/* Name + meta */}
       <div className="px-6 pt-20 pb-5">
         <h1 className="text-2xl font-bold text-warm">{profile.username}</h1>
         <div className="text-sm text-warm-mute mt-1">@{profile.username}</div>
       </div>
 
-      {/* Stats */}
       <div className="px-6 pb-6 max-w-md">
         <ProfileStatsRow stats={stats} />
       </div>
 
-      {/* Actions */}
       <div className="px-6 pb-6 max-w-md">
         {isMe ? (
           <Link
@@ -74,23 +70,16 @@ export default function ProfileDesktopHeader({
             Edit profile
           </Link>
         ) : (
-          <ProfileActions
-            targetUserId={profile.id}
-            targetUsername={profile.username}
-          />
+          <ProfileActions targetUser={profile} />
         )}
       </div>
 
-      {/* Divider */}
       <div className="border-t border-dashed border-white/10 mx-6" />
 
-      {/* About */}
       <ProfileAbout profile={profile} />
 
-      {/* Divider */}
       <div className="border-t border-white/10" />
 
-      {/* Tabs + Feed */}
       <ProfileTabs />
       <Feed
         posts={posts || []}

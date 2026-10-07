@@ -11,7 +11,6 @@ export default function ProfileMobileCard({ profile, isMe, counts }) {
 
   return (
     <div className="md:hidden">
-      {/* Banner */}
       <div className="relative h-40" style={{ background: gradient }}>
         <div className="absolute top-3 left-3 right-3 flex items-center justify-between">
           <Link
@@ -36,7 +35,6 @@ export default function ProfileMobileCard({ profile, isMe, counts }) {
           </div>
         </div>
 
-        {/* Avatar overlapping */}
         <div className="absolute -bottom-10 left-5">
           <div className="rounded-full p-1 bg-[#050510]">
             <Avatar url={profile.avatar_url} username={profile.username} size={80} />
@@ -44,18 +42,15 @@ export default function ProfileMobileCard({ profile, isMe, counts }) {
         </div>
       </div>
 
-      {/* Name + meta */}
       <div className="px-5 pt-14 pb-4">
         <h1 className="text-xl font-bold text-warm">{profile.username}</h1>
         <div className="text-sm text-warm-mute mt-1">@{profile.username}</div>
       </div>
 
-      {/* Stats */}
       <div className="px-5 pb-5">
         <ProfileStatsRow stats={counts} />
       </div>
 
-      {/* Actions */}
       <div className="px-5 pb-6">
         {isMe ? (
           <Link
@@ -65,17 +60,12 @@ export default function ProfileMobileCard({ profile, isMe, counts }) {
             Edit profile
           </Link>
         ) : (
-          <ProfileActions
-            targetUserId={profile.id}
-            targetUsername={profile.username}
-          />
+          <ProfileActions targetUser={profile} />
         )}
       </div>
 
-      {/* Divider */}
       <div className="border-t border-dashed border-white/10 mx-5" />
 
-      {/* About */}
       <ProfileAbout profile={profile} />
     </div>
   );
