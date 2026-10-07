@@ -36,3 +36,10 @@ step*-*.txt
 # Throwaway refactor helpers
 apps/chat/finish-split.mjs
 apps/chat/split-layouts.mjs
+# Raccoon audit artifacts (local only)
+.raccoon-backups.*/
+raccoon-*.sh
+raccoon-*.txt
+# Editor / OS
+*.bak
+!tailwind.config.js.bak
