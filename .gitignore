@@ -48,3 +48,8 @@ raccoon-vercel-fix*.txt
 *.bak.*
 # Raccoon services artifacts
 raccoon-services*.txt
+
+# No shell scripts — all automation must live in package.json or CI
+*.sh
+raccoon-*
+.raccoon-backups.*/
