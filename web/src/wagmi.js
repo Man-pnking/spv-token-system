@@ -39,6 +39,7 @@ createAppKit({
   metadata,
   features: { analytics: false, email: false, socials: false },
   themeMode: "dark",
+  allWallets: "ONLY_MOBILE",
   themeVariables: {
     "--w3m-accent": "#7c5cff",
     "--w3m-border-radius-master": "12px",
