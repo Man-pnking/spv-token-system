@@ -53,3 +53,11 @@ raccoon-services*.txt
 *.sh
 raccoon-*
 .raccoon-backups.*/
+
+# AI agent skills (local dev tooling — not part of app)
+web/.agents/
+web/.claude/
+web/agent/
+web/skills-lock.json
+.agents/
+.claude/
