@@ -3,11 +3,11 @@ import AppShell from "@/components/AppShell";
 
 export default async function AppLayout({ children }) {
   const supabase = createClient();
-  const { data: { user } } = await supabase.auth.getUser();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
 
-  if (!user) {
-    return <>{children}</>;
-  }
+  if (!user) return <>{children}</>;
 
   const { data: profile } = await supabase
     .from("users")
@@ -15,9 +15,11 @@ export default async function AppLayout({ children }) {
     .eq("id", user.id)
     .maybeSingle();
 
-  if (!profile) {
-    return <>{children}</>;
-  }
+  if (!profile) return <>{children}</>;
 
-  return <AppShell profile={profile}>{children}</AppShell>;
+  return (
+    <AppShell profile={profile}>
+      {children}
+    </AppShell>
+  );
 }
