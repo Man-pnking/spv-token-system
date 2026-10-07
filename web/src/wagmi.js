@@ -8,11 +8,11 @@ const projectId = "51cd3b45476208218ad7bf80015380d9";
 const metadata = {
   name: "SPV Token",
   description: "Mint-on-demand bonding curve on Polygon",
-  url: "https://system-67jn.vercel.app",
-  icons: ["https://system-67jn.vercel.app/ruby-diamond-32.svg"],
+  url: "https://spv-token-system-67jn.vercel.app",
+  icons: ["https://spv-token-system-67jn.vercel.app/ruby-diamond-32.svg"],
   redirect: {
     native: "spvtoken://",
-    universal: "https://system-67jn.vercel.app",
+    universal: "https://spv-token-system-67jn.vercel.app",
     linkMode: true,
   },
 };
