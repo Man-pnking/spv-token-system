@@ -1,3 +1,4 @@
+import { cache } from "react";
 import { supabase } from "./supabase";
 
 export async function likePost(postId) {

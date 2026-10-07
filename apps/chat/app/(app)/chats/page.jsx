@@ -1,10 +1,13 @@
 import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase-server";
 import ChatList from "@/components/ChatList";
+import PageHeader from "@/components/ui/PageHeader";
 
 export default async function ChatsPage() {
   const supabase = createClient();
-  const { data: { user } } = await supabase.auth.getUser();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
   if (!user) redirect("/sign-in");
 
   const { data: rawConversations } = await supabase
@@ -26,13 +29,7 @@ export default async function ChatsPage() {
 
   return (
     <div className="max-w-2xl mx-auto">
-      <div
-        className="sticky top-0 z-20 backdrop-blur-xl border-b border-white/5 px-4 py-3"
-        style={{ background: "rgba(5, 5, 16, 0.92)" }}
-      >
-        <h1 className="text-warm font-bold text-lg">Chats</h1>
-      </div>
-
+      <PageHeader title="Chats" />
       <ChatList conversations={conversations} />
     </div>
   );
