@@ -4,19 +4,30 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { createReply } from "@/lib/replies";
 import Avatar from "./Avatar";
+import { Button } from "@/components/ui/Button";
 
 const MAX = 500;
 
-export default function ReplyForm({ postId, profile }) {
+type Profile = {
+  avatar_url?: string | null;
+  username?: string;
+};
+
+type Props = {
+  postId: string;
+  profile?: Profile;
+};
+
+export function ReplyForm({ postId, profile }: Props) {
   const router = useRouter();
   const [content, setContent] = useState("");
   const [posting, setPosting] = useState(false);
-  const [error, setError] = useState(null);
+  const [error, setError] = useState<string | null>(null);
 
   const remaining = MAX - content.length;
   const canPost = content.trim().length > 0 && remaining >= 0 && !posting;
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!canPost) return;
 
@@ -29,16 +40,23 @@ export default function ReplyForm({ postId, profile }) {
       setContent("");
       router.refresh();
     } catch (err) {
-      setError(err.message || "Failed to reply");
+      setError(err instanceof Error ? err.message : "Failed to reply");
     } finally {
       setPosting(false);
     }
   };
 
   return (
-    <form onSubmit={handleSubmit} className="border-b border-[#00ffff]/10 px-4 py-4">
+    <form
+      onSubmit={handleSubmit}
+      className="border-b border-[#00ffff]/10 px-4 py-4"
+    >
       <div className="flex gap-3">
-        <Avatar url={profile?.avatar_url} username={profile?.username} size={40} />
+        <Avatar
+          url={profile?.avatar_url}
+          username={profile?.username}
+          size={40}
+        />
         <div className="flex-1 min-w-0">
           <textarea
             value={content}
@@ -46,25 +64,33 @@ export default function ReplyForm({ postId, profile }) {
             placeholder="Post your reply"
             rows={2}
             maxLength={MAX + 50}
-            className="w-full bg-transparent text-warm outline-none placeholder:text-warm-mute resize-none py-2"
+            className="w-full bg-transparent text-warm outline-none placeholder:text-warm-mute resize-none py-2 text-[15px]"
           />
 
           {error && <div className="text-xs text-red-400 mb-2">{error}</div>}
 
           <div className="flex items-center justify-between pt-2 border-t border-[#00ffff]/10">
-            <div className={"text-xs font-mono " + (remaining < 0 ? "text-red-400" : "text-warm-mute")}>
+            <div
+              className={
+                "text-xs font-mono " +
+                (remaining < 0 ? "text-red-400" : "text-warm-mute")
+              }
+            >
               {remaining}
             </div>
-            <button
+            <Button
               type="submit"
               disabled={!canPost}
-              className="btn-gold text-sm font-semibold disabled:opacity-40 px-4 py-1.5"
+              loading={posting}
+              size="sm"
             >
-              {posting ? "..." : "Reply"}
-            </button>
+              {posting ? "Replying" : "Reply"}
+            </Button>
           </div>
         </div>
       </div>
     </form>
   );
 }
+
+export default ReplyForm;
