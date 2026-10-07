@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import { LogOut, User, Settings } from "lucide-react";
 import { signOut } from "@/lib/auth";
 import Avatar from "./Avatar";
+import SearchUsers from "./SearchUsers";
 
 export default function TopBar({ username, avatarUrl }) {
   const router = useRouter();
@@ -30,18 +31,24 @@ export default function TopBar({ username, avatarUrl }) {
 
   return (
     <header
-      className="sticky top-0 z-30 border-b border-[#00ffff]/10 backdrop-blur-xl"
+      className="sticky top-0 z-30 border-b border-white/5 backdrop-blur-xl"
       style={{ background: "rgba(5, 5, 16, 0.92)" }}
     >
-      <div className="flex items-center justify-between px-4 py-3">
-        <Link href="/feed" className="flex items-center gap-2">
-          <div className="w-8 h-8 rounded-xl flex items-center justify-center bg-gradient-to-br from-[#00ffff] to-[#00a8a8] text-[#050510] font-black text-xs">
-            SPV
-          </div>
-          <span className="text-warm font-bold text-sm hidden sm:block">SPV Chat</span>
-        </Link>
+      <div className="flex items-center justify-between gap-4 px-4 py-3">
+        <div className="flex items-center gap-4 flex-1 min-w-0">
+          <Link href="/feed" className="flex items-center gap-2 shrink-0">
+            <div className="w-8 h-8 rounded-xl flex items-center justify-center bg-gradient-to-br from-[#00ffff] to-[#00a8a8] text-[#050510] font-black text-xs">
+              SPV
+            </div>
+            <span className="text-warm font-bold text-sm hidden lg:block">
+              SPV Chat
+            </span>
+          </Link>
 
-        <div className="relative" ref={menuRef}>
+          <SearchUsers />
+        </div>
+
+        <div className="relative shrink-0" ref={menuRef}>
           <button
             onClick={() => setOpen((v) => !v)}
             className="flex items-center gap-2 rounded-full hover:bg-white/5 p-1 transition-colors"
@@ -50,9 +57,11 @@ export default function TopBar({ username, avatarUrl }) {
           </button>
 
           {open && (
-            <div className="absolute right-0 mt-2 w-56 glass-strong rounded-xl overflow-hidden">
-              <div className="px-4 py-3 border-b border-[#00ffff]/10">
-                <div className="text-warm text-sm font-mono truncate">@{username}</div>
+            <div className="absolute right-0 mt-2 w-56 glass-strong rounded-xl overflow-hidden z-50">
+              <div className="px-4 py-3 border-b border-white/5">
+                <div className="text-warm text-sm font-mono truncate">
+                  @{username}
+                </div>
               </div>
               <Link
                 href={"/profile/" + username}
@@ -70,7 +79,7 @@ export default function TopBar({ username, avatarUrl }) {
               </Link>
               <button
                 onClick={handleSignOut}
-                className="w-full flex items-center gap-3 px-4 py-3 text-sm text-red-400 hover:bg-red-500/10 border-t border-[#00ffff]/10"
+                className="w-full flex items-center gap-3 px-4 py-3 text-sm text-red-400 hover:bg-red-500/10 border-t border-white/5"
               >
                 <LogOut className="w-4 h-4" /> Sign out
               </button>

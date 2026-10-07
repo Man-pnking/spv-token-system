@@ -23,7 +23,7 @@ export async function getProfileByUsername(username) {
   return { profile: data, error };
 }
 
-export async function upsertProfile({ username, bio, website, avatarUrl }) {
+export async function upsertProfile({ username, bio, website, location, avatarUrl }) {
   const { data: { user } } = await supabase.auth.getUser();
   if (!user) return { profile: null, error: new Error("Not authenticated") };
 
@@ -33,6 +33,7 @@ export async function upsertProfile({ username, bio, website, avatarUrl }) {
     username: username.toLowerCase(),
     bio: bio || "",
     website: website || null,
+    location: location || null,
     avatar_url: avatarUrl || null,
     updated_at: new Date().toISOString(),
   };

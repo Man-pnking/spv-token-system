@@ -12,6 +12,7 @@ export default function ProfileForm({ existing, isSetup = false }) {
   const [username, setUsername] = useState(existing?.username || "");
   const [bio, setBio] = useState(existing?.bio || "");
   const [website, setWebsite] = useState(existing?.website || "");
+  const [location, setLocation] = useState(existing?.location || "");
   const [avatarUrl, setAvatarUrl] = useState(existing?.avatar_url || null);
   const [error, setError] = useState(null);
   const [saving, setSaving] = useState(false);
@@ -44,6 +45,7 @@ export default function ProfileForm({ existing, isSetup = false }) {
         username,
         bio,
         website,
+        location,
         avatarUrl,
       });
       if (saveError) throw saveError;
@@ -75,11 +77,8 @@ export default function ProfileForm({ existing, isSetup = false }) {
           onChange={(e) => setUsername(e.target.value.toLowerCase())}
           required
           disabled={!isSetup && !!existing}
-          className="w-full bg-transparent border-b border-[#00ffff]/20 px-0 py-2 text-sm outline-none focus:border-[#00ffff]/60 transition-colors disabled:opacity-50"
+          className="w-full bg-transparent border-b border-white/15 px-0 py-2 text-sm outline-none focus:border-white/40 transition-colors disabled:opacity-50"
         />
-        <div className="text-[10px] text-warm-mute mt-1">
-          3-20 characters, lowercase letters, numbers, underscores
-        </div>
       </div>
 
       <div>
@@ -90,9 +89,20 @@ export default function ProfileForm({ existing, isSetup = false }) {
           rows={3}
           maxLength={160}
           placeholder="Tell people about yourself"
-          className="w-full bg-transparent border border-[#00ffff]/20 rounded-lg px-3 py-2 text-sm outline-none focus:border-[#00ffff]/60 transition-colors resize-none"
+          className="w-full bg-transparent border border-white/15 rounded-lg px-3 py-2 text-sm outline-none focus:border-white/40 transition-colors resize-none"
         />
         <div className="text-[10px] text-warm-mute mt-1">{bio.length} / 160</div>
+      </div>
+
+      <div>
+        <label className="text-xs text-warm-dim block mb-1">Location</label>
+        <input
+          type="text"
+          value={location}
+          onChange={(e) => setLocation(e.target.value)}
+          placeholder="City, Country"
+          className="w-full bg-transparent border-b border-white/15 px-0 py-2 text-sm outline-none focus:border-white/40 transition-colors"
+        />
       </div>
 
       <div>
@@ -102,7 +112,7 @@ export default function ProfileForm({ existing, isSetup = false }) {
           value={website}
           onChange={(e) => setWebsite(e.target.value)}
           placeholder="your-site.com"
-          className="w-full bg-transparent border-b border-[#00ffff]/20 px-0 py-2 text-sm outline-none focus:border-[#00ffff]/60 transition-colors"
+          className="w-full bg-transparent border-b border-white/15 px-0 py-2 text-sm outline-none focus:border-white/40 transition-colors"
         />
       </div>
 
@@ -111,7 +121,7 @@ export default function ProfileForm({ existing, isSetup = false }) {
       <button
         type="submit"
         disabled={saving}
-        className="btn-gold w-full text-sm font-semibold disabled:opacity-50"
+        className="w-full px-4 py-2.5 rounded-full bg-white text-black text-sm font-semibold disabled:opacity-50"
       >
         {saving ? "Saving..." : isSetup ? "Create profile" : "Save changes"}
       </button>
