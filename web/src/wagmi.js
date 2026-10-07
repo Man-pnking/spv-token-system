@@ -10,6 +10,10 @@ const metadata = {
   description: "Mint-on-demand bonding curve on Polygon",
   url: "https://spv-token-system-brxa.vercel.app",
   icons: ["https://spv-token-system-brxa.vercel.app/ruby-diamond-32.svg"],
+  redirect: {
+    native: "spvtoken://",
+    universal: "https://spv-token-system-brxa.vercel.app",
+  },
 };
 
 const networks = [polygon, polygonAmoy, mainnet];
