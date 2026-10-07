@@ -13,6 +13,7 @@ const metadata = {
   redirect: {
     native: "spvtoken://",
     universal: "https://spv-token-system-brxa.vercel.app",
+    linkMode: true,
   },
 };
 
