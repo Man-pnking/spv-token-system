@@ -43,3 +43,6 @@ raccoon-*.txt
 # Editor / OS
 *.bak
 !tailwind.config.js.bak
+# Raccoon vercel fix artifacts
+raccoon-vercel-fix*.txt
+*.bak.*
