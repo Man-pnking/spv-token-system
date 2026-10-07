@@ -4,7 +4,9 @@ import ProfileForm from "@/components/ProfileForm";
 
 export default async function ProfileSetupPage() {
   const supabase = createClient();
-  const { data: { user } } = await supabase.auth.getUser();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
   if (!user) redirect("/sign-in");
 
   const { data: profile } = await supabase
@@ -16,7 +18,7 @@ export default async function ProfileSetupPage() {
   if (profile) redirect("/profile/" + profile.username);
 
   return (
-    <div className="min-h-screen flex items-center justify-center px-6 py-12">
+    <div className="min-h-dvh flex items-center justify-center px-6 py-12">
       <div className="w-full max-w-md">
         <div className="text-center mb-8">
           <div className="text-label mb-2">Welcome</div>
@@ -25,7 +27,9 @@ export default async function ProfileSetupPage() {
             Choose a username and add some details. You can change these later.
           </p>
         </div>
-        <ProfileForm isSetup={true} />
+        <div className="glass p-6 md:p-7">
+          <ProfileForm isSetup={true} />
+        </div>
       </div>
     </div>
   );

@@ -6,8 +6,17 @@ import { UserPlus, UserCheck, MessageCircle, Bookmark } from "lucide-react";
 import { supabase } from "@/lib/supabase";
 import { followUser, unfollowUser, isFollowing } from "@/lib/follows";
 
-export default function ProfileActions({ targetUser }) {
-  const [currentUserId, setCurrentUserId] = useState(null);
+type TargetUser = {
+  id: string;
+  username: string;
+};
+
+type Props = {
+  targetUser: TargetUser;
+};
+
+export function ProfileActions({ targetUser }: Props) {
+  const [currentUserId, setCurrentUserId] = useState<string | null>(null);
   const [following, setFollowing] = useState(false);
   const [loading, setLoading] = useState(true);
   const [pending, setPending] = useState(false);
@@ -27,7 +36,9 @@ export default function ProfileActions({ targetUser }) {
         setLoading(false);
       }
     });
-    return () => { mounted = false; };
+    return () => {
+      mounted = false;
+    };
   }, [targetUser.id]);
 
   const toggleFollow = async () => {
@@ -47,7 +58,9 @@ export default function ProfileActions({ targetUser }) {
   };
 
   if (loading) {
-    return <div className="h-10 w-full bg-white/5 rounded animate-pulse" />;
+    return (
+      <div className="h-10 w-full bg-white/5 rounded-full animate-pulse" />
+    );
   }
 
   return (
@@ -56,31 +69,36 @@ export default function ProfileActions({ targetUser }) {
         onClick={toggleFollow}
         disabled={pending}
         className={
-          "flex-1 inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-full text-sm font-semibold transition-colors " +
+          "flex-1 inline-flex items-center justify-center gap-1.5 px-3 py-2.5 rounded-full text-xs font-semibold transition-all duration-200 " +
           (following
-            ? "bg-white/5 border border-white/15 text-warm hover:bg-white/10"
-            : "bg-white text-black hover:bg-white/90")
+            ? "bg-white/5 border border-white/15 text-warm hover:bg-white/10 hover:border-white/25"
+            : "bg-gradient-to-br from-[#00ffff] to-[#00a8a8] text-[#050510] shadow-[0_4px_20px_rgba(0,255,255,0.25)] hover:shadow-[0_6px_28px_rgba(0,255,255,0.4)] hover:-translate-y-px")
         }
       >
-        {following ? <UserCheck className="w-4 h-4" /> : <UserPlus className="w-4 h-4" />}
+        {following ? (
+          <UserCheck className="w-3.5 h-3.5" />
+        ) : (
+          <UserPlus className="w-3.5 h-3.5" />
+        )}
         {following ? "Following" : "Follow"}
       </button>
 
       <Link
-        href={"/chats/new?to=" + targetUser.username}
-        className="flex-1 inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-full text-sm font-semibold border border-white/15 text-warm hover:bg-white/5 transition-colors"
+        href={`/chats/new?to=${targetUser.username}`}
+        className="flex-1 inline-flex items-center justify-center gap-1.5 px-3 py-2.5 rounded-full text-xs font-semibold border border-white/15 text-warm hover:bg-white/5 hover:border-white/25 transition-colors"
       >
-        <MessageCircle className="w-4 h-4" />
+        <MessageCircle className="w-3.5 h-3.5" />
         Message
       </Link>
 
       <button
-        className="flex-1 inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-full text-sm font-semibold border border-white/15 text-warm hover:bg-white/5 transition-colors"
         aria-label="Save"
+        className="inline-flex items-center justify-center w-10 h-10 rounded-full border border-white/15 text-warm hover:bg-white/5 hover:border-white/25 transition-colors shrink-0"
       >
-        <Bookmark className="w-4 h-4" />
-        Save
+        <Bookmark className="w-3.5 h-3.5" />
       </button>
     </div>
   );
 }
+
+export default ProfileActions;

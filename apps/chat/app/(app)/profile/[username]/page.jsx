@@ -1,15 +1,15 @@
 import { notFound, redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase-server";
-import LayoutSwitch from "@/components/LayoutSwitch";
-import ProfileMobile from "@/components/profile/ProfileMobile";
-import ProfileDesktop from "@/components/profile/ProfileDesktop";
+import ProfileView from "@/components/profile/ProfileView";
 import { getProfileStats } from "@/lib/profile-stats";
 import { getLikeCountsForPosts } from "@/lib/likes";
 import { getReplyCountsForPosts } from "@/lib/replies";
 
 export default async function ProfilePage({ params }) {
   const supabase = createClient();
-  const { data: { user } } = await supabase.auth.getUser();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
   if (!user) redirect("/sign-in");
 
   const { data: profile } = await supabase
@@ -39,29 +39,14 @@ export default async function ProfilePage({ params }) {
   const replyCounts = await getReplyCountsForPosts(postIds);
 
   return (
-    <LayoutSwitch
-      mobile={
-        <ProfileMobile
-          profile={profile}
-          isMe={isMe}
-          stats={stats}
-          currentUserId={user.id}
-          posts={posts || []}
-          likeCounts={likeCounts}
-          replyCounts={replyCounts}
-        />
-      }
-      desktop={
-        <ProfileDesktop
-          profile={profile}
-          isMe={isMe}
-          stats={stats}
-          currentUserId={user.id}
-          posts={posts || []}
-          likeCounts={likeCounts}
-          replyCounts={replyCounts}
-        />
-      }
+    <ProfileView
+      profile={profile}
+      isMe={isMe}
+      stats={stats}
+      currentUserId={user.id}
+      posts={posts || []}
+      likeCounts={likeCounts}
+      replyCounts={replyCounts}
     />
   );
 }
