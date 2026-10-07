@@ -1,15 +1,16 @@
 import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase-server";
-import LayoutSwitch from "@/components/LayoutSwitch";
-import PostComposer from "@/components/PostComposer";
-import FeedMobile from "@/components/feed/FeedMobile";
-import FeedDesktop from "@/components/feed/FeedDesktop";
+import PostComposer from "@/components/feed/PostComposer";
+import Feed from "@/components/feed/Feed";
+import PageHeader from "@/components/ui/PageHeader";
 import { getLikeCountsForPosts } from "@/lib/likes";
 import { getReplyCountsForPosts } from "@/lib/replies";
 
 export default async function FeedPage() {
   const supabase = createClient();
-  const { data: { user } } = await supabase.auth.getUser();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
   if (!user) redirect("/sign-in");
 
   const { data: profile } = await supabase
@@ -36,36 +37,14 @@ export default async function FeedPage() {
 
   return (
     <div className="max-w-2xl mx-auto">
-      <div
-        className="sticky top-0 z-20 backdrop-blur-xl border-b border-white/5"
-        style={{ background: "rgba(5, 5, 16, 0.92)" }}
-      >
-        <div className="px-4 py-3">
-          <h1 className="text-warm font-bold text-lg">Home</h1>
-        </div>
-      </div>
-
+      <PageHeader title="Home" />
       <PostComposer profile={profile} />
-
-      <LayoutSwitch
-        mobile={
-          <FeedMobile
-            posts={posts || []}
-            currentUserId={user.id}
-            likeCounts={likeCounts}
-            replyCounts={replyCounts}
-            emptyMessage="Be the first to post."
-          />
-        }
-        desktop={
-          <FeedDesktop
-            posts={posts || []}
-            currentUserId={user.id}
-            likeCounts={likeCounts}
-            replyCounts={replyCounts}
-            emptyMessage="Be the first to post."
-          />
-        }
+      <Feed
+        posts={posts || []}
+        currentUserId={user.id}
+        likeCounts={likeCounts}
+        replyCounts={replyCounts}
+        emptyMessage="Be the first to post."
       />
     </div>
   );
