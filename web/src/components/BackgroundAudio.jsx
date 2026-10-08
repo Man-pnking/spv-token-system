@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { Volume2, VolumeX } from "lucide-react";
 
 const STORAGE_KEY = "spv_audio_enabled";
-const TARGET_VOLUME = 0.08;   // quiet, ambient — not foreground music
+const TARGET_VOLUME = 0.02;   // quiet, ambient — not foreground music
 const FADE_IN_MS = 4000;      // slow, gentle fade-in
 const FADE_OUT_MS = 600;
 
