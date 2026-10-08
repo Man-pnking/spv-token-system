@@ -2,9 +2,32 @@ import { useEffect, useRef, useState } from "react";
 import { Volume2, VolumeX } from "lucide-react";
 
 const STORAGE_KEY = "spv_audio_enabled";
-const TARGET_VOLUME = 0.15;   // quiet, ambient — not foreground music
-const FADE_IN_MS = 4000;      // slow, gentle fade-in
+const TARGET_VOLUME = 0.15;
+const FADE_IN_MS = 4000;
 const FADE_OUT_MS = 600;
+
+const CDN = "https://cdn.jsdelivr.net/npm/sounds-for-focus@0.1.0/audio";
+const TRACKS = [
+  "rain/light-rain",
+  "rain/heavy-rain",
+  "rain/rain-on-leaves",
+  "rain/rain-on-window",
+  "rain/rain-on-tent",
+  "rain/rain-on-car-roof",
+  "nature/river",
+  "nature/waterfall",
+  "nature/waves",
+  "nature/wind",
+  "nature/wind-in-trees",
+  "nature/jungle",
+  "animals/whale",
+  "places/night-village",
+];
+
+function pickRandomTrack() {
+  const slug = TRACKS[Math.floor(Math.random() * TRACKS.length)];
+  return `${CDN}/${slug}.mp3`;
+}
 
 export default function BackgroundAudio() {
   const audioRef = useRef(null);
@@ -13,7 +36,7 @@ export default function BackgroundAudio() {
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
-    const audio = new Audio("https://cdn.jsdelivr.net/npm/sounds-for-focus@0.1.0/audio/rain/light-rain.mp3");
+    const audio = new Audio(pickRandomTrack());
     audio.loop = true;
     audio.volume = 0;
     audio.preload = "auto";
