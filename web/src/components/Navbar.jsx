@@ -14,6 +14,7 @@ const LINKS = [
   { href: "#trade", label: "Trade" },
   { href: "#docs", label: "Docs" },
   { href: "#faq", label: "FAQ" },
+  { href: "#team", label: "Team" },
   { href: "#verify", label: "Verify" },
 ];
 

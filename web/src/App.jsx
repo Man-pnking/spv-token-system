@@ -14,6 +14,7 @@ import HowItWorks from "./components/HowItWorks";
 import TradePanel from "./components/TradePanel";
 import Docs from "./components/Docs";
 import FAQ from "./components/FAQ";
+import Team from "./components/Team";
 import HowToVerify from "./components/HowToVerify";
 import Footer from "./components/Footer";
 import { useMobileReconnect } from "./hooks/useMobileReconnect";
@@ -79,6 +80,10 @@ export default function App() {
 
           <section id="faq" aria-label="Frequently asked questions">
             <FAQ />
+          </section>
+
+          <section id="team" aria-label="Team">
+            <Team />
           </section>
 
           <section id="verify" aria-label="How to verify the contracts">

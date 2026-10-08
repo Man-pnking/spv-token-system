@@ -72,6 +72,7 @@ export default function Footer() {
                 { label: "Trade", href: "#trade" },
                 { label: "Docs", href: "#docs" },
                 { label: "FAQ", href: "#faq" },
+                { label: "Team", href: "#team" },
                 { label: "How to Verify", href: "#verify" },
               ].map((item) => (
                 <li key={item.href}>
@@ -121,6 +122,14 @@ export default function Footer() {
                   Token Page <ExternalLink className="w-3 h-3" />
                 </a>
               </li>
+              <li>
+                <a
+                  href="mailto:contactus@spvtoken.io"
+                  className="flex items-center gap-2 text-warm-dim hover:text-[#00ffff] transition-colors"
+                >
+                  contactus@spvtoken.io
+                </a>
+              </li>
             </ul>
           </div>
 
@@ -131,7 +140,7 @@ export default function Footer() {
             <ul className="space-y-3 text-sm">
               <li>
                 <a
-                  href="https://twitter.com"
+                  href="https://x.com/specialpur6fu"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center gap-3 text-warm-dim hover:text-[#00ffff] transition-colors"
@@ -141,7 +150,7 @@ export default function Footer() {
               </li>
               <li>
                 <a
-                  href="https://discord.com"
+                  href="https://discord.gg/yXfT4YKg"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center gap-3 text-warm-dim hover:text-[#00ffff] transition-colors"
