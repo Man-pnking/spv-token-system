@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { Volume2, VolumeX } from "lucide-react";
 
 const STORAGE_KEY = "spv_audio_enabled";
-const TARGET_VOLUME = 0.02;   // quiet, ambient — not foreground music
+const TARGET_VOLUME = 0.15;   // quiet, ambient — not foreground music
 const FADE_IN_MS = 4000;      // slow, gentle fade-in
 const FADE_OUT_MS = 600;
 
@@ -13,7 +13,7 @@ export default function BackgroundAudio() {
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
-    const audio = new Audio("/ambience.mp3");
+    const audio = new Audio("https://cdn.jsdelivr.net/npm/sounds-for-focus@0.1.0/audio/rain/light-rain.mp3");
     audio.loop = true;
     audio.volume = 0;
     audio.preload = "auto";
