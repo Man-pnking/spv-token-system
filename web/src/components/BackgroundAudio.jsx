@@ -2,6 +2,9 @@ import { useEffect, useRef, useState } from "react";
 import { Volume2, VolumeX } from "lucide-react";
 
 const STORAGE_KEY = "spv_audio_enabled";
+const TARGET_VOLUME = 0.08;   // quiet, ambient — not foreground music
+const FADE_IN_MS = 4000;      // slow, gentle fade-in
+const FADE_OUT_MS = 600;
 
 export default function BackgroundAudio() {
   const audioRef = useRef(null);
@@ -15,7 +18,6 @@ export default function BackgroundAudio() {
     audio.volume = 0;
     audio.preload = "auto";
     audioRef.current = audio;
-
     return () => {
       audio.pause();
       audioRef.current = null;
@@ -29,10 +31,22 @@ export default function BackgroundAudio() {
 
   useEffect(() => {
     const stored = localStorage.getItem(STORAGE_KEY);
-    if (stored === "true") {
-      setEnabled(true);
-    }
+    if (stored === "true") setEnabled(true);
   }, []);
+
+  const fadeTo = (target, duration, onDone) => {
+    const audio = audioRef.current;
+    if (!audio) return;
+    const startVol = audio.volume;
+    const startTime = performance.now();
+    const tick = (now) => {
+      const t = Math.min(1, (now - startTime) / duration);
+      audio.volume = Math.max(0, Math.min(1, startVol + (target - startVol) * t));
+      if (t < 1) requestAnimationFrame(tick);
+      else if (onDone) onDone();
+    };
+    requestAnimationFrame(tick);
+  };
 
   useEffect(() => {
     if (started || !enabled) return;
@@ -41,30 +55,19 @@ export default function BackgroundAudio() {
       try {
         const audio = audioRef.current;
         if (!audio) return;
+        audio.volume = 0;
         await audio.play();
         setStarted(true);
-        let v = 0;
-        const target = 0.2;
-        const step = target / 20;
-        const interval = setInterval(() => {
-          v += step;
-          if (v >= target) {
-            v = target;
-            clearInterval(interval);
-          }
-          audio.volume = v;
-        }, 100);
+        fadeTo(TARGET_VOLUME, FADE_IN_MS);
       } catch {
         // autoplay blocked — retry on next interaction
       }
     };
 
     const onInteract = () => tryStart();
-
     window.addEventListener("click", onInteract);
     window.addEventListener("keydown", onInteract);
     window.addEventListener("touchstart", onInteract);
-
     return () => {
       window.removeEventListener("click", onInteract);
       window.removeEventListener("keydown", onInteract);
@@ -79,9 +82,10 @@ export default function BackgroundAudio() {
       const audio = audioRef.current;
       if (!audio) return;
       if (document.hidden) {
-        audio.pause();
+        fadeTo(0, FADE_OUT_MS, () => audio.pause());
       } else {
         audio.play().catch(() => {});
+        fadeTo(TARGET_VOLUME, FADE_IN_MS);
       }
     };
 
@@ -94,16 +98,7 @@ export default function BackgroundAudio() {
     if (!audio) return;
 
     if (enabled) {
-      let v = audio.volume;
-      const interval = setInterval(() => {
-        v -= 0.02;
-        if (v <= 0) {
-          v = 0;
-          audio.pause();
-          clearInterval(interval);
-        }
-        audio.volume = v;
-      }, 60);
+      fadeTo(0, FADE_OUT_MS, () => audio.pause());
       setEnabled(false);
       setStarted(false);
       localStorage.setItem(STORAGE_KEY, "false");
@@ -135,10 +130,7 @@ export default function BackgroundAudio() {
       {enabled && started && (
         <span
           className="absolute inset-0 rounded-full"
-          style={{
-            animation: "audioPulse 2.5s ease-in-out infinite",
-            pointerEvents: "none",
-          }}
+          style={{ animation: "audioPulse 2.5s ease-in-out infinite", pointerEvents: "none" }}
         />
       )}
       <style>{`
