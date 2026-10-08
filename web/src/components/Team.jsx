@@ -2,14 +2,6 @@ import Animated from "./Animated";
 import Stagger from "./Stagger";
 import SectionLabel from "./SectionLabel";
 import SectionWatermark from "./SectionWatermark";
-import { AtSign, Github, MessageCircle, Mail, ExternalLink } from "lucide-react";
-
-const LINKS = [
-  { icon: AtSign,        label: "@specialpur6fu", href: "https://x.com/specialpur6fu" },
-  { icon: Github,        label: "GitHub", href: "https://github.com/Man-pnking/spv-token-system" },
-  { icon: MessageCircle, label: "Discord", href: "https://discord.gg/yXfT4YKg" },
-  { icon: Mail,          label: "contactus@spvtoken.io", href: "mailto:contactus@spvtoken.io" },
-];
 
 export default function Team() {
   return (
@@ -47,26 +39,6 @@ export default function Team() {
         </p>
       </Animated>
 
-      <Animated variant="up" className="mb-12">
-        <div className="text-label mb-6">Reach the project</div>
-        <div className="flex flex-wrap gap-3">
-          {LINKS.map((link, i) => (
-            <a
-              key={i}
-              href={link.href}
-              target={link.href.startsWith("mailto:") ? undefined : "_blank"}
-              rel={link.href.startsWith("mailto:") ? undefined : "noopener noreferrer"}
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm text-warm-dim hover:text-[#00ffff] border border-[#00ffff]/15 hover:border-[#00ffff]/40 transition-colors"
-            >
-              <link.icon className="w-3.5 h-3.5 text-[#00ffff]" />
-              {link.label}
-              {!link.href.startsWith("mailto:") && (
-                <ExternalLink className="w-3 h-3 opacity-50" />
-              )}
-            </a>
-          ))}
-        </div>
-      </Animated>
 
       <Animated variant="up">
         <div className="divider mb-10" />

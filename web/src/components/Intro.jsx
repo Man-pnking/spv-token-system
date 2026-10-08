@@ -77,11 +77,11 @@ export default function Intro() {
         </Animated>
         {HOW_TO_BUY.map((step, i) => (
           <Animated key={i} variant="left">
-            <div className="py-6 grid grid-cols-12 gap-6 items-start">
-              <div className="col-span-2 text-5xl sm:text-6xl font-black gradient-text leading-none">
+            <div className="py-6 grid grid-cols-12 gap-4 sm:gap-6 items-start">
+              <div className="col-span-2 sm:col-span-1 text-2xl sm:text-3xl font-black gradient-text leading-none pt-1">
                 {step.n}
               </div>
-              <div className="col-span-10">
+              <div className="col-span-10 sm:col-span-11">
                 <div className="text-warm font-bold text-lg mb-2">{step.title}</div>
                 <div className="text-body text-sm">{step.desc}</div>
               </div>
@@ -164,55 +164,7 @@ export default function Intro() {
         ))}
       </Stagger>
 
-      <Stagger delay={0} stagger={100} className="mb-16">
-        <Animated variant="up">
-          <SectionLabel current={6} total={9} title="Goals and Mission" />
-        </Animated>
-        <Animated variant="up">
-          <h3 className="display-lg mt-6 mb-14">
-            What SPV is <span className="gradient-text">for</span>
-          </h3>
-        </Animated>
-        <div className="grid md:grid-cols-2 gap-16">
-          <Animated variant="left">
-            <div>
-              <div className="flex items-center gap-3 mb-6">
-                <Target className="w-5 h-5 text-[#00ffff]" />
-                <h4 className="display-md text-warm">Mission</h4>
-              </div>
-              <p className="text-body mb-8">
-                To create a transparent, self-sustaining token that anyone can inspect,
-                verify, and use without permission. SPV exists to demonstrate that a
-                token can be launched fairly — with no pre-mine, no insider allocation,
-                and with liquidity that can never be withdrawn by the creator.
-              </p>
-              <p className="text-body">
-                The purpose is not speculation. The purpose is to build a vehicle that
-                holds value through real utility, real adoption, and real community
-                participation — a special purpose vehicle in the truest sense.
-              </p>
-            </div>
-          </Animated>
-          <Animated variant="right">
-            <div>
-              <div className="flex items-center gap-3 mb-6">
-                <Eye className="w-5 h-5 text-[#00ffff]" />
-                <h4 className="display-md text-warm">Goals</h4>
-              </div>
-              <ul className="space-y-4">
-                {GOALS.map((item, i) => (
-                  <li key={i} className="flex items-start gap-3 text-sm text-warm-dim">
-                    <span className="text-[#00ffff] mt-0.5">·</span>
-                    <span>{item}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </Animated>
-        </div>
-      </Stagger>
-
-      <Animated variant="up" className="text-center pt-8">
+            <Animated variant="up" className="text-center pt-8">
         <div className="divider mb-10" />
         <h3 className="display-lg mb-6 text-warm">
           Built for the <span className="gradient-text">long term</span>

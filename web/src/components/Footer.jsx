@@ -67,13 +67,11 @@ export default function Footer() {
               {[
                 { label: "Home", href: "#home" },
                 { label: "Introduction", href: "#intro" },
-                { label: "What You're Buying", href: "#what" },
                 { label: "Live Stats", href: "#stats" },
                 { label: "Trade", href: "#trade" },
                 { label: "Docs", href: "#docs" },
                 { label: "FAQ", href: "#faq" },
                 { label: "Team", href: "#team" },
-                { label: "How to Verify", href: "#verify" },
               ].map((item) => (
                 <li key={item.href}>
                   <a
@@ -210,27 +208,7 @@ export default function Footer() {
           </div>
         </div>
 
-        <div
-          className="rounded-xl px-5 py-4 mb-8 flex items-start gap-3"
-          style={{
-            background: "rgba(0, 255, 255, 0.03)",
-            border: "1px solid rgba(0, 255, 255, 0.08)",
-          }}
-        >
-          <Shield className="w-4 h-4 text-[#00ffff] shrink-0 mt-0.5" />
-          <div className="text-xs text-warm-dim leading-relaxed">
-            <strong className="text-warm">Verify before you trade.</strong> All three SPV
-            contracts are verified on Polygonscan. Follow the{" "}
-            <a
-              href="#verify"
-              className="text-[#00ffff] hover:text-[#ff8c00] transition-colors"
-            >
-              verification guide
-            </a>{" "}
-            to independently confirm the deployed code matches the source.
-          </div>
-        </div>
-
+        
         <div className="divider-full mb-8" />
 
         <div className="flex flex-col sm:flex-row justify-between items-center gap-4 text-xs text-warm-mute">

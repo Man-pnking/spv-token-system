@@ -8,14 +8,12 @@ import QuickNav from "./components/QuickNav";
 import CommandPalette from "./components/CommandPalette";
 import Hero from "./components/Hero";
 import Intro from "./components/Intro";
-import WhatYoureBuying from "./components/WhatYoureBuying";
 import CurveStats from "./components/CurveStats";
 import HowItWorks from "./components/HowItWorks";
 import TradePanel from "./components/TradePanel";
 import Docs from "./components/Docs";
 import FAQ from "./components/FAQ";
 import Team from "./components/Team";
-import HowToVerify from "./components/HowToVerify";
 import Footer from "./components/Footer";
 import { useMobileReconnect } from "./hooks/useMobileReconnect";
 
@@ -58,10 +56,6 @@ export default function App() {
             <Intro />
           </section>
 
-          <section id="what" aria-label="What you are buying">
-            <WhatYoureBuying />
-          </section>
-
           <section id="stats" aria-label="Live curve stats">
             <CurveStats />
           </section>
@@ -86,9 +80,6 @@ export default function App() {
             <Team />
           </section>
 
-          <section id="verify" aria-label="How to verify the contracts">
-            <HowToVerify />
-          </section>
         </main>
 
         <Footer />

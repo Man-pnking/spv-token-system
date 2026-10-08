@@ -8,14 +8,12 @@ import PriceTickerBanner from "./PriceTickerBanner";
 const LINKS = [
   { href: "#home", label: "Home" },
   { href: "#intro", label: "Introduction" },
-  { href: "#what", label: "What You're Buying" },
   { href: "#stats", label: "Stats" },
   { href: "#how", label: "How it Works" },
   { href: "#trade", label: "Trade" },
   { href: "#docs", label: "Docs" },
   { href: "#faq", label: "FAQ" },
   { href: "#team", label: "Team" },
-  { href: "#verify", label: "Verify" },
 ];
 
 export default function Navbar() {
