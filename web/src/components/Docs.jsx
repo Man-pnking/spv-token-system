@@ -47,7 +47,7 @@ function CopyAddr({ label, addr }) {
 
 export default function Docs() {
   return (
-    <div className="relative max-w-4xl mx-auto px-6 py-16 overflow-hidden">
+    <div className="relative max-w-4xl mx-auto px-6 py-[clamp(6rem,10vw,7rem)] overflow-hidden">
       <SectionWatermark position="bottom-left" size={480} opacity={0.03} rotate={-12} />
 
       <div className="mb-24">

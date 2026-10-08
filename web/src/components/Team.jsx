@@ -5,7 +5,7 @@ import SectionWatermark from "./SectionWatermark";
 
 export default function Team() {
   return (
-    <div className="relative max-w-4xl mx-auto px-6 py-16 overflow-hidden">
+    <div className="relative max-w-4xl mx-auto px-6 pt-[clamp(8rem,14vw,9rem)] pb-[clamp(6rem,10vw,7rem)] overflow-hidden">
       <SectionWatermark position="right" size={520} opacity={0.03} rotate={6} />
       <Stagger delay={0} stagger={110} className="mb-16">
         <Animated variant="up">

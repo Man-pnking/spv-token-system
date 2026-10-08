@@ -31,7 +31,7 @@ const GOALS = [
 
 export default function Intro() {
   return (
-    <div className="max-w-5xl mx-auto px-6 py-16">
+    <div className="max-w-5xl mx-auto px-6 py-[clamp(6rem,10vw,7rem)]">
       <Stagger delay={0} stagger={120} className="mb-20">
         <Animated variant="up">
           <SectionLabel current={1} total={8} title="What is SPV" />
@@ -77,11 +77,11 @@ export default function Intro() {
         </Animated>
         {HOW_TO_BUY.map((step, i) => (
           <Animated key={i} variant="left">
-            <div className="py-6 grid grid-cols-12 gap-4 sm:gap-6 items-start">
-              <div className="col-span-2 sm:col-span-1 text-2xl sm:text-3xl font-black gradient-text leading-none pt-1">
+            <div className="py-6">
+              <div className="text-2xl sm:text-3xl font-black gradient-text leading-none mb-3">
                 {step.n}
               </div>
-              <div className="col-span-10 sm:col-span-11">
+              <div>
                 <div className="text-warm font-bold text-lg mb-2">{step.title}</div>
                 <div className="text-body text-sm">{step.desc}</div>
               </div>

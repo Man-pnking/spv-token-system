@@ -42,7 +42,7 @@ const STEPS = [
 
 export default function HowToVerify() {
   return (
-    <div className="relative max-w-4xl mx-auto px-6 py-16 overflow-hidden">
+    <div className="relative max-w-4xl mx-auto px-6 py-[clamp(6rem,10vw,7rem)] overflow-hidden">
       <SectionWatermark position="left" size={480} opacity={0.03} rotate={-8} />
 
       <Animated variant="up" className="mb-16">

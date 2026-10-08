@@ -17,7 +17,7 @@ export default function Hero() {
   const priceNumber = Number(priceDisplay);
 
   return (
-    <div className="relative min-h-screen flex items-center justify-center overflow-hidden pt-32 pb-16">
+    <div className="relative min-h-screen flex items-center justify-center overflow-hidden pt-32 pb-[clamp(6rem,10vw,7rem)]">
       <div
         className="absolute rounded-full pointer-events-none"
         style={{

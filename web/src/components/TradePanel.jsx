@@ -111,7 +111,7 @@ export default function TradePanel() {
   };
 
   return (
-    <div className="max-w-3xl mx-auto px-6 py-16">
+    <div className="max-w-3xl mx-auto px-6 py-[clamp(6rem,10vw,7rem)]">
       <div className="mb-12">
         <div className="text-label mb-4">Trade</div>
         <h2 className="display-lg">

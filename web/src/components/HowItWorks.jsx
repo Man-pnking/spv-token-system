@@ -11,7 +11,7 @@ const STEPS = [
 
 export default function HowItWorks() {
   return (
-    <div className="max-w-5xl mx-auto px-6 py-16">
+    <div className="max-w-5xl mx-auto px-6 py-[clamp(6rem,10vw,7rem)]">
       <Stagger delay={0} stagger={120} className="mb-16">
         <Animated variant="up">
           <SectionLabel current={4} total={8} title="How it works" />

@@ -78,7 +78,7 @@ export default function FAQ() {
   const [open, setOpen] = useState(null);
 
   return (
-    <div className="max-w-3xl mx-auto px-6 py-16">
+    <div className="max-w-3xl mx-auto px-6 pt-[clamp(9rem,10vw,10rem)] pb-[clamp(7.5rem,14vw,9rem)]">
       <Animated variant="up" className="mb-16">
         <div className="text-xs uppercase tracking-[0.3em] text-warm-mute mb-4">
           FAQ

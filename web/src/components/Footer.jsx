@@ -21,7 +21,7 @@ export default function Footer() {
 
   return (
     <footer id="footer" className="relative mt-16 safe-bottom">
-      <div className="max-w-6xl mx-auto px-6 py-16">
+      <div className="max-w-6xl mx-auto px-6 py-[clamp(6rem,10vw,7rem)]">
         <div className="divider mb-16" />
 
         <div className="grid md:grid-cols-2 gap-12 mb-20">

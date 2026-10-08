@@ -7,7 +7,7 @@ export default function CurveStats() {
 
   if (s.loading) {
     return (
-      <div className="max-w-6xl mx-auto px-6 py-16">
+      <div className="max-w-6xl mx-auto px-6 py-[clamp(6rem,10vw,7rem)]">
         <div className="text-center text-warm-mute text-sm">Loading curve stats…</div>
       </div>
     );
@@ -18,7 +18,7 @@ export default function CurveStats() {
   const supplyFloorNumber = Number(s.supplyFloor) / 1e18;
 
   return (
-    <div className="max-w-6xl mx-auto px-6 py-16">
+    <div className="max-w-6xl mx-auto px-6 py-[clamp(6rem,10vw,7rem)]">
       <div className="mb-20">
         <SectionLabel current={3} total={8} title="Live Curve Stats" />
         <h2 className="text-4xl sm:text-6xl font-black leading-tight mt-6">
