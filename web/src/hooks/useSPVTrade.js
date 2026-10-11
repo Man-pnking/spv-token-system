@@ -1,10 +1,13 @@
-import { useState, useCallback, useEffect } from "react";
+import { useState, useCallback, useEffect, useRef } from "react";
 import { useAccount, useReadContract, useWriteContract, useWaitForTransactionReceipt } from "wagmi";
 import { maxUint256, parseUnits, formatUnits } from "viem";
 import { CONFIG, ABIS } from "../config";
+import { useAddToken } from "./useAddToken";
 
 export function useSPVTrade() {
   const { address } = useAccount();
+  const { addToken } = useAddToken();
+  const autoAddFiredRef = useRef(false);
   const [mode, setMode] = useState("buy");
   const [usdtInput, setUsdtInput] = useState("");
   const [spvInput, setSpvInput] = useState("");
@@ -168,6 +171,18 @@ export function useSPVTrade() {
   useEffect(() => {
     if (tradeReceipt.isSuccess) reset();
   }, [tradeReceipt.isSuccess, reset]);
+
+  // Auto-prompt to add SPV token to wallet after a successful buy
+  useEffect(() => {
+    if (mode !== "buy") return;
+    if (!tradeReceipt.isSuccess) {
+      autoAddFiredRef.current = false;
+      return;
+    }
+    if (autoAddFiredRef.current) return;
+    autoAddFiredRef.current = true;
+    addToken().catch(() => {});
+  }, [tradeReceipt.isSuccess, mode, addToken]);
 
   const needsApproval = mode === "buy"
     ? (usdtAllowance ?? 0n) < parsedUsdt

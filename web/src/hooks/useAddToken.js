@@ -6,7 +6,7 @@ const TOKEN_PARAMS = {
   address: CONFIG.spvToken,
   symbol: "SPV",
   decimals: 18,
-  image: "https://spv-token-system-brxa.vercel.app/ruby-diamond-32.svg",
+  image: `${window.location.origin}/ruby-diamond-32.svg`,
 };
 
 export function useAddToken() {

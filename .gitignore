@@ -61,3 +61,6 @@ web/agent/
 web/skills-lock.json
 .agents/
 .claude/
+
+.vercel
+.env*
