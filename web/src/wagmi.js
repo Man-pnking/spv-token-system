@@ -3,16 +3,20 @@ import { WagmiAdapter } from "@reown/appkit-adapter-wagmi";
 import { polygon, polygonAmoy, mainnet } from "@reown/appkit/networks";
 import { http, fallback } from "wagmi";
 
-const projectId = "51cd3b45476208218ad7bf80015380d9";
+const APP_URL = typeof window !== 'undefined'
+  ? window.location.origin
+  : 'https://spv-token-system.vercel.app';
+
+const projectId = import.meta.env.VITE_WC_PROJECT_ID || '51cd3b45476208218ad7bf80015380d9';
 
 const metadata = {
   name: "SPV Token",
   description: "Mint-on-demand bonding curve on Polygon",
-  url: "https://spv-token-system.vercel.app",
-  icons: ["https://spv-token-system.vercel.app/ruby-diamond-32.svg"],
+  url: APP_URL,
+  icons: [`${APP_URL}/ruby-diamond-32.svg`],
   redirect: {
     native: "spvtoken://",
-    universal: "https://spv-token-system.vercel.app",
+    universal: APP_URL,
     linkMode: true,
   },
 };
@@ -21,10 +25,9 @@ const networks = [polygon, polygonAmoy, mainnet];
 
 const transports = {
   [polygon.id]: fallback([
-    http(`https://polygon-mainnet.infura.io/v3/${import.meta.env.VITE_INFURA_KEY}`),
     http("https://polygon.drpc.org"),
-    http("https://polygon.llamarpc.com"),
-    http("https://rpc.ankr.com/polygon"),
+    http("https://polygon-rpc.com"),
+    http(`https://polygon-mainnet.infura.io/v3/${import.meta.env.VITE_INFURA_KEY}`),
   ]),
   [polygonAmoy.id]: fallback([
     http("https://rpc-amoy.polygon.technology"),
@@ -50,7 +53,7 @@ createAppKit({
   metadata,
   features: { analytics: false, email: false, socials: false },
   themeMode: "dark",
-  allWallets: "ONLY_MOBILE",
+  allWallets: "SHOW",
   themeVariables: {
     "--w3m-accent": "#7c5cff",
     "--w3m-border-radius-master": "12px",
