@@ -7,7 +7,7 @@ const network = import.meta.env.VITE_CHAIN || "amoy";
 const deployed = deployments[network] || {};
 
 export const CONFIG = {
-  chainId: deployed.chainId || 80002,
+  chainId: deployed.chainId || (network === "polygon" ? 137 : 80002),
   spvToken: deployed.spvToken || "0x0000000000000000000000000000000000000000",
   curve: deployed.bondingCurve || "0x0000000000000000000000000000000000000000",
   router: deployed.router || "0x0000000000000000000000000000000000000000",
