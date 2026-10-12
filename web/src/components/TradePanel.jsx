@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { ArrowDownUp, ExternalLink } from "lucide-react";
 import { useAccount, useBalance } from "wagmi";
+import { useMetaMaskConnect } from "../hooks/useMetaMaskConnect";
 import { useAppKit } from "@reown/appkit/react";
 import { useSPVTrade } from "../hooks/useSPVTrade";
 import { useSPVFees } from "../hooks/useSPVFees";
@@ -16,6 +17,7 @@ const MIN_SPV = 1;
 export default function TradePanel() {
   const { isConnected, address } = useAccount();
   const { open } = useAppKit();
+  const { connectWithMetaMask } = useMetaMaskConnect();
   const t = useSPVTrade();
   const fees = useSPVFees();
 
@@ -100,7 +102,13 @@ export default function TradePanel() {
 
   const handleAction = () => {
     if (!isConnected) {
-      open();
+      const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent)
+        || (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
+      if (isIOS) {
+        connectWithMetaMask();
+      } else {
+        open();
+      }
       return;
     }
     if (t.needsApproval) {

@@ -3,6 +3,7 @@ import { useAppKit } from "@reown/appkit/react";
 import { useAccount, useDisconnect } from "wagmi";
 import { Wallet, Smartphone, ExternalLink } from "lucide-react";
 import { shorten } from "../utils/format";
+import { useMetaMaskConnect } from "../hooks/useMetaMaskConnect";
 
 const APP_HOST = "spv-token-system.vercel.app";
 const METAMASK_DEEPLINK = `https://link.metamask.io/dapp/${APP_HOST}`;
@@ -24,6 +25,7 @@ export default function WalletButton({ compact = false }) {
   const { open } = useAppKit();
   const { address, isConnected } = useAccount();
   const { disconnect } = useDisconnect();
+  const { connectWithMetaMask } = useMetaMaskConnect();
   const wasConnected = useRef(false);
   const [showIosHelp, setShowIosHelp] = useState(false);
 
