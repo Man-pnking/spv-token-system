@@ -1,5 +1,6 @@
 import { useEffect, useState, useMemo, useRef } from "react";
 import { useAppKit } from "@reown/appkit/react";
+import { useMetaMaskConnect } from "../hooks/useMetaMaskConnect";
 import {
   Home, BarChart3, ArrowLeftRight, BookOpen, HelpCircle, ShieldCheck,
   Wallet, ExternalLink, Sparkles,
@@ -23,6 +24,7 @@ export default function CommandPalette({ open, onClose, onOpenTrade }) {
   const [active, setActive] = useState(0);
   const inputRef = useRef(null);
   const { open: openWallet } = useAppKit();
+  const { connect } = useMetaMaskConnect();
 
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase();
@@ -68,7 +70,7 @@ export default function CommandPalette({ open, onClose, onOpenTrade }) {
     }
 
     if (item.type === "action" && item.action === "wallet") {
-      openWallet();
+      connect();
       onClose();
       return;
     }

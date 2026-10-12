@@ -23,6 +23,7 @@ function isInAppBrowser() {
 
 export default function WalletButton({ compact = false }) {
   const { open } = useAppKit();
+  const { connect } = useMetaMaskConnect();
   const { address, isConnected } = useAccount();
   const { disconnect } = useDisconnect();
   const { connectWithMetaMask } = useMetaMaskConnect();
@@ -48,11 +49,11 @@ export default function WalletButton({ compact = false }) {
       if (isIOS()) {
         open({ view: "Connect", namespace: "eip155" });
       } else {
-        open();
+        connect();
       }
     } catch (e) {
       // If the structured call throws, fall back to plain open
-      open();
+      connect();
     }
     // If the user is in an in-app browser (Instagram/Telegram/etc),
     // show the manual deep-link helper.
