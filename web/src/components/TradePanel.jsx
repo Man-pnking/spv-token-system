@@ -17,7 +17,7 @@ const MIN_SPV = 1;
 export default function TradePanel() {
   const { isConnected, address } = useAccount();
   const { open } = useAppKit();
-  const { connectWithMetaMask } = useMetaMaskConnect();
+  const { connect } = useMetaMaskConnect();
   const t = useSPVTrade();
   const fees = useSPVFees();
 
@@ -102,13 +102,7 @@ export default function TradePanel() {
 
   const handleAction = () => {
     if (!isConnected) {
-      const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent)
-        || (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
-      if (isIOS) {
-        connectWithMetaMask();
-      } else {
-        open();
-      }
+      connect();
       return;
     }
     if (t.needsApproval) {

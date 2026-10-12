@@ -26,7 +26,6 @@ export default function WalletButton({ compact = false }) {
   const { connect } = useMetaMaskConnect();
   const { address, isConnected } = useAccount();
   const { disconnect } = useDisconnect();
-  const { connectWithMetaMask } = useMetaMaskConnect();
   const wasConnected = useRef(false);
   const [showIosHelp, setShowIosHelp] = useState(false);
 
@@ -43,20 +42,7 @@ export default function WalletButton({ compact = false }) {
   }, [isConnected]);
 
   const handleConnect = () => {
-    // On iOS, force the WalletConnect namespace — the direct MetaMask
-    // path is broken on iOS 26 due to universal-link handling changes.
-    try {
-      if (isIOS()) {
-        open({ view: "Connect", namespace: "eip155" });
-      } else {
-        connect();
-      }
-    } catch (e) {
-      // If the structured call throws, fall back to plain open
-      connect();
-    }
-    // If the user is in an in-app browser (Instagram/Telegram/etc),
-    // show the manual deep-link helper.
+    connect();
     if (isIOS() && isInAppBrowser()) {
       setShowIosHelp(true);
     }
