@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import AnimatedBackground from "./components/AnimatedBackground";
 import CursorGlow from "./components/CursorGlow";
 import ScrollProgress from "./components/ScrollProgress";
-import BackgroundAudio from "./components/BackgroundAudio";
 import Navbar from "./components/Navbar";
 import QuickNav from "./components/QuickNav";
 import CommandPalette from "./components/CommandPalette";
@@ -42,7 +41,6 @@ export default function App() {
       <ScrollProgress />
       <AnimatedBackground />
       <CursorGlow />
-      <BackgroundAudio />
 
       <div className="relative z-10 min-h-screen w-full">
         <Navbar />
